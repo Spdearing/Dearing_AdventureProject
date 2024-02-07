@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
+   [SerializeField] GameObject[] panels;
+    
+    
+
     // Start is called before the first frame update
     void Start()
     {
