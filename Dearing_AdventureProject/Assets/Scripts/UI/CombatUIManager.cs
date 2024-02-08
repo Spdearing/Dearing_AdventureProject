@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatUIManager : MonoBehaviour
 {
     [SerializeField] GameObject mainCombatPanel;
-    [SerializeField] GameObject attackPanel;
+    [SerializeField] GameObject fightPanel;
     [SerializeField] GameObject confirmPanel;
     [SerializeField] GameObject ItemsPanel;
 
@@ -13,16 +13,13 @@ public class CombatUIManager : MonoBehaviour
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
     
-    
-        
-       
-        
 
-
-// Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         panels.Add("MainCombatPanel", mainCombatPanel);
+        panels.Add("FightPanel", fightPanel);
+        panels.Add("confirmPanel")
     }
     // Update is called once per frame
     void Update()
