@@ -13,6 +13,7 @@ public class GymBattleOne : MonoBehaviour
 
     private bool attacking;
     private int inflictedDamageToEnemy;
+    private int inflictedDamageToPlayer;
 
 
     //private string playerMisses = "Friendly Creature missed the enemy";
@@ -83,28 +84,43 @@ public class GymBattleOne : MonoBehaviour
         {
             case "Tackle":
 
-                int accuracy = Random.Range(0, 2);
+                int accuracy = Random.Range(0, 4);
                 
-                if (accuracy == 1)
+                if (accuracy == 2 || accuracy == 3 || accuracy == 4)
                 {
                     inflictedDamageToEnemy = friendlyCreature.DoPlayerDamage();
                     enemyCreature.TakeDamage(inflictedDamageToEnemy);
                     UpdateHealthAndNameText();
                     PlayerHitEnemy();
                 }
-                else if (accuracy == 0)
+                else if (accuracy == 0 || accuracy == 1 )
                 {
                     PlayerMisses();
                 }
                 SwitchToCombatDialogue();
+                StartCoroutine(EnemyAction());
                 break;
         }
     }
-                
-    public void ConfirmAction()
+    void EnemyAttacksPlayer()
     {
-        Action("Tackle");
+        int enemyAccuracy = Random.Range(0, 4);
+
+        if (enemyAccuracy == 2 || enemyAccuracy == 3 || enemyAccuracy == 4)
+        {
+            inflictedDamageToPlayer = enemyCreature.DoEnemyDamage();
+            friendlyCreature.TakeDamage(inflictedDamageToPlayer);
+            UpdateHealthAndNameText();
+            EnemyHitPlayer();
+        }
+        else if (enemyAccuracy == 0 || enemyAccuracy == 1)
+        {
+            EnemyMisses();
+        }
+        SwitchToCombatDialogue();
     }
+
+  
     void SwitchPanel(string panelName)
     {
         string currentPanelName;
@@ -121,13 +137,10 @@ public class GymBattleOne : MonoBehaviour
             }
         }
     }
-
     void SwitchToFightPanel()
     {
         SwitchPanel("FightPanel");
     }
-
-    
     void SwitchToConfirmPanel()
     {
         SwitchPanel("confirmPanel");
@@ -136,14 +149,10 @@ public class GymBattleOne : MonoBehaviour
     {
         SwitchPanel("CombatDialogue");
     }
-
-    
     public void SwitchToItemsPanel()
     {
         SwitchPanel("ItemsPanel");
     }
-    
-
     public void BackToCombatOptions()
     {
         SwitchPanel("PlayerCombatOptions");
@@ -157,14 +166,28 @@ public class GymBattleOne : MonoBehaviour
     {
         combatText.text = friendlyCreature.GetFriendlyName() + " did " + inflictedDamageToEnemy.ToString() + " to " + enemyCreature.GetEnemyName();
     }
+    void EnemyMisses()
+    {
+        combatText.text = enemyCreature.GetEnemyName() + " missed an attack on " + friendlyCreature.GetFriendlyName();
+    }    
+
     void EnemyHitPlayer()
     {
-        
+        combatText.text = enemyCreature.GetEnemyName() + " did " + inflictedDamageToPlayer.ToString() + " to " + friendlyCreature.GetFriendlyName();
     }
 
+    public void ConfirmAction()
+    {
+        Action("Tackle");
+    }
 
-
-
+    IEnumerator EnemyAction()
+    {
+        yield return new WaitForSeconds(2);
+        EnemyAttacksPlayer();
+        yield return new WaitForSeconds(4);
+        BackToCombatOptions();
+    }
 }
 
 

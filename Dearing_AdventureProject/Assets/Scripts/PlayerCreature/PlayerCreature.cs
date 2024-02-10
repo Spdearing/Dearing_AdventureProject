@@ -36,7 +36,7 @@ public class FriendlyCreature : MonoBehaviour
     }
     public int DoPlayerDamage()
     {
-        damage = Random.Range(0, 6);
+        damage = Random.Range(2, 6);
 
         return this.damage;
     }

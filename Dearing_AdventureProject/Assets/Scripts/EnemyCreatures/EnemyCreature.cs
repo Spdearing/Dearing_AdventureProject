@@ -36,7 +36,7 @@ public class EnemyCreature
     }
     public int DoEnemyDamage()
     {
-        enemyDamage = Random.Range(0, 6);
+        enemyDamage = Random.Range(2, 6);
 
         return this.enemyDamage;
     }
