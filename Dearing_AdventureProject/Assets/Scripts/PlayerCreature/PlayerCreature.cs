@@ -2,17 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCreature : MonoBehaviour
+public class FriendlyCreature : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private string friendlyName;
+    private int friendlyHealth;
+    private int damage;
+
+
+
+    public FriendlyCreature(string friendlyName, int friendlyHealth)
     {
-        
+        this.friendlyName = friendlyName;
+        this.friendlyHealth = friendlyHealth;
+       
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        friendlyHealth -= damage;
+        if (friendlyHealth <= 0)
+        {
+            friendlyHealth = 0;
+        }
+    }
+
+    public int GetFriendlyHealth()
+    {
+        return this.friendlyHealth;
+    }
+    public string GetFriendlyName()
+    {
+        return this.friendlyName;
+    }
+    public int DoPlayerDamage()
+    {
+        damage = Random.Range(0, 6);
+
+        return this.damage;
     }
 }
