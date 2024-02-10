@@ -63,7 +63,7 @@ public class GymBattleOne : MonoBehaviour
     {
         enemyName.text = "EnemyName: " + enemyCreature.GetEnemyName();
         enemyHealth.text = "HP: " + enemyCreature.GetEnemyHealth() + "/10";
-        friendlyName.text = friendlyCreature.GetFriendlyName();
+        friendlyName.text = "FriendlyName: " + friendlyCreature.GetFriendlyName();
         friendlyHealth.text = "HP: " + friendlyCreature.GetFriendlyHealth() + "/10";
     }
 
@@ -84,16 +84,16 @@ public class GymBattleOne : MonoBehaviour
         {
             case "Tackle":
 
-                int accuracy = Random.Range(0, 4);
+                int accuracy = Random.Range(0, 5);
                 
-                if (accuracy == 2 || accuracy == 3 || accuracy == 4)
+                if (accuracy >= 2)
                 {
                     inflictedDamageToEnemy = friendlyCreature.DoPlayerDamage();
                     enemyCreature.TakeDamage(inflictedDamageToEnemy);
                     UpdateHealthAndNameText();
                     PlayerHitEnemy();
                 }
-                else if (accuracy == 0 || accuracy == 1 )
+                else if (accuracy <=1 )
                 {
                     PlayerMisses();
                 }
@@ -104,16 +104,16 @@ public class GymBattleOne : MonoBehaviour
     }
     void EnemyAttacksPlayer()
     {
-        int enemyAccuracy = Random.Range(0, 4);
+        int enemyAccuracy = Random.Range(0, 5);
 
-        if (enemyAccuracy == 2 || enemyAccuracy == 3 || enemyAccuracy == 4)
+        if (enemyAccuracy >= 2)
         {
             inflictedDamageToPlayer = enemyCreature.DoEnemyDamage();
             friendlyCreature.TakeDamage(inflictedDamageToPlayer);
             UpdateHealthAndNameText();
             EnemyHitPlayer();
         }
-        else if (enemyAccuracy == 0 || enemyAccuracy == 1)
+        else if (enemyAccuracy <= 1)
         {
             EnemyMisses();
         }
