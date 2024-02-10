@@ -15,6 +15,9 @@ public class GymBattleOne : MonoBehaviour
     private TMP_Text enemyHealth;
     private TMP_Text playerHealth;
 
+    private string playerCreatureName;
+    private string enemyCreatureName;
+
     
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
@@ -23,6 +26,8 @@ public class GymBattleOne : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerCreatureName = "Rextalion";
+        enemyCreatureName = "Barnabus";
         enemyName = GameObject.Find("EnemyName").GetComponent<TMP_Text>();
         playerName = GameObject.Find("PlayerName").GetComponent<TMP_Text>();
         enemyHealth = GameObject.Find("EnemyHealth").GetComponent<TMP_Text>();
@@ -30,6 +35,7 @@ public class GymBattleOne : MonoBehaviour
         panels.Add("MainCombatPanel", mainCombatPanel);
         panels.Add("FightPanel", fightPanel);
         panels.Add("confirmPanel", confirmPanel);
+        panels.Add("ItemsPanel", ItemsPanel);
     }
     // Update is called once per frame
     void Update()
@@ -37,9 +43,10 @@ public class GymBattleOne : MonoBehaviour
         
     }
 
-    void UpdateHealthText()
+    void UpdateHealthAndNameText()
     {
-
+        playerName.text = "Player Name: " + playerCreatureName;
+        
     }
 
 }

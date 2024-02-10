@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GymBattleTwo : MonoBehaviour
+public class GymBattleThree : MonoBehaviour
 {
     [SerializeField] GameObject mainCombatPanel;
     [SerializeField] GameObject fightPanel;
