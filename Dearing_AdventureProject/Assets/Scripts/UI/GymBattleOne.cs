@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GymBattleOne : MonoBehaviour
 {
@@ -15,20 +16,27 @@ public class GymBattleOne : MonoBehaviour
     private int inflictedDamageToEnemy;
     private int inflictedDamageToPlayer;
 
-
-    //private string playerMisses = "Friendly Creature missed the enemy";
-    //private string playerHitTarget = "Friendly player hit";
-    //private string enemyHitPlayer = "Friendly c"
-
-
+    /// <summary>
+    /// These are text spaces that are used during the battle
+    /// </summary>
     private TMP_Text enemyName;
     private TMP_Text friendlyName;
     private TMP_Text enemyHealth;
     private TMP_Text friendlyHealth;
     private TMP_Text combatText;
+    private TMP_Text potionQuanityText;
+    private TMP_Text potionNameText;
+    private TMP_Text aPBoostNameText;
+    private TMP_Text aPBoostQuantityText;
+
+
 
     private EnemyCreature enemyCreature;
     private FriendlyCreature friendlyCreature;
+
+    private PlayerItems potion;
+    private PlayerItems aPBoost;
+    private PlayerItems enemyPotion;
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
@@ -37,19 +45,34 @@ public class GymBattleOne : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyCreature = new EnemyCreature("Barnabus", 10);
-        friendlyCreature = new FriendlyCreature("Rexasourus", 10);
+        //Creation of Enemy, and Friendly Creature
+        enemyCreature = EnemyCreature.Create("Barnabus", 10);
+        friendlyCreature = FriendlyCreature.Create("Rexasourus", 10);
+
+        //Creation of Enemy, and Friendly Items
+        potion = PlayerItems.Create("Potion", 5, 0, 5);
+        aPBoost = PlayerItems.Create("APBoost", 0, 3, 5);
+
+        //This is where the text is aquired through the code
         enemyName = GameObject.Find("EnemyName").GetComponent<TMP_Text>();
         friendlyName = GameObject.Find("PlayerName").GetComponent<TMP_Text>();
         enemyHealth = GameObject.Find("EnemyHealth").GetComponent<TMP_Text>();
         friendlyHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
         combatText = GameObject.Find("CombatText").GetComponent<TMP_Text>();
+        potionNameText = GameObject.Find("PotionText").GetComponent<TMP_Text>();
+        potionQuanityText = GameObject.Find("PotionQuantityText").GetComponent<TMP_Text>();
+        aPBoostNameText = GameObject.Find("APBoostText").GetComponent<TMP_Text>();
+        aPBoostQuantityText = GameObject.Find("APBoostQuantityText").GetComponent<TMP_Text>();
+
+
+        //this is where the panels are added to the dictionary
         panels.Add("CombatDialogue", combatDialoguePanel);//panels(0)
         panels.Add("PlayerCombatOptions", playerCombatOptions);//panels(1)
         panels.Add("FightPanel", fightPanel);//panels(2)
         panels.Add("confirmPanel", confirmPanel);//panels(3)
         panels.Add("ItemsPanel", ItemsPanel);//panels(4)
 
+        //The initial panel is the player options when the game begins.
         SwitchPanel("PlayerCombatOptions");
 
     }
@@ -57,6 +80,7 @@ public class GymBattleOne : MonoBehaviour
     void Update()
     {
         UpdateHealthAndNameText();
+        UpdateInventory();
     }
 
     void UpdateHealthAndNameText()
@@ -65,6 +89,13 @@ public class GymBattleOne : MonoBehaviour
         enemyHealth.text = "HP: " + enemyCreature.GetEnemyHealth() + "/10";
         friendlyName.text = "FriendlyName: " + friendlyCreature.GetFriendlyName();
         friendlyHealth.text = "HP: " + friendlyCreature.GetFriendlyHealth() + "/10";
+    }
+    void UpdateInventory()
+    {
+        potionNameText.text = potion.GetItemName();
+        potionQuanityText.text = "Quantity: " + potion.GetItemQuantity() + "/5";
+        aPBoostNameText.text = aPBoost.GetItemName();
+        aPBoostQuantityText.text = "Quantity: " + aPBoost.GetItemQuantity() + "/5";
     }
 
     public void Fight()
@@ -178,14 +209,34 @@ public class GymBattleOne : MonoBehaviour
 
     public void ConfirmAction()
     {
-        Action("Tackle");
+        if(attacking) 
+        { 
+            Action("Tackle");
+        }
+        
     }
+
+    public void UsingPotion()
+    {
+        int healingAmount = potion.GetHealing();
+
+        if (friendlyCreature.GetFriendlyHealth() <= 9)
+        {
+            friendlyCreature.Heal(healingAmount);
+            Debug.Log(friendlyCreature.GetFriendlyHealth());
+            potion.UseItem(1);
+            UpdateInventory();
+        }
+        
+       
+    }
+
 
     IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(2);
         EnemyAttacksPlayer();
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
         BackToCombatOptions();
     }
 }

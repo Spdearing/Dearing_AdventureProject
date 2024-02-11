@@ -10,11 +10,15 @@ public class EnemyCreature
     
 
 
-    public EnemyCreature(string enemyName, int health)
+    private EnemyCreature(string enemyName, int health)
     {
         this.enemyName = enemyName;
         this.enemyHealth = health;
         
+    }
+    public static EnemyCreature Create(string enemyName, int enemyHealth)
+    {
+        return new EnemyCreature(enemyName, enemyHealth);
     }
 
     public void TakeDamage(int damage)
