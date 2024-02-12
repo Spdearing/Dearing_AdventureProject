@@ -28,6 +28,9 @@ public class GymBattleOne : MonoBehaviour
     private TMP_Text potionNameText;
     private TMP_Text aPBoostNameText;
     private TMP_Text aPBoostQuantityText;
+    private TMP_Text tackleAp;
+    private TMP_Text persuadeAp;
+    private TMP_Text mockAp;
 
 
 
@@ -47,7 +50,7 @@ public class GymBattleOne : MonoBehaviour
     {
         //Creation of Enemy, and Friendly Creature
         enemyCreature = EnemyCreature.Create("Barnabus", 10);
-        friendlyCreature = FriendlyCreature.Create("Rexasourus", 10);
+        friendlyCreature = FriendlyCreature.Create("Rexasourus", 10, 15, 10, 5);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);
@@ -63,6 +66,9 @@ public class GymBattleOne : MonoBehaviour
         potionQuanityText = GameObject.Find("PotionQuantityText").GetComponent<TMP_Text>();
         aPBoostNameText = GameObject.Find("APBoostText").GetComponent<TMP_Text>();
         aPBoostQuantityText = GameObject.Find("APBoostQuantityText").GetComponent<TMP_Text>();
+        tackleAp = GameObject.Find("TackleAP").GetComponent<TMP_Text>();
+        persuadeAp = GameObject.Find("PersuadeAP").GetComponent<TMP_Text>();
+        mockAp = GameObject.Find("MockAP").GetComponent<TMP_Text>();
 
 
         //this is where the panels are added to the dictionary
@@ -81,6 +87,7 @@ public class GymBattleOne : MonoBehaviour
     {
         UpdateHealthAndNameText();
         UpdateInventory();
+        UpdateAP();
     }
 
     void UpdateHealthAndNameText()
@@ -97,16 +104,32 @@ public class GymBattleOne : MonoBehaviour
         aPBoostNameText.text = aPBoost.GetItemName();
         aPBoostQuantityText.text = "Quantity: " + aPBoost.GetItemQuantity() + "/5";
     }
+    void UpdateAP()
+    {
+        tackleAp.text = "AP: " + friendlyCreature.GetTackleAp() + "/15";
+        persuadeAp.text = "AP: " + friendlyCreature.GetPersuadeAp() + "/10";
+        mockAp.text = "AP: " + friendlyCreature.GetMockAp() + "/5";
+    }
 
     public void Fight()
     {
         SwitchToFightPanel();
-        attacking = true;
+        
     }
 
     public void Tackle()
     {
-        SwitchToConfirmPanel();
+        if (friendlyCreature.GetTackleAp() != 0)
+        {
+            SwitchToConfirmPanel();
+            attacking = true;
+        }
+        else if(friendlyCreature.GetTackleAp() == 0)
+        {
+            attacking = false;
+            StartCoroutine(PlayerRanOutOfAP());
+        }
+        
     }
 
     void Action(string input)
@@ -116,20 +139,22 @@ public class GymBattleOne : MonoBehaviour
             case "Tackle":
 
                 int accuracy = Random.Range(0, 5);
-                
+
                 if (accuracy >= 2)
                 {
                     inflictedDamageToEnemy = friendlyCreature.DoPlayerDamage();
                     enemyCreature.TakeDamage(inflictedDamageToEnemy);
                     UpdateHealthAndNameText();
                     PlayerHitEnemy();
+                    friendlyCreature.SpendTackleAp(1);
                 }
-                else if (accuracy <=1 )
+                else if (accuracy <= 1)
                 {
                     PlayerMisses();
                 }
                 SwitchToCombatDialogue();
                 StartCoroutine(EnemyAction());
+
                 break;
         }
     }
@@ -151,7 +176,10 @@ public class GymBattleOne : MonoBehaviour
         SwitchToCombatDialogue();
     }
 
-  
+    /// <summary>
+    /// Panel Switching Methods
+    /// </summary>
+
     void SwitchPanel(string panelName)
     {
         string currentPanelName;
@@ -168,6 +196,7 @@ public class GymBattleOne : MonoBehaviour
             }
         }
     }
+    
     void SwitchToFightPanel()
     {
         SwitchPanel("FightPanel");
@@ -189,6 +218,14 @@ public class GymBattleOne : MonoBehaviour
         SwitchPanel("PlayerCombatOptions");
         attacking = !attacking;
     }
+
+    /// <summary>
+    /// Dialogue Changing Methods
+    /// </summary>
+    void PlayerRanOutOfTackleAP()
+    {
+        combatText.text = "You cannot use that move, you ran out of AP.";
+    }
     void PlayerMisses()
     {
         combatText.text = friendlyCreature.GetFriendlyName() + " missed an attack on " + enemyCreature.GetEnemyName();
@@ -207,15 +244,21 @@ public class GymBattleOne : MonoBehaviour
         combatText.text = enemyCreature.GetEnemyName() + " did " + inflictedDamageToPlayer.ToString() + " to " + friendlyCreature.GetFriendlyName();
     }
 
+    /// <summary>
+    /// Confirmative Methods
+    /// </summary>
+
     public void ConfirmAction()
     {
         if(attacking) 
-        { 
-            Action("Tackle");
-        }
-        
+        {
+            if (friendlyCreature.GetTackleAp() <= 15)
+            {
+                Action("Tackle");
+            }
+            
+        }   
     }
-
     public void UsingPotion()
     {
         int healingAmount = potion.GetHealing();
@@ -226,18 +269,37 @@ public class GymBattleOne : MonoBehaviour
             Debug.Log(friendlyCreature.GetFriendlyHealth());
             potion.UseItem(1);
             UpdateInventory();
+        } 
+    }
+    public void TackleAPIncrease()
+    {
+        int increaseTackleAP = aPBoost.GetAPBoost();
+
+        if(friendlyCreature.GetTackleAp() <= 15)
+        {
+            friendlyCreature.IncreasePlayerAP(increaseTackleAP);
+            aPBoost.UseItem(1);
+            UpdateAP();
         }
-        
-       
+
     }
 
-
+    /// <summary>
+    /// Combat Cycle Enumerators
+    /// </summary>
     IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(2);
         EnemyAttacksPlayer();
         yield return new WaitForSeconds(2);
         BackToCombatOptions();
+    }
+    IEnumerator PlayerRanOutOfAP()
+    {
+        SwitchToCombatDialogue();
+        PlayerRanOutOfTackleAP();
+        yield return new WaitForSeconds(2);
+        SwitchToFightPanel();
     }
 }
 

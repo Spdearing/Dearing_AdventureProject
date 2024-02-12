@@ -1,25 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FriendlyCreature
 {
     private string friendlyName;
     private int friendlyHealth;
     private int damage;
+    private int tackleAp;
+    private int persuadeAp;
+    private int mockAp;
 
 
 
-    private FriendlyCreature(string friendlyName, int friendlyHealth)
+    private FriendlyCreature(string friendlyName, int friendlyHealth, int tackleAp, int persuadeAp, int mockAp)
     {
         this.friendlyName = friendlyName;
         this.friendlyHealth = friendlyHealth;
-       
+        this.tackleAp = tackleAp;
+        this.tackleAp = tackleAp;
+        this.persuadeAp = persuadeAp;
+        this.mockAp = mockAp;
     }
 
-    public static FriendlyCreature Create(string friendlyName, int friendlyHealth)
+    public static FriendlyCreature Create(string friendlyName, int friendlyHealth, int tackleAp, int persuadeAp, int mockAp)
     {
-        return new FriendlyCreature(friendlyName, friendlyHealth);
+        return new FriendlyCreature(friendlyName, friendlyHealth, tackleAp,persuadeAp,mockAp);
     }
 
     public void TakeDamage(int damage)
@@ -41,6 +48,18 @@ public class FriendlyCreature
     {
         return this.friendlyName;
     }
+    public int GetTackleAp()
+    {
+        return this.tackleAp;
+    }
+    public int GetPersuadeAp() 
+    {
+        return this.persuadeAp;
+    }
+    public int GetMockAp() 
+    {
+        return this.mockAp;
+    }
     public int DoPlayerDamage()
     {
         damage = Random.Range(2, 6);
@@ -56,5 +75,31 @@ public class FriendlyCreature
         {
             this.friendlyHealth = 10;
         }
+    }
+    public void IncreasePlayerAP(int amount)
+    {
+
+        this.tackleAp += amount;
+
+        if (this.tackleAp >= 15)
+        {
+            this.tackleAp = 15;
+        }
+    }
+
+    public void SpendTackleAp(int amount)
+    {
+        this.tackleAp -= amount;
+
+        if(this.tackleAp <= 0)
+        {
+            this.tackleAp = 0;
+        }
+    }
+    public void APBoost(int amount) 
+    { 
+        this.tackleAp += amount;
+        this.persuadeAp += amount;
+        this.mockAp += amount;
     }
 }

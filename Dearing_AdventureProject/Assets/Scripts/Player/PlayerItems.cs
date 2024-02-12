@@ -33,6 +33,7 @@ public class PlayerItems
             itemQuantity = 0;
         }
     }
+    
 
     public int GetHealing()
     {
@@ -46,7 +47,7 @@ public class PlayerItems
     { 
         return this.itemQuantity;
     }
-    public int GetItemAPBoost()
+    public int GetAPBoost()
     {
         return this.aPBoost;
     }
