@@ -71,9 +71,13 @@ public class PlayerMovement : MonoBehaviour
             interactable = true;
             interactableText.text = "Talk to the gym member!";
         }
-        else
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("GymTrainerOne"))
         {
             interactable = false;
+            interactableText.text = "";
         }
     }
 }
