@@ -233,6 +233,7 @@ public class GymBattleOne : MonoBehaviour
                 {
                     SwitchToCombatDialogue();
                     PlayerMisses();
+                    persuading = false;
                     StartCoroutine(EnemyAction());
                     
                 }
@@ -242,8 +243,9 @@ public class GymBattleOne : MonoBehaviour
 
                 if (accuracy >= 2)
                 {
-                    inflictedDamageToEnemy = friendlyCreature.DoPlayerDamage();
-                    enemyCreature.TakeDamage(inflictedDamageToEnemy);
+                    inflictedDamageToPlayer = friendlyCreature.DoPlayerDamage();
+                    enemyCreature.TakeDamage(inflictedDamageToPlayer);
+                    PlayerHitEnemy();
                     UpdateHealthAndNameText();
                     friendlyCreature.SpendMockAP(1);
                 }
@@ -366,9 +368,9 @@ public class GymBattleOne : MonoBehaviour
     {
         SwitchPanel("PlayerCombatOptions");
         
-        attacking = !attacking;
-        persuading = !persuading;
-        mocking = !mocking;
+        attacking = false;
+        persuading = false;
+        mocking = false;
         Debug.Log(attacking);
         Debug.Log(persuading);
         Debug.Log(mocking);
@@ -462,6 +464,7 @@ public class GymBattleOne : MonoBehaviour
     IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(2);
+        
         if(!persuading)
         {
             EnemyAttacksPlayer();
