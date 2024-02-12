@@ -87,13 +87,31 @@ public class FriendlyCreature
         }
     }
 
-    public void SpendTackleAp(int amount)
+    public void SpendTackleAP(int amount)
     {
         this.tackleAp -= amount;
 
         if(this.tackleAp <= 0)
         {
             this.tackleAp = 0;
+        }
+    }
+    public void SpendPersuadeAP(int amount)
+    {
+        this.persuadeAp -= amount;
+        
+        if (this.persuadeAp <= 0)
+        {
+            this.persuadeAp = 0;
+        }
+    }
+    public void SpendMockAP(int amount)
+    {
+        this.mockAp -= amount;
+
+        if (this.mockAp <= 0)
+        {
+            this.mockAp = 0;
         }
     }
     public void APBoost(int amount) 

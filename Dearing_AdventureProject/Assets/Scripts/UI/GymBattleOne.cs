@@ -10,9 +10,15 @@ public class GymBattleOne : MonoBehaviour
     [SerializeField] GameObject playerCombatOptions;
     [SerializeField] GameObject fightPanel;
     [SerializeField] GameObject confirmPanel;
-    [SerializeField] GameObject ItemsPanel;
+    [SerializeField] GameObject itemsPanel;
+    [SerializeField] GameObject aPBoostSelectionPanel;
 
     private bool attacking;
+    private bool persuading;
+    private bool mocking;
+    private bool tackleAPIncrease;
+    private bool persuadeAPIncrease;
+    private bool mockAPIncrease;
     private int inflictedDamageToEnemy;
     private int inflictedDamageToPlayer;
 
@@ -72,11 +78,12 @@ public class GymBattleOne : MonoBehaviour
 
 
         //this is where the panels are added to the dictionary
-        panels.Add("CombatDialogue", combatDialoguePanel);//panels(0)
-        panels.Add("PlayerCombatOptions", playerCombatOptions);//panels(1)
-        panels.Add("FightPanel", fightPanel);//panels(2)
-        panels.Add("confirmPanel", confirmPanel);//panels(3)
-        panels.Add("ItemsPanel", ItemsPanel);//panels(4)
+        panels.Add("CombatDialogue", combatDialoguePanel);
+        panels.Add("PlayerCombatOptions", playerCombatOptions);
+        panels.Add("FightPanel", fightPanel);
+        panels.Add("confirmPanel", confirmPanel);
+        panels.Add("ItemsPanel", itemsPanel);
+        panels.Add("APBoosterSelectionPanel", aPBoostSelectionPanel);
 
         //The initial panel is the player options when the game begins.
         SwitchPanel("PlayerCombatOptions");
@@ -113,8 +120,7 @@ public class GymBattleOne : MonoBehaviour
 
     public void Fight()
     {
-        SwitchToFightPanel();
-        
+        SwitchToFightPanel(); 
     }
 
     public void Tackle()
@@ -129,16 +135,72 @@ public class GymBattleOne : MonoBehaviour
             attacking = false;
             StartCoroutine(PlayerRanOutOfAP());
         }
-        
+    }
+
+    public void Persuading()
+    {
+        if (friendlyCreature.GetPersuadeAp() != 0)
+        {
+            SwitchToConfirmPanel();
+             persuading = true;
+        }
+        else if (friendlyCreature.GetPersuadeAp() == 0)
+        {
+            persuading = false;
+            StartCoroutine(PlayerRanOutOfAP());
+        }
+    }
+
+    public void Mocking()
+    {
+        if (friendlyCreature.GetMockAp() != 0)
+        {
+            SwitchToConfirmPanel();
+            mocking = true;
+        }
+        else if (friendlyCreature.GetMockAp() == 0)
+        {
+            mocking = false;
+            StartCoroutine(PlayerRanOutOfAP());
+        }
+    }
+
+    /// <summary>
+    /// Confirmative Methods
+    /// </summary>
+
+    public void ConfirmAction()
+    {
+        if (attacking)
+        {
+            if (friendlyCreature.GetTackleAp() <= 15)
+            {
+                Action("Tackle");
+            }
+        }
+        else if (persuading)
+        {
+            if (friendlyCreature.GetPersuadeAp() <= 10)
+            {
+                Action("Persuade");
+            }
+        }
+        if (mocking)
+        {
+            if (friendlyCreature.GetMockAp() <= 5)
+            {
+                Action("Mock");
+            }
+        }
     }
 
     void Action(string input)
     {
+        int accuracy = Random.Range(0, 5);
+        
         switch (input)
         {
             case "Tackle":
-
-                int accuracy = Random.Range(0, 5);
 
                 if (accuracy >= 2)
                 {
@@ -146,7 +208,7 @@ public class GymBattleOne : MonoBehaviour
                     enemyCreature.TakeDamage(inflictedDamageToEnemy);
                     UpdateHealthAndNameText();
                     PlayerHitEnemy();
-                    friendlyCreature.SpendTackleAp(1);
+                    friendlyCreature.SpendTackleAP(1);
                 }
                 else if (accuracy <= 1)
                 {
@@ -156,6 +218,87 @@ public class GymBattleOne : MonoBehaviour
                 StartCoroutine(EnemyAction());
 
                 break;
+
+            case "Persuade":
+
+                if (accuracy >= 2)
+                {
+                    SwitchToCombatDialogue();
+                    PlayerHitEnemy();
+                    UpdateHealthAndNameText();
+                    friendlyCreature.SpendPersuadeAP(1);
+                    StartCoroutine(EnemyAction());
+                }
+                else if (accuracy <= 1)
+                {
+                    SwitchToCombatDialogue();
+                    PlayerMisses();
+                    StartCoroutine(EnemyAction());
+                    
+                }
+                break;
+            
+            case "Mock":
+
+                if (accuracy >= 2)
+                {
+                    inflictedDamageToEnemy = friendlyCreature.DoPlayerDamage();
+                    enemyCreature.TakeDamage(inflictedDamageToEnemy);
+                    UpdateHealthAndNameText();
+                    friendlyCreature.SpendMockAP(1);
+                }
+                else if (accuracy <= 1)
+                {
+                    PlayerMisses();
+                }
+                SwitchToCombatDialogue();
+                StartCoroutine(EnemyAction());
+
+                break;
+
+        }
+    }
+
+    void SelectAPIncrease(string ability)
+    {
+        switch (ability)
+        {
+            case "Tackle":
+
+                int increaseTackleAP = aPBoost.GetAPBoost();
+
+                if (friendlyCreature.GetTackleAp() <= 15)
+                {
+                    friendlyCreature.IncreasePlayerAP(increaseTackleAP);
+                    aPBoost.UseItem(1);
+                    UpdateAP();
+                }
+                break;
+
+            case "Persuade":
+
+                int increasePersuadeAP = aPBoost.GetAPBoost();
+
+                if (friendlyCreature.GetPersuadeAp() <= 15)
+                {
+                    friendlyCreature.IncreasePlayerAP(increasePersuadeAP);
+                    aPBoost.UseItem(1);
+                    UpdateAP();
+                }
+                break;
+
+            case "Mock":
+
+                int increaseMockAP = aPBoost.GetAPBoost();
+
+                if (friendlyCreature.GetMockAp() <= 15)
+                {
+                    friendlyCreature.IncreasePlayerAP(increaseMockAP);
+                    aPBoost.UseItem(1);
+                    UpdateAP();
+                }
+                break;
+
         }
     }
     void EnemyAttacksPlayer()
@@ -175,6 +318,8 @@ public class GymBattleOne : MonoBehaviour
         }
         SwitchToCombatDialogue();
     }
+
+
 
     /// <summary>
     /// Panel Switching Methods
@@ -213,10 +358,21 @@ public class GymBattleOne : MonoBehaviour
     {
         SwitchPanel("ItemsPanel");
     }
+    public void SwitchToAPBoosterSelectionPanel()
+    {
+        SwitchPanel("APBoosterSelectionPanel");
+    }
     public void BackToCombatOptions()
     {
         SwitchPanel("PlayerCombatOptions");
+        
         attacking = !attacking;
+        persuading = !persuading;
+        mocking = !mocking;
+        Debug.Log(attacking);
+        Debug.Log(persuading);
+        Debug.Log(mocking);
+        Debug.Log("Fight Cycle Has Ended");
     }
 
     /// <summary>
@@ -228,11 +384,35 @@ public class GymBattleOne : MonoBehaviour
     }
     void PlayerMisses()
     {
-        combatText.text = friendlyCreature.GetFriendlyName() + " missed an attack on " + enemyCreature.GetEnemyName();
+        if(attacking)
+        {
+            combatText.text = friendlyCreature.GetFriendlyName() + " missed their tackle on " + enemyCreature.GetEnemyName();
+        }
+        else if(persuading)
+        {
+            combatText.text = friendlyCreature.GetFriendlyName() + " failed to persuade " + enemyCreature.GetEnemyName();
+        }
+        if(mocking)
+        {
+            combatText.text = enemyCreature.GetEnemyName() + " did not care about " + friendlyCreature.GetFriendlyName() + "insults, TRY HARDER!" ;
+        }
+        
     }
     void PlayerHitEnemy()
     {
-        combatText.text = friendlyCreature.GetFriendlyName() + " did " + inflictedDamageToEnemy.ToString() + " to " + enemyCreature.GetEnemyName();
+        if(attacking)
+        {
+            combatText.text = friendlyCreature.GetFriendlyName() + " did " + inflictedDamageToEnemy.ToString() + " to " + enemyCreature.GetEnemyName();
+        }
+        else if(persuading)
+        {
+            combatText.text = friendlyCreature.GetFriendlyName() + " persuaded " + enemyCreature.GetEnemyName() + " to not attack them"; 
+        }
+        if(mocking)
+        {
+            combatText.text = friendlyCreature.GetFriendlyName() + " mocked " + enemyCreature.GetEnemyName() + " into attacking themselves, dealing " + inflictedDamageToPlayer + " points of damage";
+        }
+        
     }
     void EnemyMisses()
     {
@@ -244,21 +424,9 @@ public class GymBattleOne : MonoBehaviour
         combatText.text = enemyCreature.GetEnemyName() + " did " + inflictedDamageToPlayer.ToString() + " to " + friendlyCreature.GetFriendlyName();
     }
 
-    /// <summary>
-    /// Confirmative Methods
-    /// </summary>
-
-    public void ConfirmAction()
-    {
-        if(attacking) 
-        {
-            if (friendlyCreature.GetTackleAp() <= 15)
-            {
-                Action("Tackle");
-            }
-            
-        }   
-    }
+ /// <summary>
+ /// Item Usage
+ /// </summary>
     public void UsingPotion()
     {
         int healingAmount = potion.GetHealing();
@@ -271,17 +439,21 @@ public class GymBattleOne : MonoBehaviour
             UpdateInventory();
         } 
     }
-    public void TackleAPIncrease()
+    public void UseAPBooster()
     {
-        int increaseTackleAP = aPBoost.GetAPBoost();
-
-        if(friendlyCreature.GetTackleAp() <= 15)
-        {
-            friendlyCreature.IncreasePlayerAP(increaseTackleAP);
-            aPBoost.UseItem(1);
-            UpdateAP();
-        }
-
+        SwitchToAPBoosterSelectionPanel();
+    }
+    public void IncreaseTackleAP()
+    {
+        SelectAPIncrease("Tackle");
+    }
+    public void IncreasePersuadeAP()
+    {
+        SelectAPIncrease("Persuade");
+    }
+    public void IncreaseMockAP()
+    {
+        SelectAPIncrease("Mock");
     }
 
     /// <summary>
@@ -290,9 +462,17 @@ public class GymBattleOne : MonoBehaviour
     IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(2);
-        EnemyAttacksPlayer();
-        yield return new WaitForSeconds(2);
-        BackToCombatOptions();
+        if(!persuading)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2);
+            BackToCombatOptions();
+        }
+        else
+        {
+            yield return new WaitForSeconds(2);
+            BackToCombatOptions();
+        }
     }
     IEnumerator PlayerRanOutOfAP()
     {
