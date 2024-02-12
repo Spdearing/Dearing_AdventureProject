@@ -16,9 +16,8 @@ public class GymBattleOne : MonoBehaviour
     private bool attacking;
     private bool persuading;
     private bool mocking;
-    private bool tackleAPIncrease;
-    private bool persuadeAPIncrease;
-    private bool mockAPIncrease;
+    private bool usingPotion;
+    private bool usingAPBoost;
     private int inflictedDamageToEnemy;
     private int inflictedDamageToPlayer;
 
@@ -192,12 +191,26 @@ public class GymBattleOne : MonoBehaviour
                 Action("Mock");
             }
         }
+        else if(usingPotion)
+        {
+            if(potion.GetItemQuantity() > 0)
+            {
+                Action("Potion");
+            }
+        }
+        if(usingAPBoost) 
+        { 
+            if(aPBoost.GetItemQuantity() > 0)
+            {
+                Action("APBoost");
+            }
+        }
     }
 
     void Action(string input)
     {
         int accuracy = Random.Range(0, 5);
-        
+
         switch (input)
         {
             case "Tackle":
@@ -212,6 +225,7 @@ public class GymBattleOne : MonoBehaviour
                 }
                 else if (accuracy <= 1)
                 {
+                    friendlyCreature.SpendTackleAP(1);
                     PlayerMisses();
                 }
                 SwitchToCombatDialogue();
@@ -233,12 +247,13 @@ public class GymBattleOne : MonoBehaviour
                 {
                     SwitchToCombatDialogue();
                     PlayerMisses();
+                    friendlyCreature.SpendPersuadeAP(1);
                     persuading = false;
                     StartCoroutine(EnemyAction());
-                    
+
                 }
                 break;
-            
+
             case "Mock":
 
                 if (accuracy >= 2)
@@ -251,9 +266,28 @@ public class GymBattleOne : MonoBehaviour
                 }
                 else if (accuracy <= 1)
                 {
+                    friendlyCreature.SpendMockAP(1);
                     PlayerMisses();
+                    StartCoroutine(EnemyAction());
                 }
                 SwitchToCombatDialogue();
+
+
+                break;
+
+            case "Potion":
+
+                
+                UpdateHealthAndNameText();
+                UsingItem();
+                StartCoroutine(EnemyAction());
+
+                break;
+
+            case "APBoost":
+
+                UpdateHealthAndNameText();
+                UsingItem();
                 StartCoroutine(EnemyAction());
 
                 break;
@@ -371,16 +405,14 @@ public class GymBattleOne : MonoBehaviour
         attacking = false;
         persuading = false;
         mocking = false;
-        Debug.Log(attacking);
-        Debug.Log(persuading);
-        Debug.Log(mocking);
-        Debug.Log("Fight Cycle Has Ended");
+        usingAPBoost = false;
+        usingPotion = false;
     }
 
     /// <summary>
     /// Dialogue Changing Methods
     /// </summary>
-    void PlayerRanOutOfTackleAP()
+    void PlayerRanOutOfAPText()
     {
         combatText.text = "You cannot use that move, you ran out of AP.";
     }
@@ -425,6 +457,14 @@ public class GymBattleOne : MonoBehaviour
     {
         combatText.text = enemyCreature.GetEnemyName() + " did " + inflictedDamageToPlayer.ToString() + " to " + friendlyCreature.GetFriendlyName();
     }
+    void UsePotionText()
+    {
+        combatText.text = friendlyCreature.GetFriendlyName() + " healed themselves for " + potion.GetHealing() + " points of HP!";
+    }
+    void UseAPBoostText()
+    {
+        combatText.text = friendlyCreature.GetFriendlyName() + " increased their AP for one of their abilities";
+    }
 
  /// <summary>
  /// Item Usage
@@ -439,6 +479,8 @@ public class GymBattleOne : MonoBehaviour
             Debug.Log(friendlyCreature.GetFriendlyHealth());
             potion.UseItem(1);
             UpdateInventory();
+            usingPotion = true;
+            SwitchToConfirmPanel();
         } 
     }
     public void UseAPBooster()
@@ -456,6 +498,24 @@ public class GymBattleOne : MonoBehaviour
     public void IncreaseMockAP()
     {
         SelectAPIncrease("Mock");
+    }
+
+
+    IEnumerator UsingItem()
+    {
+       if(usingPotion) 
+        {
+            UsePotionText();
+            SwitchToCombatDialogue();
+        }
+       else if(usingAPBoost)
+        {
+            UseAPBoostText();
+            SwitchToCombatDialogue();
+        }
+        
+        yield return new WaitForSeconds(2);
+        BackToCombatOptions();
     }
 
     /// <summary>
@@ -480,7 +540,7 @@ public class GymBattleOne : MonoBehaviour
     IEnumerator PlayerRanOutOfAP()
     {
         SwitchToCombatDialogue();
-        PlayerRanOutOfTackleAP();
+        PlayerRanOutOfAPText();
         yield return new WaitForSeconds(2);
         SwitchToFightPanel();
     }
