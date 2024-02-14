@@ -3011,6 +3011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d738358134ce014f90b34a5a6139463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatText: {fileID: 0}
 --- !u!1 &763123356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3838,7 +3839,7 @@ GameObject:
   - component: {fileID: 861263541}
   - component: {fileID: 861263540}
   m_Layer: 5
-  m_Name: Combat
+  m_Name: CombatText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
