@@ -163,7 +163,7 @@ public class CombatActions : MonoBehaviour
                 {
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                     PlayerEnemyDialogue.Instance.PlayerMisses();
-                    GymBattleOneManager.Instance.StartCoroutine(EnemyAction());
+                    StartCoroutine(EnemyAction());
                 }
                 SwitchPanels.Instance.SwitchToCombatDialogue();
 
@@ -175,7 +175,7 @@ public class CombatActions : MonoBehaviour
 
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
                 UsingItems.Instance.UsingItem();
-                GymBattleOneManager.Instance.StartCoroutine(EnemyAction());
+                StartCoroutine(EnemyAction());
 
                 break;
 
@@ -183,7 +183,7 @@ public class CombatActions : MonoBehaviour
 
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
                 UsingItems.Instance.UsingItem();
-                GymBattleOneManager.Instance.StartCoroutine(EnemyAction());
+                StartCoroutine(EnemyAction());
 
                 break;
 

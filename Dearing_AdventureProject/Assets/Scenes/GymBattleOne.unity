@@ -2863,6 +2863,7 @@ GameObject:
   - component: {fileID: 697525122}
   - component: {fileID: 697525126}
   - component: {fileID: 697525127}
+  - component: {fileID: 697525128}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2973,6 +2974,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34ccef4b13ee254ba6141a5a374b323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potionQuanityText: {fileID: 1592955893}
+  potionNameText: {fileID: 763123358}
+  aPBoostNameText: {fileID: 793580389}
+  aPBoostQuantityText: {fileID: 1167517366}
+  tackleAp: {fileID: 1362649782}
+  persuadeAp: {fileID: 299963745}
+  mockAp: {fileID: 1340206783}
 --- !u!114 &697525127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2991,6 +2999,18 @@ MonoBehaviour:
   confirmPanel: {fileID: 1181751353}
   itemsPanel: {fileID: 654201910}
   aPBoostSelectionPanel: {fileID: 1139536883}
+--- !u!114 &697525128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697525121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d738358134ce014f90b34a5a6139463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &763123356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3818,7 +3838,7 @@ GameObject:
   - component: {fileID: 861263541}
   - component: {fileID: 861263540}
   m_Layer: 5
-  m_Name: CombatText
+  m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
