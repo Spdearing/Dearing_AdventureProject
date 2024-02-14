@@ -16,14 +16,13 @@ public class GymBattleOneManager : MonoBehaviour
     private TMP_Text friendlyName;
     private TMP_Text enemyHealth;
     private TMP_Text friendlyHealth;
-    private TMP_Text combatText;
-    private TMP_Text potionQuanityText;
-    private TMP_Text potionNameText;
-    private TMP_Text aPBoostNameText;
-    private TMP_Text aPBoostQuantityText;
-    private TMP_Text tackleAp;
-    private TMP_Text persuadeAp;
-    private TMP_Text mockAp;
+    [SerializeField] TMP_Text potionQuanityText;
+    [SerializeField] TMP_Text potionNameText;
+    [SerializeField] TMP_Text aPBoostNameText;
+    [SerializeField] TMP_Text aPBoostQuantityText;
+    [SerializeField] TMP_Text tackleAp;
+    [SerializeField] TMP_Text persuadeAp;
+    [SerializeField] TMP_Text mockAp;
 
 
 
@@ -32,41 +31,26 @@ public class GymBattleOneManager : MonoBehaviour
 
     private PlayerItems potion;
     private PlayerItems aPBoost;
-    private PlayerItems enemyPotion;
-
-    
 
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        //Creation of Enemy, and Friendly Creature
         enemyCreature = EnemyCreature.Create("Barnabus", 10);
         friendlyCreature = FriendlyCreature.Create("Rexasourus", 10, 15, 10, 5);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);
         aPBoost = PlayerItems.Create("APBoost", 0, 3, 5);
+    }
 
-        //This is where the text is aquired through the code
+
+    // Start is called before the first frame update
+    void Start()
+    {
         enemyName = GameObject.Find("EnemyName").GetComponent<TMP_Text>();
         friendlyName = GameObject.Find("PlayerName").GetComponent<TMP_Text>();
         enemyHealth = GameObject.Find("EnemyHealth").GetComponent<TMP_Text>();
         friendlyHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
-        combatText = GameObject.Find("CombatText").GetComponent<TMP_Text>();
-        potionNameText = GameObject.Find("PotionText").GetComponent<TMP_Text>();
-        potionQuanityText = GameObject.Find("PotionQuantityText").GetComponent<TMP_Text>();
-        aPBoostNameText = GameObject.Find("APBoostText").GetComponent<TMP_Text>();
-        aPBoostQuantityText = GameObject.Find("APBoostQuantityText").GetComponent<TMP_Text>();
-        tackleAp = GameObject.Find("TackleAP").GetComponent<TMP_Text>();
-        persuadeAp = GameObject.Find("PersuadeAP").GetComponent<TMP_Text>();
-        mockAp = GameObject.Find("MockAP").GetComponent<TMP_Text>();
-
-
-        //this is where the panels are added to the dictionary
-       
-
     }
     // Update is called once per frame
     void Update()
@@ -74,6 +58,11 @@ public class GymBattleOneManager : MonoBehaviour
         UpdateHealthAndNameText();
         UpdateInventory();
         UpdateAP();
+    }
+
+    public GymBattleOneManager()
+    {
+        Instance = this;
     }
 
     public void UpdateHealthAndNameText()
@@ -96,10 +85,7 @@ public class GymBattleOneManager : MonoBehaviour
         persuadeAp.text = "AP: " + friendlyCreature.GetPersuadeAp() + "/10";
         mockAp.text = "AP: " + friendlyCreature.GetMockAp() + "/5";
     }
-    public TMP_Text ReturnCombatText()
-    {
-        return this.combatText;
-    }
+
     public FriendlyCreature ReturnFriendlyCreature()
     {
         return this.friendlyCreature;

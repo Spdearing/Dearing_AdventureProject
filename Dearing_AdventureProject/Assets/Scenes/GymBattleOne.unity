@@ -206,8 +206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442481}
+        m_TargetAssemblyTypeName: UsingItems, Assembly-CSharp
         m_MethodName: UsingPotion
         m_Mode: 1
         m_Arguments:
@@ -339,8 +339,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: IncreaseTackleAP
         m_Mode: 1
         m_Arguments:
@@ -389,6 +389,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45620518}
   m_CullTransparentMesh: 1
+--- !u!1 &66442480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66442483}
+  - component: {fileID: 66442482}
+  - component: {fileID: 66442481}
+  m_Layer: 0
+  m_Name: CombatSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &66442481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66442480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fe2d9da098788428a47b0fa2f5272f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &66442482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66442480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5392bd2876737e64db6446bafc06aed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &66442483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66442480}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 295.66806, y: 164.53163, z: 0.96262336}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &107623709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,9 +1058,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
-        m_MethodName: ConfirmAction
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
+        m_MethodName: ConfirmPlayerAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1808,8 +1865,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Tackle
         m_Mode: 1
         m_Arguments:
@@ -1941,8 +1998,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 697525127}
+        m_TargetAssemblyTypeName: SwitchPanels, Assembly-CSharp
         m_MethodName: BackToCombatOptions
         m_Mode: 1
         m_Arguments:
@@ -2742,9 +2799,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
-        m_MethodName: Fight
+      - m_Target: {fileID: 697525127}
+        m_TargetAssemblyTypeName: SwitchPanels, Assembly-CSharp
+        m_MethodName: SwitchToFightPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2805,6 +2862,7 @@ GameObject:
   - component: {fileID: 697525123}
   - component: {fileID: 697525122}
   - component: {fileID: 697525126}
+  - component: {fileID: 697525127}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2913,6 +2971,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e34ccef4b13ee254ba6141a5a374b323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &697525127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697525121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b771f6644a5f86a469138ba0b2248ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   combatDialoguePanel: {fileID: 653542445}
@@ -4223,8 +4293,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Persuading
         m_Mode: 1
         m_Arguments:
@@ -5188,8 +5258,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 697525127}
+        m_TargetAssemblyTypeName: SwitchPanels, Assembly-CSharp
         m_MethodName: BackToCombatOptions
         m_Mode: 1
         m_Arguments:
@@ -5589,8 +5659,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Mocking
         m_Mode: 1
         m_Arguments:
@@ -5722,8 +5792,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: IncreaseMockAP
         m_Mode: 1
         m_Arguments:
@@ -5855,8 +5925,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 697525127}
+        m_TargetAssemblyTypeName: SwitchPanels, Assembly-CSharp
         m_MethodName: BackToCombatOptions
         m_Mode: 1
         m_Arguments:
@@ -5988,8 +6058,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 697525127}
+        m_TargetAssemblyTypeName: SwitchPanels, Assembly-CSharp
         m_MethodName: SwitchToItemsPanel
         m_Mode: 1
         m_Arguments:
@@ -6389,8 +6459,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 697525127}
+        m_TargetAssemblyTypeName: SwitchPanels, Assembly-CSharp
         m_MethodName: BackToCombatOptions
         m_Mode: 1
         m_Arguments:
@@ -6522,8 +6592,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442482}
+        m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: IncreasePersuadeAP
         m_Mode: 1
         m_Arguments:
@@ -7133,8 +7203,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 697525126}
-        m_TargetAssemblyTypeName: GymBattleOne, Assembly-CSharp
+      - m_Target: {fileID: 66442481}
+        m_TargetAssemblyTypeName: UsingItems, Assembly-CSharp
         m_MethodName: UseAPBooster
         m_Mode: 1
         m_Arguments:
@@ -7403,3 +7473,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 697525125}
   - {fileID: 529294772}
+  - {fileID: 66442483}

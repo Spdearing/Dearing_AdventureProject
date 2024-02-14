@@ -16,12 +16,18 @@ public class SwitchPanels: MonoBehaviour
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
+    public SwitchPanels()
+    {
+        Instance = this;
+    }
+
+
     void Start()
     {
         panels.Add("CombatDialogue", combatDialoguePanel);
         panels.Add("PlayerCombatOptions", playerCombatOptions);
         panels.Add("FightPanel", fightPanel);
-        panels.Add("confirmPanel", confirmPanel);
+        panels.Add("ConfirmPanel", confirmPanel);
         panels.Add("ItemsPanel", itemsPanel);
         panels.Add("APBoosterSelectionPanel", aPBoostSelectionPanel);
 
@@ -56,7 +62,7 @@ public class SwitchPanels: MonoBehaviour
     }
     public void SwitchToConfirmPanel()
     {
-        SwitchPanel("confirmPanel");
+        SwitchPanel("ConfirmPanel");
     }
     public void SwitchToCombatDialogue()
     {

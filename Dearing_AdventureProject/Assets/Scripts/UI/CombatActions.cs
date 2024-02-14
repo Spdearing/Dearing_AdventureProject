@@ -21,6 +21,9 @@ public class CombatActions : MonoBehaviour
 
     public void Tackle()
     {
+        Debug.Log(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp());
+
+
         if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() != 0)
         {
             SwitchPanels.Instance.SwitchToConfirmPanel();
