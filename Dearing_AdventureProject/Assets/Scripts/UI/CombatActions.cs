@@ -26,13 +26,13 @@ public class CombatActions : MonoBehaviour
 
         if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() != 0)
         {
-            SwitchPanels.Instance.SwitchToConfirmPanel();
             attacking = true;
+            SwitchPanels.Instance.SwitchToConfirmPanel();
         }
         else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() == 0)
         {
             attacking = false;
-            PlayerEnemyDialogue.Instance.PlayerRanOutOfAP();
+            PlayerEnemyDialogue.Instance.PlayerRanOutOfAPText();
         }
     }
 
@@ -40,13 +40,13 @@ public class CombatActions : MonoBehaviour
     {
         if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAp() != 0)
         {
-            SwitchPanels.Instance.SwitchToConfirmPanel();
             persuading = true;
+            SwitchPanels.Instance.SwitchToConfirmPanel();
         }
         else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAp() == 0)
         {
             persuading = false;
-            PlayerEnemyDialogue.Instance.PlayerRanOutOfAP();
+            PlayerEnemyDialogue.Instance.PlayerRanOutOfAPText();
         }
     }
 
@@ -54,13 +54,13 @@ public class CombatActions : MonoBehaviour
     {
         if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAp() != 0)
         {
-            SwitchPanels.Instance.SwitchToConfirmPanel();
             mocking = true;
+            SwitchPanels.Instance.SwitchToConfirmPanel();
         }
         else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAp() == 0)
         {
             mocking = false;
-            PlayerEnemyDialogue.Instance.PlayerRanOutOfAP();
+            PlayerEnemyDialogue.Instance.PlayerRanOutOfAPText();
         }
     }
     public void ConfirmPlayerAction()
@@ -104,13 +104,13 @@ public class CombatActions : MonoBehaviour
 
     void Action(string input)
     {
-        int accuracy = Random.Range(0, 5);
+        int accuracy = Random.Range(0, 11);
 
         switch (input)
         {
             case "Tackle":
 
-                if (accuracy >= 2)
+                if (accuracy >= 5)
                 {
                     inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
                     GymBattleOneManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
@@ -118,10 +118,10 @@ public class CombatActions : MonoBehaviour
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                 }
-                else if (accuracy <= 1)
+                else if (accuracy <= 4)
                 {
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
-                    PlayerEnemyDialogue.Instance.PlayerMisses();
+                    PlayerEnemyDialogue.Instance.PlayerMissedTackle();
                 }
                 SwitchPanels.Instance.SwitchToCombatDialogue();
                 StartCoroutine(EnemyAction());
@@ -130,28 +130,27 @@ public class CombatActions : MonoBehaviour
 
             case "Persuade":
 
-                if (accuracy >= 2)
+                if (accuracy >= 5)
                 {
-                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
-                    GymBattleOneManager.Instance.StartCoroutine(EnemyAction());
                 }
-                else if (accuracy <= 1)
+                else if (accuracy <= 4)
                 {
-                    SwitchPanels.Instance.SwitchToCombatDialogue();
-                    PlayerEnemyDialogue.Instance.PlayerMisses();
+                    persuading = false;
+                    PlayerEnemyDialogue.Instance.PlayerCouldNotPersuade();
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
-                    GymBattleOneManager.Instance.StartCoroutine(EnemyAction());
-
                 }
+                SwitchPanels.Instance.SwitchToCombatDialogue();
+                StartCoroutine(EnemyAction());
+                Debug.Log(accuracy);
                 break;
 
             case "Mock":
 
-                if (accuracy >= 2)
+                if (accuracy >= 5)
                 {
                     inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
                     GymBattleOneManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
@@ -159,28 +158,34 @@ public class CombatActions : MonoBehaviour
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                 }
-                else if (accuracy <= 1)
+                else if (accuracy <= 4)
                 {
+                    mocking = false;
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
-                    PlayerEnemyDialogue.Instance.PlayerMisses();
-                    StartCoroutine(EnemyAction());
+                    PlayerEnemyDialogue.Instance.PlayerCouldNotMock();
                 }
                 SwitchPanels.Instance.SwitchToCombatDialogue();
-
+                StartCoroutine(EnemyAction());
 
                 break;
 
             case "Potion":
 
-
+                Debug.Log("about to use a potion");
+                UsingItems.Instance.UsingPotion();
+                Debug.Log("Starting the using item coroutine");
+                UsingItems.Instance.StartCoroutine(UsingItems.Instance.UsingItem());
+                Debug.Log("Did the itemCoroutine");
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
-                UsingItems.Instance.UsingItem();
                 StartCoroutine(EnemyAction());
+                
 
                 break;
 
+
             case "APBoost":
 
+                SwitchPanels.Instance.SwitchToCombatDialogue();
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
                 UsingItems.Instance.UsingItem();
                 StartCoroutine(EnemyAction());
@@ -224,15 +229,27 @@ public class CombatActions : MonoBehaviour
     IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(2);
-
-        if (!persuading)
+        if (attacking && !persuading && !mocking)
         {
             EnemyAttacksPlayer();
             yield return new WaitForSeconds(2);
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
         }
-        else
+        else if(!attacking && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        if(!attacking && persuading && !mocking)
+        {
+            yield return new WaitForSeconds(2);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        else if(!attacking && !persuading && mocking)
         {
             yield return new WaitForSeconds(2);
             SwitchPanels.Instance.BackToCombatOptions();

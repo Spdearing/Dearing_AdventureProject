@@ -53,21 +53,23 @@ public class UsingItems : MonoBehaviour
 
         }
     }
-
-    
+    public void UsePotion()
+    {
+        if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() <= 9)
+        {
+            CombatActions.Instance.SetUsingPotionsBool(true);
+            Debug.Log("Setting using potion to true");
+            Debug.Log(CombatActions.Instance.ReturnUsingPotions());
+            SwitchPanels.Instance.SwitchToConfirmPanel();
+        }
+    }
 
     public void UsingPotion()
     {
         int healingAmount = GymBattleOneManager.Instance.ReturnPotion().GetHealing();
-
-        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() <= 9)
-        {
-            GymBattleOneManager.Instance.ReturnFriendlyCreature().Heal(healingAmount);
-            GymBattleOneManager.Instance.ReturnPotion().UseItem(1);
-            GymBattleOneManager.Instance.UpdateInventory();
-            CombatActions.Instance.SetUsingPotionsBool(true);
-            SwitchPanels.Instance.SwitchToConfirmPanel();
-        }
+        GymBattleOneManager.Instance.ReturnFriendlyCreature().Heal(healingAmount);
+        GymBattleOneManager.Instance.ReturnPotion().UseItem(1);
+        GymBattleOneManager.Instance.UpdateInventory();
     }
     public void UseAPBooster()
     {
@@ -76,18 +78,25 @@ public class UsingItems : MonoBehaviour
 
     public IEnumerator UsingItem()
     {
-        if (CombatActions.Instance.ReturnUsingPotions())
+        Debug.Log("inside the USINGITEM Coroutine");
+        Debug.Log(CombatActions.Instance.ReturnUsingPotions());
+        
+        
+        if (CombatActions.Instance.ReturnUsingPotions() == true)
         {
+            Debug.Log("Supposed to printing potion text");
             PlayerEnemyDialogue.Instance.UsePotionText();
             SwitchPanels.Instance.SwitchToCombatDialogue();
+            yield return new WaitForSeconds(3);
         }
-        else if (CombatActions.Instance.ReturnUsingAPBoost())
+        else if (CombatActions.Instance.ReturnUsingAPBoost() == true)
         {
             PlayerEnemyDialogue.Instance.UseAPBoostText();
             SwitchPanels.Instance.SwitchToCombatDialogue();
+            yield return new WaitForSeconds(2);
         }
 
         yield return new WaitForSeconds(2);
-        SwitchPanels.Instance.BackToCombatOptions();
+        //SwitchPanels.Instance.BackToCombatOptions();
     }
 }

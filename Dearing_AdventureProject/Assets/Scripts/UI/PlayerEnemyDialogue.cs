@@ -8,11 +8,11 @@ public class PlayerEnemyDialogue : MonoBehaviour
     public static PlayerEnemyDialogue Instance;
 
 
-    private TMP_Text combatText;
+    [SerializeField] TMP_Text combatText;
 
     public void Start()
     {
-        combatText = GameObject.Find("Combat").GetComponent<TMP_Text>();
+        
     }
 
     public PlayerEnemyDialogue()
@@ -20,34 +20,41 @@ public class PlayerEnemyDialogue : MonoBehaviour
         Instance = this;
     }
 
-    public void PlayerMisses()
+    public void PlayerMissedTackle()
     {
         if (CombatActions.Instance.ReturnAttacking())
         {
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " missed their tackle on " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName();
         }
-        else if (CombatActions.Instance.ReturnPersuading())
+    }
+
+    public void PlayerCouldNotPersuade()
+    {
+        if (CombatActions.Instance.ReturnPersuading() == false)
         {
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " failed to persuade " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName();
         }
-        if (CombatActions.Instance.ReturnMocking())
+    }
+
+    public void PlayerCouldNotMock()
+    {
+        if (CombatActions.Instance.ReturnMocking() == false)
         {
             combatText.text = GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + "insults, TRY HARDER!";
         }
-
     }
 
     public void PlayerHitEnemy()
     {
-        if (CombatActions.Instance.ReturnAttacking())
+        if (CombatActions.Instance.ReturnAttacking() == true)
         {
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " to " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName();
         }
-        else if (CombatActions.Instance.ReturnPersuading())
+        else if (CombatActions.Instance.ReturnPersuading() == true)
         {
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " persuaded " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " to not attack them";
         }
-        if (CombatActions.Instance.ReturnMocking())
+        if (CombatActions.Instance.ReturnMocking() == true)
         {
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
         }
@@ -77,12 +84,6 @@ public class PlayerEnemyDialogue : MonoBehaviour
     {
         combatText.text = "You cannot use that move, you ran out of AP.";
     }
-
-    public void PlayerRanOutOfAP()
-    {
-        PlayerEnemyDialogue.Instance.PlayerRanOutOfAP();
-    }
-
     public IEnumerator PlayerRanOutOfAPDialogue()
     {
         SwitchPanels.Instance.SwitchToCombatDialogue();
