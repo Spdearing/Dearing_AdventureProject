@@ -12,6 +12,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
 
     public void Start()
     {
+        combatText = GameObject.Find("CombatText").GetComponent<TMP_Text>();
         
     }
 
