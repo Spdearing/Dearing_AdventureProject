@@ -8,25 +8,27 @@ public class FriendlyCreature
     private string friendlyName;
     private int friendlyHealth;
     private int damage;
+    private int level;
     private int tackleAp;
     private int persuadeAp;
     private int mockAp;
 
 
 
-    private FriendlyCreature(string friendlyName, int friendlyHealth, int tackleAp, int persuadeAp, int mockAp)
+    private FriendlyCreature(string friendlyName, int friendlyHealth, int level, int tackleAp, int persuadeAp, int mockAp)
     {
         this.friendlyName = friendlyName;
         this.friendlyHealth = friendlyHealth;
+        this.level = level;
         this.tackleAp = tackleAp;
         this.tackleAp = tackleAp;
         this.persuadeAp = persuadeAp;
         this.mockAp = mockAp;
     }
 
-    public static FriendlyCreature Create(string friendlyName, int friendlyHealth, int tackleAp, int persuadeAp, int mockAp)
+    public static FriendlyCreature Create(string friendlyName, int friendlyHealth, int level, int tackleAp, int persuadeAp, int mockAp)
     {
-        return new FriendlyCreature(friendlyName, friendlyHealth, tackleAp,persuadeAp,mockAp);
+        return new FriendlyCreature(friendlyName, friendlyHealth, level, tackleAp,persuadeAp,mockAp);
     }
 
     public void TakeDamage(int damage)
@@ -48,6 +50,10 @@ public class FriendlyCreature
     {
         return this.friendlyName;
     }
+    public int GetLevel() 
+    {
+        return this.level;
+    }
     public int GetTackleAp()
     {
         return this.tackleAp;
@@ -60,6 +66,7 @@ public class FriendlyCreature
     {
         return this.mockAp;
     }
+
     public int DoPlayerDamage()
     {
         damage = Random.Range(2, 6);

@@ -6,19 +6,21 @@ public class EnemyCreature
 {
     private string enemyName;
     private int enemyHealth;
+    private int level;
     private int enemyDamage;
     
 
 
-    private EnemyCreature(string enemyName, int health)
+    private EnemyCreature(string enemyName, int health, int level)
     {
         this.enemyName = enemyName;
         this.enemyHealth = health;
+        this.level = level;
         
     }
-    public static EnemyCreature Create(string enemyName, int enemyHealth)
+    public static EnemyCreature Create(string enemyName, int enemyHealth, int level)
     {
-        return new EnemyCreature(enemyName, enemyHealth);
+        return new EnemyCreature(enemyName, enemyHealth, level);
     }
 
     public void TakeDamage(int damage)
@@ -43,5 +45,9 @@ public class EnemyCreature
         enemyDamage = Random.Range(2, 6);
 
         return this.enemyDamage;
+    }
+    public int GetLevel()
+    {
+        return this.level;
     }
 }
