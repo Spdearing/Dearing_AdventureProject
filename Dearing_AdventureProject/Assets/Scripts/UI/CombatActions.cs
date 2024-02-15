@@ -254,6 +254,7 @@ public class CombatActions : MonoBehaviour
             yield return new WaitForSeconds(2);
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.TurnOffText());
         }
     }
 

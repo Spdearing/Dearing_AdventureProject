@@ -92,6 +92,9 @@ public class PlayerEnemyDialogue : MonoBehaviour
         yield return new WaitForSeconds(2);
         SwitchPanels.Instance.SwitchToFightPanel();
     }
-
-
+    public IEnumerator TurnOffText()
+    {
+        yield return new WaitForSeconds(2);
+        combatText.text = " ";
+    }
 }

@@ -3011,7 +3011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d738358134ce014f90b34a5a6139463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatText: {fileID: 0}
+  combatText: {fileID: 861263540}
 --- !u!1 &763123356
 GameObject:
   m_ObjectHideFlags: 0
