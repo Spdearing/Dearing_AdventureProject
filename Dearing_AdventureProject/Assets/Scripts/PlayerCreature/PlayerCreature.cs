@@ -60,31 +60,34 @@ public class FriendlyCreature
         return this.level;
     }
 
-    public int GetTackleAp()
+    public int GetTackleAP()
     {
         return this.tackleAp;
     }
 
-    public int GetPersuadeAp() 
+    public int GetPersuadeAP() 
     {
         return this.persuadeAp;
     }
 
-    public int GetMockAp() 
+    public int GetMockAP() 
     {
         return this.mockAp;
     }
 
     public string ReturnTackleName()
     {
+        tackleName = "Tackle";
         return this.tackleName;        
     }
     public string ReturnPersuadeName() 
     {
+        persuadeName = "Persuade";
         return this.persuadeName;
     }
     public string ReturnMockName()
     {
+        mockName = "Mock";
         return this.mockName;
     }
 

@@ -91,9 +91,9 @@ public class GymBattleOneManager : MonoBehaviour
     }
     public void UpdateAP()
     {
-        tackleAp.text = "AP: " + friendlyCreature.GetTackleAp() + "/15";
-        persuadeAp.text = "AP: " + friendlyCreature.GetPersuadeAp() + "/10";
-        mockAp.text = "AP: " + friendlyCreature.GetMockAp() + "/5";
+        tackleAp.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
+        persuadeAp.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
+        mockAp.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
     }
 
     public FriendlyCreature ReturnFriendlyCreature()

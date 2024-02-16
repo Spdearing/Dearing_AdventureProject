@@ -13,44 +13,42 @@ public class UsingItems : MonoBehaviour
 
     public void SelectAPToIncrease(string ability)
     {
-        switch(ability) 
+        switch (ability)
         {
             case "Tackle":
 
-            int increaseTackleAP = GymBattleOneManager.Instance.ReturnAPBoost().GetAPBoost();
+                int increaseTackleAP = GymBattleOneManager.Instance.ReturnAPBoost().GetAPBoost();
 
-                if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() <= 15)
-                {
-                    GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseTackleAP);
-                    GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
-                    GymBattleOneManager.Instance.UpdateAP();
-                    CombatActions.Instance.SetUsingAPBoostBool(true);
-                    SwitchPanels.Instance.SwitchToConfirmPanel();
-                }
+                GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseTackleAP);
+                GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
+                GymBattleOneManager.Instance.UpdateAP();
+                CombatActions.Instance.SetUsingAPBoostBool(true);
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+
                 break;
 
             case "Persuade":
 
                 int increasePersuadeAP = GymBattleOneManager.Instance.ReturnAPBoost().GetAPBoost();
 
-                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() <= 15)
-                {
-                    GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increasePersuadeAP);
-                    GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
-                    GymBattleOneManager.Instance.UpdateAP();
-                }
+                GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increasePersuadeAP);
+                GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
+                GymBattleOneManager.Instance.UpdateAP();
+                CombatActions.Instance.SetUsingAPBoostBool(true);
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+
                 break;
 
             case "Mock":
 
                 int increaseMockAP = GymBattleOneManager.Instance.ReturnAPBoost().GetAPBoost();
 
-                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() <= 15)
-                {
-                    GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseMockAP);
-                    GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
-                    GymBattleOneManager.Instance.UpdateAP();
-                }
+                GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseMockAP);
+                GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
+                GymBattleOneManager.Instance.UpdateAP();
+                CombatActions.Instance.SetUsingAPBoostBool(true);
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+
                 break;
 
         }
@@ -61,6 +59,10 @@ public class UsingItems : MonoBehaviour
         {
             CombatActions.Instance.SetUsingPotionsBool(true);
             SwitchPanels.Instance.SwitchToConfirmPanel();
+        }
+        else if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() == 10)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullHP());
         }
     }
 

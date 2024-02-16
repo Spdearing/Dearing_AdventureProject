@@ -24,67 +24,67 @@ public class CombatActions : MonoBehaviour
 
     public void Tackle()
     {
-        Debug.Log(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp());
+        Debug.Log(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP());
 
 
-        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() != 0)
+        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() != 0)
         {
             attacking = true;
             SwitchPanels.Instance.SwitchToConfirmPanel();
         }
-        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() == 0)
+        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() == 0)
         {
             attacking = false;
-            PlayerEnemyDialogue.Instance.PlayerRanOutOfAPText();
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
         }
     }
 
     public void Persuading()
     {
-        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAp() != 0)
+        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() != 0)
         {
             persuading = true;
             SwitchPanels.Instance.SwitchToConfirmPanel();
         }
-        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAp() == 0)
+        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() == 0)
         {
             persuading = false;
-            PlayerEnemyDialogue.Instance.PlayerRanOutOfAPText();
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
         }
     }
 
     public void Mocking()
     {
-        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAp() != 0)
+        if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() != 0)
         {
             mocking = true;
             SwitchPanels.Instance.SwitchToConfirmPanel();
         }
-        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAp() == 0)
+        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() == 0)
         {
             mocking = false;
-            PlayerEnemyDialogue.Instance.PlayerRanOutOfAPText();
+            
         }
     }
     public void ConfirmPlayerAction()
     {
         if (attacking)
         {
-            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAp() <= 15)
+            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 15)
             {
                 Action("Tackle");
             }
         }
         else if (persuading)
         {
-            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAp() <= 10)
+            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 10)
             {
                 Action("Persuade");
             }
         }
         if (mocking)
         {
-            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAp() <= 5)
+            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 5)
             {
                 Action("Mock");
             }
@@ -107,13 +107,13 @@ public class CombatActions : MonoBehaviour
 
     void Action(string input)
     {
-        int accuracy = Random.Range(0, 11);
+        int accuracy = Random.Range(0, 20);
 
         switch (input)
         {
             case "Tackle":
 
-                if (accuracy >= 5)
+                if (accuracy >= 10)
                 {
                     inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
                     GymBattleOneManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
@@ -121,7 +121,7 @@ public class CombatActions : MonoBehaviour
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                 }
-                else if (accuracy <= 4)
+                else if (accuracy <= 9)
                 {
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     PlayerEnemyDialogue.Instance.PlayerMissedTackle();
@@ -133,13 +133,13 @@ public class CombatActions : MonoBehaviour
 
             case "Persuade":
 
-                if (accuracy >= 5)
+                if (accuracy >= 10)
                 {
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
                 }
-                else if (accuracy <= 4)
+                else if (accuracy <= 9)
                 {
                     persuading = false;
                     PlayerEnemyDialogue.Instance.PlayerCouldNotPersuade();
@@ -153,7 +153,7 @@ public class CombatActions : MonoBehaviour
 
             case "Mock":
 
-                if (accuracy >= 5)
+                if (accuracy >= 15)
                 {
                     inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
                     GymBattleOneManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
@@ -161,7 +161,7 @@ public class CombatActions : MonoBehaviour
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                 }
-                else if (accuracy <= 4)
+                else if (accuracy <= 14)
                 {
                     mocking = false;
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
@@ -197,18 +197,39 @@ public class CombatActions : MonoBehaviour
 
     public void IncreaseTackleAP()
     {
-        UsingItems.Instance.SelectAPToIncrease("Tackle");
-        increasingTackleAP = true;
+        if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() < 15)
+        {
+            UsingItems.Instance.SelectAPToIncrease("Tackle");
+            increasingTackleAP = true;
+        }
+        else if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() == 15)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+        }
     }
     public void IncreasePersuadeAP()
     {
-        UsingItems.Instance.SelectAPToIncrease("Persuade");
-        increasingPersuadeAP = true;
+        if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() < 10)
+        {
+            UsingItems.Instance.SelectAPToIncrease("Persuade");
+            increasingPersuadeAP = true;
+        }
+        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() == 10)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+        }
     }
     public void IncreaseMockAP()
     {
-        UsingItems.Instance.SelectAPToIncrease("Mock");
-        increasingMockAP = true;
+        if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() < 5)
+        {
+            UsingItems.Instance.SelectAPToIncrease("Mock");
+            increasingMockAP = true;
+        }
+        else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() == 5)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+        }
     }
 
     void EnemyAttacksPlayer()
@@ -268,6 +289,9 @@ public class CombatActions : MonoBehaviour
         mocking = false;
         usingPotion = false;
         usingAPBoost = false;
+        increasingTackleAP = false;
+        increasingPersuadeAP = false;
+        increasingMockAP = false;
     }
 
     public bool ReturnAttacking()

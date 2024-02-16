@@ -80,17 +80,34 @@ public class PlayerEnemyDialogue : MonoBehaviour
     {
         if (CombatActions.Instance.ReturnIncreasingTackleAP() == true)
         {
-            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their "  + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnTackleName() + "attack points.";
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their "  + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnTackleName() + " attack points.";
         }
         else if(CombatActions.Instance.ReturnIncreasingPersuadeAP() == true)
         {
-            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnPersuadeName() + "attack points.";
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnPersuadeName() + " attack points.";
         }
         if(CombatActions.Instance.ReturnIncreasingMockAP() == true)
         {
-            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnMockName() + "attack points.";
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnMockName() + " attack points.";
         }
         
+    }
+
+    public IEnumerator PlayerHasFullAP() 
+    {
+        SwitchPanels.Instance.SwitchToCombatDialogue();
+        combatText.text = " Player cannot increaser their AP any further!";
+        yield return new WaitForSeconds(2);
+        TurnOffText();
+        SwitchPanels.Instance.SwitchToAPBoosterSelectionPanel();
+    }
+    public IEnumerator PlayerHasFullHP()
+    {
+        SwitchPanels.Instance.SwitchToCombatDialogue();
+        combatText.text = " Player cannot increaser their HP any further!";
+        yield return new WaitForSeconds(2);
+        TurnOffText();
+        SwitchPanels.Instance.SwitchToItemsPanel();
     }
 
     public void PlayerRanOutOfAPText()
@@ -106,7 +123,6 @@ public class PlayerEnemyDialogue : MonoBehaviour
     }
     public void TurnOffText()
     {
-        
         combatText.text = " ";
     }
 }
