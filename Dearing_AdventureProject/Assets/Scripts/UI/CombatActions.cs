@@ -105,6 +105,35 @@ public class CombatActions : MonoBehaviour
         }
     }
 
+    public void CancelPlayerAction()
+    {
+        if (attacking)
+        {
+            SwitchPanels.Instance.SwitchToFightPanel();
+            attacking = false;
+        }
+        else if (persuading)
+        {
+            SwitchPanels.Instance.SwitchToFightPanel();
+            persuading = false;
+        }
+        if (mocking)
+        {
+            SwitchPanels.Instance.SwitchToFightPanel();
+            mocking = false;
+        }
+        else if (usingPotion)
+        {
+            SwitchPanels.Instance.SwitchToItemsPanel();
+            usingPotion = false;
+        }
+        if (usingAPBoost)
+        {
+            SwitchPanels.Instance.SwitchToItemsPanel();
+            usingAPBoost = false;
+        }
+    }
+
     void Action(string input)
     {
         int accuracy = Random.Range(0, 20);

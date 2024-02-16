@@ -96,7 +96,7 @@ public class FriendlyCreature
     {
         int accuracy = Random.Range(0, 11);
         {
-            if (accuracy <= 4) 
+            if (accuracy <= 4) // if accuracy is 0,1,2,3, or 4  
             {
                 damage = 2;
             }

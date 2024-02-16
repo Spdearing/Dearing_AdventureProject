@@ -97,7 +97,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
     public IEnumerator PlayerHasFullAP() 
     {
         SwitchPanels.Instance.SwitchToCombatDialogue();
-        combatText.text = " Player cannot increaser their AP any further!";
+        combatText.text = " Player cannot increase their AP any further!";
         yield return new WaitForSeconds(2);
         TurnOffText();
         SwitchPanels.Instance.SwitchToAPBoosterSelectionPanel();
@@ -105,7 +105,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
     public IEnumerator PlayerHasFullHP()
     {
         SwitchPanels.Instance.SwitchToCombatDialogue();
-        combatText.text = " Player cannot increaser their HP any further!";
+        combatText.text = " Player cannot increase their HP any further!";
         yield return new WaitForSeconds(2);
         TurnOffText();
         SwitchPanels.Instance.SwitchToItemsPanel();

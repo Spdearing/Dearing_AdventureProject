@@ -30,6 +30,7 @@ public class GymBattleOneManager : MonoBehaviour
 
     private EnemyCreature enemyCreature;
     private FriendlyCreature friendlyCreature;
+    
 
     private PlayerItems potion;
     private PlayerItems aPBoost;
@@ -37,6 +38,7 @@ public class GymBattleOneManager : MonoBehaviour
 
     private void Awake()
     {
+        
         enemyCreature = EnemyCreature.Create("Barnabus", 10, 5);
         friendlyCreature = FriendlyCreature.Create("Rexasourus", 10, 5, 15, 10, 5);
 
@@ -55,6 +57,7 @@ public class GymBattleOneManager : MonoBehaviour
         friendlyLevel = GameObject.Find("PlayerLevelText").GetComponent<TMP_Text>();
         enemyHealth = GameObject.Find("EnemyHealth").GetComponent<TMP_Text>();
         friendlyHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
+        
     }
     // Update is called once per frame
     void Update()
