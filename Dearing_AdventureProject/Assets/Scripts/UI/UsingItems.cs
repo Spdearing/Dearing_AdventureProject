@@ -84,7 +84,7 @@ public class UsingItems : MonoBehaviour
         {
             PlayerEnemyDialogue.Instance.UsePotionText();
             SwitchPanels.Instance.SwitchToCombatDialogue();
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
         }
         else if (CombatActions.Instance.ReturnUsingAPBoost() == true)
         {

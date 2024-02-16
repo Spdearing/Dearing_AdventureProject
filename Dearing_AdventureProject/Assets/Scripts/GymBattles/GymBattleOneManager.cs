@@ -63,6 +63,8 @@ public class GymBattleOneManager : MonoBehaviour
         UpdateInventory();
         UpdateAP();
         UpdateLevel();
+        PlayerDied();
+        PlayerWonTheBattle();
     }
 
     public GymBattleOneManager()
@@ -94,6 +96,22 @@ public class GymBattleOneManager : MonoBehaviour
         tackleAp.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
         persuadeAp.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
         mockAp.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
+    }
+
+    void PlayerDied()
+    {
+        if(friendlyCreature.GetFriendlyHealth() <= 0)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerDiedDialogue());
+        } 
+    }    
+
+    void PlayerWonTheBattle()
+    {
+        if(friendlyCreature.GetFriendlyHealth() >= 0 && enemyCreature.GetEnemyHealth() <= 0)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerWonTheBattleDialogue());
+        }
     }
 
     public FriendlyCreature ReturnFriendlyCreature()

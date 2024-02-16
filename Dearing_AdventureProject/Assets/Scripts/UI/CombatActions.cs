@@ -252,30 +252,30 @@ public class CombatActions : MonoBehaviour
 
     IEnumerator EnemyAction()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         if (attacking && !persuading && !mocking)
         {
             EnemyAttacksPlayer();
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1.5f);
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
         }
         else if(!attacking && !persuading && !mocking)
         {
             EnemyAttacksPlayer();
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1.5f);
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
         }
         if(!attacking && persuading && !mocking)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1.5f);
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
         }
         else if(!attacking && !persuading && mocking)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1.5f);
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
         }

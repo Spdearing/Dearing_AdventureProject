@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerEnemyDialogue : MonoBehaviour
 {
@@ -124,5 +125,25 @@ public class PlayerEnemyDialogue : MonoBehaviour
     public void TurnOffText()
     {
         combatText.text = " ";
+    }
+
+    public IEnumerator PlayerDiedDialogue()
+    {
+        yield return new WaitForSeconds(1);
+        SwitchPanels.Instance.SwitchToCombatDialogue();
+        combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Gym");
+        TurnOffText();
+    }
+
+    public IEnumerator PlayerWonTheBattleDialogue()
+    {
+        yield return new WaitForSeconds(1);
+        SwitchPanels.Instance.SwitchToCombatDialogue();
+        combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congradulations, you won the battle!!!";
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Gym");
+        TurnOffText();
     }
 }

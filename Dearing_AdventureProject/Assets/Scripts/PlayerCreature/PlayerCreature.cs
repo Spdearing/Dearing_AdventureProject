@@ -94,8 +94,21 @@ public class FriendlyCreature
 
     public int DoPlayerDamage()
     {
-        damage = Random.Range(2, 6);
-
+        int accuracy = Random.Range(0, 11);
+        {
+            if (accuracy <= 4) 
+            {
+                damage = 2;
+            }
+            else if (accuracy >= 5 && accuracy <= 7) 
+            {
+                damage = 5;
+            }
+            if(accuracy >= 8)
+            {
+                damage = 8;
+            }
+        }
         return this.damage;
     }
     public void Heal(int amount)
