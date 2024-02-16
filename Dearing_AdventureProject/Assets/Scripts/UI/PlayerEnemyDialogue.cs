@@ -78,7 +78,19 @@ public class PlayerEnemyDialogue : MonoBehaviour
     }
     public void UseAPBoostText()
     {
-        combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their AP for one of their abilities";
+        if (CombatActions.Instance.ReturnIncreasingTackleAP() == true)
+        {
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their "  + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnTackleName() + "attack points.";
+        }
+        else if(CombatActions.Instance.ReturnIncreasingPersuadeAP() == true)
+        {
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnPersuadeName() + "attack points.";
+        }
+        if(CombatActions.Instance.ReturnIncreasingMockAP() == true)
+        {
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleOneManager.Instance.ReturnFriendlyCreature().ReturnMockName() + "attack points.";
+        }
+        
     }
 
     public void PlayerRanOutOfAPText()

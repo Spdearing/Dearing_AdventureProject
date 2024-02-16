@@ -9,6 +9,9 @@ public class FriendlyCreature
     private int friendlyHealth;
     private int damage;
     private int level;
+    private string tackleName;
+    private string persuadeName;
+    private string mockName;
     private int tackleAp;
     private int persuadeAp;
     private int mockAp;
@@ -46,26 +49,45 @@ public class FriendlyCreature
     {
         return this.friendlyHealth;
     }
+
     public string GetFriendlyName()
     {
         return this.friendlyName;
     }
+
     public int GetLevel() 
     {
         return this.level;
     }
+
     public int GetTackleAp()
     {
         return this.tackleAp;
     }
+
     public int GetPersuadeAp() 
     {
         return this.persuadeAp;
     }
+
     public int GetMockAp() 
     {
         return this.mockAp;
     }
+
+    public string ReturnTackleName()
+    {
+        return this.tackleName;        
+    }
+    public string ReturnPersuadeName() 
+    {
+        return this.persuadeName;
+    }
+    public string ReturnMockName()
+    {
+        return this.mockName;
+    }
+
 
     public int DoPlayerDamage()
     {
@@ -85,13 +107,38 @@ public class FriendlyCreature
     }
     public void IncreasePlayerAP(int amount)
     {
-
-        this.tackleAp += amount;
-
-        if (this.tackleAp >= 15)
+        if(CombatActions.Instance.ReturnIncreasingTackleAP() == true)
         {
-            this.tackleAp = 15;
+            this.tackleAp += amount;
+
+            if (this.tackleAp >= 15)
+            {
+                this.tackleAp = 15;
+            }
         }
+        else if(CombatActions.Instance.ReturnIncreasingPersuadeAP() == true)
+        {
+            {
+                this.persuadeAp += amount;
+
+                if (this.persuadeAp >= 15)
+                {
+                    this.persuadeAp = 15;
+                }
+            }
+        }
+        if(CombatActions.Instance.ReturnIncreasingMockAP() == true)
+        {
+            {
+                this.mockAp += amount;
+
+                if (this.mockAp >= 15)
+                {
+                    this.mockAp = 15;
+                }
+            }
+        }
+    
     }
 
     public void SpendTackleAP(int amount)

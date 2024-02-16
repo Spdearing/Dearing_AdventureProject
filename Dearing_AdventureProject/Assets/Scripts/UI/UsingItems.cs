@@ -24,6 +24,8 @@ public class UsingItems : MonoBehaviour
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseTackleAP);
                     GymBattleOneManager.Instance.ReturnAPBoost().UseItem(1);
                     GymBattleOneManager.Instance.UpdateAP();
+                    CombatActions.Instance.SetUsingAPBoostBool(true);
+                    SwitchPanels.Instance.SwitchToConfirmPanel();
                 }
                 break;
 
@@ -58,8 +60,6 @@ public class UsingItems : MonoBehaviour
         if(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() <= 9)
         {
             CombatActions.Instance.SetUsingPotionsBool(true);
-            Debug.Log("Setting using potion to true");
-            Debug.Log(CombatActions.Instance.ReturnUsingPotions());
             SwitchPanels.Instance.SwitchToConfirmPanel();
         }
     }
@@ -78,13 +78,8 @@ public class UsingItems : MonoBehaviour
 
     public IEnumerator UsingItem()
     {
-        Debug.Log("inside the USINGITEM Coroutine");
-        Debug.Log(CombatActions.Instance.ReturnUsingPotions());
-        
-        
         if (CombatActions.Instance.ReturnUsingPotions() == true)
         {
-            Debug.Log("Supposed to printing potion text");
             PlayerEnemyDialogue.Instance.UsePotionText();
             SwitchPanels.Instance.SwitchToCombatDialogue();
             yield return new WaitForSeconds(3);
@@ -95,8 +90,6 @@ public class UsingItems : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             yield return new WaitForSeconds(2);
         }
-
         yield return new WaitForSeconds(2);
-        //SwitchPanels.Instance.BackToCombatOptions();
     }
 }

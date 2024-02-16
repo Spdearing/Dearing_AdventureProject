@@ -9,6 +9,9 @@ public class CombatActions : MonoBehaviour
     private bool attacking;
     private bool persuading;
     private bool mocking;
+    private bool increasingTackleAP;
+    private bool increasingPersuadeAP;
+    private bool increasingMockAP;
     private bool usingPotion;
     private bool usingAPBoost;
     private int inflictedDamageToEnemy;
@@ -171,11 +174,8 @@ public class CombatActions : MonoBehaviour
 
             case "Potion":
 
-                Debug.Log("about to use a potion");
                 UsingItems.Instance.UsingPotion();
-                Debug.Log("Starting the using item coroutine");
                 UsingItems.Instance.StartCoroutine(UsingItems.Instance.UsingItem());
-                Debug.Log("Did the itemCoroutine");
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
                 StartCoroutine(EnemyAction());
                 
@@ -187,7 +187,7 @@ public class CombatActions : MonoBehaviour
 
                 SwitchPanels.Instance.SwitchToCombatDialogue();
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
-                UsingItems.Instance.UsingItem();
+                UsingItems.Instance.StartCoroutine(UsingItems.Instance.UsingItem());
                 StartCoroutine(EnemyAction());
 
                 break;
@@ -198,14 +198,17 @@ public class CombatActions : MonoBehaviour
     public void IncreaseTackleAP()
     {
         UsingItems.Instance.SelectAPToIncrease("Tackle");
+        increasingTackleAP = true;
     }
     public void IncreasePersuadeAP()
     {
         UsingItems.Instance.SelectAPToIncrease("Persuade");
+        increasingPersuadeAP = true;
     }
     public void IncreaseMockAP()
     {
         UsingItems.Instance.SelectAPToIncrease("Mock");
+        increasingMockAP = true;
     }
 
     void EnemyAttacksPlayer()
@@ -270,51 +273,42 @@ public class CombatActions : MonoBehaviour
     public bool ReturnAttacking()
     {
         return this.attacking;
-    }
-    public void SetAttackingBool(bool value)
-    {
-        attacking = value;
-    }
+    } 
 
     public bool ReturnPersuading()
     {
         return this.persuading;
     }
-    public void SetPersuadingBool(bool value)
+    public void SetAttackingBool(bool value)
     {
-        persuading = value;
+        attacking = value;
     }
-
-
     public bool ReturnMocking()
     {
         return this.mocking;
     }
-    public void SetMockingBool(bool value)
-    {
-        mocking = value;
-    }
-
-
-    public bool ReturnUsingPotions()
+   public bool ReturnUsingPotions()
     {
         return this.usingPotion;
     }
-    public void SetUsingPotionsBool(bool value)
-    {
-        usingPotion = value;
-    }
-
-
     public bool ReturnUsingAPBoost()
     {
         return this.usingAPBoost;
     }
-    public void SetUsingAPBoostBool(bool value)
+    public bool ReturnIncreasingTackleAP()
     {
-        usingAPBoost = value;
+        return this.increasingTackleAP;
     }
 
+    public bool ReturnIncreasingPersuadeAP()
+    {
+        return this.increasingPersuadeAP;
+    }
+
+    public bool ReturnIncreasingMockAP()
+    {
+        return this.increasingMockAP;
+    }
 
     public int ReturnInflictedDamageToPlayer()
     {
@@ -324,4 +318,40 @@ public class CombatActions : MonoBehaviour
     {
         return this.inflictedDamageToEnemy;
     }
+
+    public void SetPersuadingBool(bool value)
+    {
+        persuading = value;
+    }
+
+    public void SetMockingBool(bool value)
+    {
+        mocking = value;
+    }
+
+    public void SetUsingPotionsBool(bool value)
+    {
+        usingPotion = value;
+    }
+
+    public void SetUsingAPBoostBool(bool value)
+    {
+        usingAPBoost = value;
+    }
+
+    public void SetIncreasingTackleAP(bool value)
+    {
+        increasingTackleAP = value;
+    }
+
+    public void SetIncreasingPersuadeAPBool(bool value)
+    {
+        increasingPersuadeAP = value;
+    }
+
+    public void SetIncreasingMockAPBool(bool value)
+    {
+        increasingMockAP = value;
+    }
+
 }
