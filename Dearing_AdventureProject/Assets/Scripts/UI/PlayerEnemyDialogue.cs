@@ -70,7 +70,15 @@ public class PlayerEnemyDialogue : MonoBehaviour
 
     public void EnemyHitPlayer()
     {
-        combatText.text = GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToPlayer().ToString() + " to " + GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName();
+        if(CombatActions.Instance.ReturnPlayerDefending() != true) 
+        {
+            combatText.text = GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToPlayer().ToString() + " to " + GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName();
+        }
+        else if(CombatActions.Instance.ReturnPlayerDefending() == true) 
+        {
+            combatText.text = GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToPlayer().ToString() + " to " + GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + ". But because they chose to defend this turn" + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " only did " + CombatActions.Instance.ReturnInflictedModifiedDamageToPlayer() + " points of damage instead.";
+        }
+        
     }
 
     public void UsePotionText()

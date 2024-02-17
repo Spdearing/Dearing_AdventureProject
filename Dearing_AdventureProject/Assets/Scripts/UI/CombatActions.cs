@@ -7,6 +7,7 @@ public class CombatActions : MonoBehaviour
     public static CombatActions Instance;
 
     private bool attacking;
+    private bool playerDefending;
     private bool persuading;
     private bool mocking;
     private bool increasingTackleAP;
@@ -15,6 +16,7 @@ public class CombatActions : MonoBehaviour
     private bool usingPotion;
     private bool usingAPBoost;
     private int inflictedDamageToEnemy;
+    private int inflictedModifiedDamageToPlayer;
     private int inflictedDamageToPlayer;
 
     public CombatActions() 
@@ -24,9 +26,6 @@ public class CombatActions : MonoBehaviour
 
     public void Tackle()
     {
-        Debug.Log(GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP());
-
-
         if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() != 0)
         {
             attacking = true;
@@ -35,7 +34,7 @@ public class CombatActions : MonoBehaviour
         else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() == 0)
         {
             attacking = false;
-            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
         }
     }
 
@@ -49,7 +48,7 @@ public class CombatActions : MonoBehaviour
         else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() == 0)
         {
             persuading = false;
-            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
         }
     }
 
@@ -63,8 +62,14 @@ public class CombatActions : MonoBehaviour
         else if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() == 0)
         {
             mocking = false;
-            
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
         }
+    }
+
+    public void Defend()
+    {
+        SwitchPanels.Instance.SwitchToConfirmPanel();
+        playerDefending = true;
     }
     public void ConfirmPlayerAction()
     {
@@ -89,14 +94,18 @@ public class CombatActions : MonoBehaviour
                 Action("Mock");
             }
         }
-        else if (usingPotion)
+        else if (playerDefending)
+        {
+            Action("Defend");
+        }
+        if (usingPotion)
         {
             if (GymBattleOneManager.Instance.ReturnPotion().GetItemQuantity() > 0)
             {
                 Action("Potion");
             }
         }
-        if (usingAPBoost)
+        else if (usingAPBoost)
         {
             if (GymBattleOneManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
             {
@@ -122,12 +131,17 @@ public class CombatActions : MonoBehaviour
             SwitchPanels.Instance.SwitchToFightPanel();
             mocking = false;
         }
-        else if (usingPotion)
+        else if(playerDefending)
+        {
+            SwitchPanels.Instance.BackToCombatOptions();
+            playerDefending = false;
+        }
+        if (usingPotion)
         {
             SwitchPanels.Instance.SwitchToItemsPanel();
             usingPotion = false;
         }
-        if (usingAPBoost)
+        else if (usingAPBoost)
         {
             SwitchPanels.Instance.SwitchToItemsPanel();
             usingAPBoost = false;
@@ -201,6 +215,13 @@ public class CombatActions : MonoBehaviour
 
                 break;
 
+            case "Defend":
+
+                SwitchPanels.Instance.SwitchToCombatDialogue();
+                StartCoroutine(EnemyAction());
+                
+                break;
+
             case "Potion":
 
                 UsingItems.Instance.UsingPotion();
@@ -272,7 +293,14 @@ public class CombatActions : MonoBehaviour
             GymBattleOneManager.Instance.UpdateHealthAndNameText();
             PlayerEnemyDialogue.Instance.EnemyHitPlayer();
         }
-        else if (enemyAccuracy <= 1)
+        else if (enemyAccuracy >= 2 && playerDefending == true)
+        {
+            PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            inflictedModifiedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
+            GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+            GymBattleOneManager.Instance.UpdateHealthAndNameText();
+        }
+        if (enemyAccuracy <= 1)
         {
             PlayerEnemyDialogue.Instance.EnemyMisses();
         }
@@ -281,7 +309,7 @@ public class CombatActions : MonoBehaviour
 
     IEnumerator EnemyAction()
     {
-        yield return new WaitForSeconds(1.5f);
+        //yield return new WaitForSeconds(1.5f);
         if (attacking && !persuading && !mocking)
         {
             EnemyAttacksPlayer();
@@ -308,12 +336,20 @@ public class CombatActions : MonoBehaviour
             SwitchPanels.Instance.BackToCombatOptions();
             ResetActions();
         }
+        if(!attacking && playerDefending && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
         PlayerEnemyDialogue.Instance.TurnOffText();
     }
 
     void ResetActions()
     {
         attacking = false;
+        playerDefending = false;
         persuading = false;
         mocking = false;
         usingPotion = false;
@@ -327,6 +363,10 @@ public class CombatActions : MonoBehaviour
     {
         return this.attacking;
     } 
+    public bool ReturnPlayerDefending()
+    {
+        return this.playerDefending;
+    }
 
     public bool ReturnPersuading()
     {
@@ -361,6 +401,11 @@ public class CombatActions : MonoBehaviour
     public bool ReturnIncreasingMockAP()
     {
         return this.increasingMockAP;
+    }
+
+    public int ReturnInflictedModifiedDamageToPlayer()
+    {
+        return this.inflictedModifiedDamageToPlayer;
     }
 
     public int ReturnInflictedDamageToPlayer()

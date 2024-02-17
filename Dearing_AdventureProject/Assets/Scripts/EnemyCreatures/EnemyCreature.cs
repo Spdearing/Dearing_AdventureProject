@@ -8,6 +8,7 @@ public class EnemyCreature
     private int enemyHealth;
     private int level;
     private int enemyDamage;
+    private int modifiedDamage;
     
 
 
@@ -45,6 +46,21 @@ public class EnemyCreature
         enemyDamage = Random.Range(2, 6);
 
         return this.enemyDamage;
+    }
+
+    public int DoModifiedEnemyDamage()
+    {
+        modifiedDamage = enemyDamage/2;
+
+        return this.enemyDamage;
+    }
+    public int ReturnModifiedDamage()
+    {
+        if (CombatActions.Instance.ReturnPlayerDefending() == true)
+        {
+            modifiedDamage = enemyDamage / 2;
+        }
+        return this.modifiedDamage;
     }
     public int GetLevel()
     {
