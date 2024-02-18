@@ -43,23 +43,17 @@ public class EnemyCreature
     }
     public int DoEnemyDamage()
     {
-        enemyDamage = Random.Range(2, 6);
+        enemyDamage = Random.Range(2,8);
 
+        if(CombatActions.Instance.ReturnPlayerDefending() == true)
+        {
+            modifiedDamage = enemyDamage - 2;
+        }
         return this.enemyDamage;
     }
-
     public int DoModifiedEnemyDamage()
     {
-        modifiedDamage = enemyDamage/2;
-
-        return this.enemyDamage;
-    }
-    public int ReturnModifiedDamage()
-    {
-        if (CombatActions.Instance.ReturnPlayerDefending() == true)
-        {
-            modifiedDamage = enemyDamage / 2;
-        }
+        
         return this.modifiedDamage;
     }
     public int GetLevel()

@@ -63,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log(interactable);
     }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("GymTrainerOne"))

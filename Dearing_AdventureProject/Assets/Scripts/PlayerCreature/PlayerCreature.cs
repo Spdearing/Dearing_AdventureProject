@@ -91,7 +91,6 @@ public class FriendlyCreature
         return this.mockName;
     }
 
-
     public int DoPlayerDamage()
     {
         int accuracy = Random.Range(0, 11);

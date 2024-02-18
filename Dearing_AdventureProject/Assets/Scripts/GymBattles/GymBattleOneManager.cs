@@ -35,6 +35,8 @@ public class GymBattleOneManager : MonoBehaviour
     private PlayerItems potion;
     private PlayerItems aPBoost;
 
+    private bool activeGymBattle;
+
 
     private void Awake()
     {
@@ -51,6 +53,7 @@ public class GymBattleOneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        activeGymBattle = true;
         enemyName = GameObject.Find("EnemyName").GetComponent<TMP_Text>();
         friendlyName = GameObject.Find("PlayerName").GetComponent<TMP_Text>();
         enemyLevel = GameObject.Find("EnemyLevelText").GetComponent<TMP_Text>();
@@ -132,6 +135,14 @@ public class GymBattleOneManager : MonoBehaviour
     public PlayerItems ReturnAPBoost()
     {
         return this.aPBoost;
+    }
+    public bool ReturnBattleStatus()
+    {
+        return this.activeGymBattle;
+    }
+    public void SetBattleStatus(bool value)
+    {
+        activeGymBattle = value;
     }
 }
 

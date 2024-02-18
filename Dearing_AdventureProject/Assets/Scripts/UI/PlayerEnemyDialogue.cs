@@ -81,6 +81,11 @@ public class PlayerEnemyDialogue : MonoBehaviour
         
     }
 
+    public void PlayerIsDefending()
+    {
+        combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " decided to defend themselves against " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + "'s next attack.";
+    }
+
     public void UsePotionText()
     {
         combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " healed themselves for " + GymBattleOneManager.Instance.ReturnPotion().GetHealing() + " points of HP!";
@@ -102,7 +107,20 @@ public class PlayerEnemyDialogue : MonoBehaviour
         
     }
 
-    public IEnumerator PlayerHasFullAP() 
+    public void PlayerRanOutOfAPText()
+    {
+        combatText.text = "You cannot use that move, you ran out of AP.";
+    }
+    public void PlayerTriedToRunAwayText()
+    {
+        combatText.text = "You cannot run away, you are in the middle of gym battle!";
+    }
+    public void TurnOffText()
+    {
+        combatText.text = " ";
+    }
+
+    public IEnumerator PlayerHasFullAP()
     {
         SwitchPanels.Instance.SwitchToCombatDialogue();
         combatText.text = " Player cannot increase their AP any further!";
@@ -118,23 +136,22 @@ public class PlayerEnemyDialogue : MonoBehaviour
         TurnOffText();
         SwitchPanels.Instance.SwitchToItemsPanel();
     }
-
-    public void PlayerRanOutOfAPText()
-    {
-        combatText.text = "You cannot use that move, you ran out of AP.";
-    }
     public IEnumerator PlayerRanOutOfAPDialogue()
     {
         SwitchPanels.Instance.SwitchToCombatDialogue();
         PlayerRanOutOfAPText();
         yield return new WaitForSeconds(2);
         SwitchPanels.Instance.SwitchToFightPanel();
+        TurnOffText();
     }
-    public void TurnOffText()
+    public IEnumerator PlayerTriedToRunAwayDialogue()
     {
-        combatText.text = " ";
+        SwitchPanels.Instance.SwitchToCombatDialogue();
+        PlayerTriedToRunAwayText();
+        yield return new WaitForSeconds(2);
+        SwitchPanels.Instance.BackToCombatOptions();
+        TurnOffText();
     }
-
     public IEnumerator PlayerDiedDialogue()
     {
         yield return new WaitForSeconds(1);
@@ -144,7 +161,6 @@ public class PlayerEnemyDialogue : MonoBehaviour
         SceneManager.LoadScene("Gym");
         TurnOffText();
     }
-
     public IEnumerator PlayerWonTheBattleDialogue()
     {
         yield return new WaitForSeconds(1);
@@ -154,4 +170,5 @@ public class PlayerEnemyDialogue : MonoBehaviour
         SceneManager.LoadScene("Gym");
         TurnOffText();
     }
+  
 }

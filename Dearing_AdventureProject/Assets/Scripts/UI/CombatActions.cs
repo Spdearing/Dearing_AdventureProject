@@ -66,6 +66,14 @@ public class CombatActions : MonoBehaviour
         }
     }
 
+    public void RunAway()
+    {
+        if(GymBattleOneManager.Instance.ReturnBattleStatus() == true)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerTriedToRunAwayDialogue());
+        }
+    }
+
     public void Defend()
     {
         SwitchPanels.Instance.SwitchToConfirmPanel();
@@ -158,15 +166,19 @@ public class CombatActions : MonoBehaviour
 
                 if (accuracy >= 10)
                 {
+                    Debug.Log("Hit Tackle");
                     inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
                     GymBattleOneManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
-                    GymBattleOneManager.Instance.UpdateHealthAndNameText();
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
+                    GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                 }
                 else if (accuracy <= 9)
                 {
+                    Debug.Log("Missed Tackle");
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerMissedTackle();
                 }
                 SwitchPanels.Instance.SwitchToCombatDialogue();
@@ -178,13 +190,17 @@ public class CombatActions : MonoBehaviour
 
                 if (accuracy >= 10)
                 {
+                    Debug.Log("Hit Persuade");
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
                 }
                 else if (accuracy <= 9)
                 {
+                    Debug.Log("Missed Persuade");
                     persuading = false;
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerCouldNotPersuade();
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
@@ -198,16 +214,20 @@ public class CombatActions : MonoBehaviour
 
                 if (accuracy >= 15)
                 {
+                    Debug.Log("Hit mock");
                     inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
                     GymBattleOneManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerHitEnemy();
                     GymBattleOneManager.Instance.UpdateHealthAndNameText();
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                 }
                 else if (accuracy <= 14)
                 {
+                    Debug.Log("missed mock");
                     mocking = false;
                     GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
                     PlayerEnemyDialogue.Instance.PlayerCouldNotMock();
                 }
                 SwitchPanels.Instance.SwitchToCombatDialogue();
@@ -218,6 +238,7 @@ public class CombatActions : MonoBehaviour
             case "Defend":
 
                 SwitchPanels.Instance.SwitchToCombatDialogue();
+                PlayerEnemyDialogue.Instance.PlayerIsDefending();
                 StartCoroutine(EnemyAction());
                 
                 break;
@@ -284,66 +305,28 @@ public class CombatActions : MonoBehaviour
 
     void EnemyAttacksPlayer()
     {
-        int enemyAccuracy = Random.Range(0, 5);
+        int enemyAccuracy = Random.Range(0,20);
 
-        if (enemyAccuracy >= 2)
+        if (enemyAccuracy >= 10 && !playerDefending)
         {
             inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
             GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
             GymBattleOneManager.Instance.UpdateHealthAndNameText();
             PlayerEnemyDialogue.Instance.EnemyHitPlayer();
         }
-        else if (enemyAccuracy >= 2 && playerDefending == true)
+        else if (enemyAccuracy >= 10 && playerDefending)
         {
-            PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
             inflictedModifiedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
-            GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+            GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
             GymBattleOneManager.Instance.UpdateHealthAndNameText();
+            PlayerEnemyDialogue.Instance.EnemyHitPlayer();
         }
-        if (enemyAccuracy <= 1)
+        if (enemyAccuracy <= 9)
         {
             PlayerEnemyDialogue.Instance.EnemyMisses();
         }
         SwitchPanels.Instance.SwitchToCombatDialogue();
-    }
-
-    IEnumerator EnemyAction()
-    {
-        //yield return new WaitForSeconds(1.5f);
-        if (attacking && !persuading && !mocking)
-        {
-            EnemyAttacksPlayer();
-            yield return new WaitForSeconds(1.5f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        else if(!attacking && !persuading && !mocking)
-        {
-            EnemyAttacksPlayer();
-            yield return new WaitForSeconds(1.5f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        if(!attacking && persuading && !mocking)
-        {
-            yield return new WaitForSeconds(1.5f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        else if(!attacking && !persuading && mocking)
-        {
-            yield return new WaitForSeconds(1.5f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        if(!attacking && playerDefending && !persuading && !mocking)
-        {
-            EnemyAttacksPlayer();
-            yield return new WaitForSeconds(2.0f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        PlayerEnemyDialogue.Instance.TurnOffText();
     }
 
     void ResetActions()
@@ -380,7 +363,7 @@ public class CombatActions : MonoBehaviour
     {
         return this.mocking;
     }
-   public bool ReturnUsingPotions()
+    public bool ReturnUsingPotions()
     {
         return this.usingPotion;
     }
@@ -452,4 +435,43 @@ public class CombatActions : MonoBehaviour
         increasingMockAP = value;
     }
 
+    IEnumerator EnemyAction()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        if (attacking && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        else if (!attacking && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        if (!attacking && persuading && !mocking)
+        {
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        else if (!attacking && !persuading && mocking)
+        {
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        if (!attacking && playerDefending && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        PlayerEnemyDialogue.Instance.TurnOffText();
+    }
 }
