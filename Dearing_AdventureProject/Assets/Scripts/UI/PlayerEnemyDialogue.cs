@@ -38,6 +38,13 @@ public class PlayerEnemyDialogue : MonoBehaviour
                 combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " missed their tackle on " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName();
             }
         }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (CombatActions.Instance.ReturnAttacking())
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " missed their tackle on " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName();
+            }
+        }
     }
 
     public void PlayerCouldNotPersuade()
@@ -56,6 +63,13 @@ public class PlayerEnemyDialogue : MonoBehaviour
                 combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " failed to persuade " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName();
             }
         }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (CombatActions.Instance.ReturnPersuading() == false)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " failed to persuade " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName();
+            }
+        }
     }
 
     public void PlayerCouldNotMock()
@@ -72,6 +86,13 @@ public class PlayerEnemyDialogue : MonoBehaviour
             if (CombatActions.Instance.ReturnMocking() == false)
             {
                 combatText.text = GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " insults, TRY HARDER!";
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (CombatActions.Instance.ReturnMocking() == false)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " insults, TRY HARDER!";
             }
         }
 
@@ -109,6 +130,21 @@ public class PlayerEnemyDialogue : MonoBehaviour
                 combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
             }
         }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (CombatActions.Instance.ReturnAttacking() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " to " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName();
+            }
+            else if (CombatActions.Instance.ReturnPersuading() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " persuaded " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " to not attack them";
+            }
+            if (CombatActions.Instance.ReturnMocking() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
+            }
+        }
     }
 
     public void EnemyMisses()
@@ -121,7 +157,11 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             combatText.text = GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " missed an attack on " + GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName();
         }
-     
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            combatText.text = GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " missed an attack on " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName();
+        }
+
     }
 
     public void EnemyHitPlayer()
@@ -148,8 +188,17 @@ public class PlayerEnemyDialogue : MonoBehaviour
                 combatText.text = GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToPlayer().ToString() + " to " + GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + ". But because they chose to defend this turn" + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " only did " + CombatActions.Instance.ReturnInflictedModifiedDamageToPlayer() + " points of damage instead.";
             }
         }
-
-
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (CombatActions.Instance.ReturnPlayerDefending() != true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToPlayer().ToString() + " to " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName();
+            }
+            else if (CombatActions.Instance.ReturnPlayerDefending() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToPlayer().ToString() + " to " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + ". But because they chose to defend this turn" + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " only did " + CombatActions.Instance.ReturnInflictedModifiedDamageToPlayer() + " points of damage instead.";
+            }
+        }
     }
 
     public void PlayerIsDefending()
@@ -162,8 +211,10 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " decided to defend themselves against " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + "'s next attack.";
         }
-
-        
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " decided to defend themselves against " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + "'s next attack.";
+        }
     }
 
     public void UsePotionText()
@@ -176,7 +227,11 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " healed themselves for " + GymBattleTwoManager.Instance.ReturnPotion().GetHealing() + " points of HP!";
         }
-        
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " healed themselves for " + GymBattleThreeManager.Instance.ReturnPotion().GetHealing() + " points of HP!";
+        }
+
     }
     public void UseAPBoostText()
     {
@@ -210,8 +265,21 @@ public class PlayerEnemyDialogue : MonoBehaviour
                 combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleTwoManager.Instance.ReturnFriendlyCreature().ReturnMockName() + " attack points.";
             }
         }
-
-
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (CombatActions.Instance.ReturnIncreasingTackleAP() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().ReturnTackleName() + " attack points.";
+            }
+            else if (CombatActions.Instance.ReturnIncreasingPersuadeAP() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().ReturnPersuadeName() + " attack points.";
+            }
+            if (CombatActions.Instance.ReturnIncreasingMockAP() == true)
+            {
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " increased their " + GymBattleThreeManager.Instance.ReturnFriendlyCreature().ReturnMockName() + " attack points.";
+            }
+        }
     }
 
     public void PlayerRanOutOfAPText()
@@ -279,6 +347,15 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            yield return new WaitForSeconds(1);
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+            combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
+            yield return new WaitForSeconds(2);
+            SceneManager.LoadScene("Gym");
+            TurnOffText();
+        }
 
     }
     public IEnumerator PlayerWonTheBattleDialogue()
@@ -301,7 +378,16 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
-   
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            yield return new WaitForSeconds(1);
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+            combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
+            yield return new WaitForSeconds(2);
+            SceneManager.LoadScene("Gym");
+            TurnOffText();
+        }
+
     }
   
 }

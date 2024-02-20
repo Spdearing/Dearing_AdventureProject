@@ -98,6 +98,48 @@ public class UsingItems : MonoBehaviour
 
             }
         }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            switch (ability)
+            {
+                case "Tackle":
+
+                    int increaseTackleAP = GymBattleThreeManager.Instance.ReturnAPBoost().GetAPBoost();
+
+                    GymBattleThreeManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseTackleAP);
+                    GymBattleThreeManager.Instance.ReturnAPBoost().UseItem(1);
+                    GymBattleThreeManager.Instance.UpdateAP();
+                    CombatActions.Instance.SetUsingAPBoostBool(true);
+                    SwitchPanels.Instance.SwitchToConfirmPanel();
+
+                    break;
+
+                case "Persuade":
+
+                    int increasePersuadeAP = GymBattleThreeManager.Instance.ReturnAPBoost().GetAPBoost();
+
+                    GymBattleThreeManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increasePersuadeAP);
+                    GymBattleThreeManager.Instance.ReturnAPBoost().UseItem(1);
+                    GymBattleThreeManager.Instance.UpdateAP();
+                    CombatActions.Instance.SetUsingAPBoostBool(true);
+                    SwitchPanels.Instance.SwitchToConfirmPanel();
+
+                    break;
+
+                case "Mock":
+
+                    int increaseMockAP = GymBattleThreeManager.Instance.ReturnAPBoost().GetAPBoost();
+
+                    GymBattleThreeManager.Instance.ReturnFriendlyCreature().IncreasePlayerAP(increaseMockAP);
+                    GymBattleThreeManager.Instance.ReturnAPBoost().UseItem(1);
+                    GymBattleThreeManager.Instance.UpdateAP();
+                    CombatActions.Instance.SetUsingAPBoostBool(true);
+                    SwitchPanels.Instance.SwitchToConfirmPanel();
+
+                    break;
+
+            }
+        }
     }
     
         
@@ -117,12 +159,24 @@ public class UsingItems : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
-            if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() <= 9)
+            if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() <= 19)
             {
                 CombatActions.Instance.SetUsingPotionsBool(true);
                 SwitchPanels.Instance.SwitchToConfirmPanel();
             }
-            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() == 10)
+            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() == 20)
+            {
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullHP());
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() <= 34)
+            {
+                CombatActions.Instance.SetUsingPotionsBool(true);
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+            }
+            else if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() == 35)
             {
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullHP());
             }
@@ -145,7 +199,14 @@ public class UsingItems : MonoBehaviour
             GymBattleTwoManager.Instance.ReturnFriendlyCreature().Heal(healingAmount);
             GymBattleTwoManager.Instance.ReturnPotion().UseItem(1);
             GymBattleTwoManager.Instance.UpdateInventory();
-        } 
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            int healingAmount = GymBattleThreeManager.Instance.ReturnPotion().GetHealing();
+            GymBattleThreeManager.Instance.ReturnFriendlyCreature().Heal(healingAmount);
+            GymBattleThreeManager.Instance.ReturnPotion().UseItem(1);
+            GymBattleThreeManager.Instance.UpdateInventory();
+        }
     }
     public void UseAPBooster()
     {
