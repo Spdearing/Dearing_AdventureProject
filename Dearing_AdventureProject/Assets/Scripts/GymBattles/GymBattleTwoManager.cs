@@ -45,7 +45,7 @@ public class GymBattleTwoManager : MonoBehaviour
     {
 
         enemyCreature = EnemyCreature.Create("Laxerous", 20, 10);
-        friendlyCreature = FriendlyCreature.Create("Rexasourus", 20, 5, 15, 10, 10);
+        friendlyCreature = FriendlyCreature.Create("Rexasourus", 20, 10, 20, 15, 10);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);
@@ -102,12 +102,12 @@ public class GymBattleTwoManager : MonoBehaviour
     }
     public void UpdateAP()
     {
-        tackleAPSetOne.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
-        persuadeAPSetOne.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
-        mockAPSetOne.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
-        tackleAPSetTwo.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
-        persuadeAPSetTwo.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
-        mockAPSetTwo.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
+        tackleAPSetOne.text = "AP: " + friendlyCreature.GetTackleAP() + "/20";
+        persuadeAPSetOne.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/15";
+        mockAPSetOne.text = "AP: " + friendlyCreature.GetMockAP() + "/10";
+        tackleAPSetTwo.text = "AP: " + friendlyCreature.GetTackleAP() + "/20";
+        persuadeAPSetTwo.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/15";
+        mockAPSetTwo.text = "AP: " + friendlyCreature.GetMockAP() + "/10";
     }
 
     void PlayerDied()

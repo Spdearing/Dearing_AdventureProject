@@ -64,14 +64,14 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             if (CombatActions.Instance.ReturnMocking() == false)
             {
-                combatText.text = GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + "insults, TRY HARDER!";
+                combatText.text = GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " insults, TRY HARDER!";
             }
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
             if (CombatActions.Instance.ReturnMocking() == false)
             {
-                combatText.text = GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + "insults, TRY HARDER!";
+                combatText.text = GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " did not care about " + GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " insults, TRY HARDER!";
             }
         }
 
@@ -287,7 +287,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();
-            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congradulations, you won the battle!!!";
+            combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
             SceneManager.LoadScene("Gym");
             TurnOffText();
@@ -296,7 +296,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();
-            combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congradulations, you won the battle!!!";
+            combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
             SceneManager.LoadScene("Gym");
             TurnOffText();

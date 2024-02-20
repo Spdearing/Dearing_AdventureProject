@@ -130,67 +130,91 @@ public class CombatActions : MonoBehaviour
     }
     public void ConfirmPlayerAction()
     {
-        if (attacking)
+        if(SceneManager.GetActiveScene().name == "GymBattleOne")
         {
-            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 15)
+            if (attacking)
             {
-                Action("Tackle");
+                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 15)
+                {
+                    Action("Tackle");
+                }
             }
-            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 20)
+            else if (persuading)
             {
-                Action("Tackle");
+                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 10)
+                {
+                    Action("Persuade");
+                }
+            }
+            if (mocking)
+            {
+                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 5)
+                {
+                    Action("Mock");
+                }
+            }
+            else if (playerDefending)
+            {
+                Action("Defend");
+            }
+            if (usingPotion)
+            {
+                if (GymBattleOneManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
+            }
+            else if (usingAPBoost)
+            {
+                if (GymBattleOneManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
             }
         }
-        else if (persuading)
+        else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
-            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 10)
+            if (attacking)
             {
-                Action("Persuade");
+                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 20)
+                {
+                    Action("Tackle");
+                }
             }
-            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 15)
+            else if (persuading)
             {
-                Action("Persuade");
+                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 15)
+                {
+                    Action("Persuade");
+                }
             }
-        }
-        if (mocking)
-        {
-            if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 5)
+            if (mocking)
             {
-                Action("Mock");
+                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 10)
+                {
+                    Action("Mock");
+                }
             }
-            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 10)
+            else if (playerDefending)
             {
-                Action("Mock");
+                Action("Defend");
             }
-        }
-        else if (playerDefending)
-        {
-            Action("Defend");
-        }
-        if (usingPotion)
-        {
-            if (GymBattleOneManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+            if (usingPotion)
             {
-                Action("Potion");
+                if (GymBattleTwoManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
             }
-            else if (GymBattleTwoManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+            else if (usingAPBoost)
             {
-                Action("Potion");
-            }
-        }
-        else if (usingAPBoost)
-        {
-            if (GymBattleOneManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
-            {
-                Action("APBoost");
-            }
-            else if (GymBattleTwoManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
-            {
-                Action("APBoost");
+                if (GymBattleTwoManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
             }
         }
     }
-
     public void CancelPlayerAction()
     {
         if (attacking)
@@ -521,12 +545,12 @@ public class CombatActions : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
-            if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() < 5)
+            if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() < 10)
             {
                 UsingItems.Instance.SelectAPToIncrease("Mock");
                 increasingMockAP = true;
             }
-            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() == 5)
+            else if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() == 10)
             {
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
             }
