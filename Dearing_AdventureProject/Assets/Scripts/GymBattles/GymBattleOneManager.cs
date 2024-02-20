@@ -22,9 +22,12 @@ public class GymBattleOneManager : MonoBehaviour
     [SerializeField] TMP_Text potionNameText;
     [SerializeField] TMP_Text aPBoostNameText;
     [SerializeField] TMP_Text aPBoostQuantityText;
-    [SerializeField] TMP_Text tackleAp;
-    [SerializeField] TMP_Text persuadeAp;
-    [SerializeField] TMP_Text mockAp;
+    [SerializeField] TMP_Text tackleAPSetOne;
+    [SerializeField] TMP_Text persuadeAPSetOne;
+    [SerializeField] TMP_Text mockAPSetOne;
+    [SerializeField] TMP_Text tackleAPSetTwo;
+    [SerializeField] TMP_Text persuadeAPSetTwo;
+    [SerializeField] TMP_Text mockAPSetTwo;
 
 
 
@@ -99,9 +102,12 @@ public class GymBattleOneManager : MonoBehaviour
     }
     public void UpdateAP()
     {
-        tackleAp.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
-        persuadeAp.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
-        mockAp.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
+        tackleAPSetOne.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
+        persuadeAPSetOne.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
+        mockAPSetOne.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
+        tackleAPSetTwo.text = "AP: " + friendlyCreature.GetTackleAP() + "/15";
+        persuadeAPSetTwo.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/10";
+        mockAPSetTwo.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
     }
 
     void PlayerDied()
