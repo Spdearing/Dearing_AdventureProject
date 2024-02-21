@@ -9,24 +9,27 @@ public class EnemyCreature
     private int level;
     private int enemyDamage;
     private int modifiedDamage;
+    private bool evolved;
     
 
 
-    private EnemyCreature(string enemyName, int health, int level)
+    private EnemyCreature(string enemyName, int health, int level,bool evolved)
     {
         this.enemyName = enemyName;
         this.enemyHealth = health;
         this.level = level;
+        this.evolved = evolved;
         
     }
-    public static EnemyCreature Create(string enemyName, int enemyHealth, int level)
+    public static EnemyCreature Create(string enemyName, int enemyHealth, int level,bool evolved)
     {
-        return new EnemyCreature(enemyName, enemyHealth, level);
+        return new EnemyCreature(enemyName, enemyHealth, level, evolved);
     }
 
     public void TakeDamage(int damage)
     {
         enemyHealth -= damage;
+        
         if (enemyHealth <= 0)
         {
             enemyHealth = 0;
@@ -43,12 +46,24 @@ public class EnemyCreature
     }
     public int DoEnemyDamage()
     {
-        enemyDamage = Random.Range(2,8);
-
-        if(CombatActions.Instance.ReturnPlayerDefending() == true)
+        if(!evolved)
         {
-            modifiedDamage = enemyDamage - 2;
+            enemyDamage = Random.Range(2, 8);
+
+            if (CombatActions.Instance.ReturnPlayerDefending() == true)
+            {
+                modifiedDamage = enemyDamage - 2;
+            }
         }
+        else if(evolved)
+            
+            enemyDamage = Random.Range(8, 17);
+
+        if (CombatActions.Instance.ReturnPlayerDefending() == true)
+        {
+            modifiedDamage = enemyDamage - 5;
+        }
+
         return this.enemyDamage;
     }
     public int DoModifiedEnemyDamage()

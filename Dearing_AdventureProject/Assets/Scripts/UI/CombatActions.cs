@@ -423,7 +423,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
                         
                         inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -433,7 +433,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleOneManager.Instance.UpdateHealthAndNameText();
                         GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
                         
                         GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
@@ -447,7 +447,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Persuade":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
                         
                         SwitchPanels.Instance.SwitchToCombatDialogue();
@@ -455,7 +455,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleOneManager.Instance.UpdateHealthAndNameText();
                         GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
                         
                         persuading = false;
@@ -471,7 +471,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Mock":
 
-                    if (accuracy >= 15)
+                    if (accuracy >= 12)
                     {
                         
                         inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -481,7 +481,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleOneManager.Instance.UpdateHealthAndNameText();
                         GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                     }
-                    else if (accuracy <= 14)
+                    else if (accuracy <= 11)
                     {
                         
                         mocking = false;
@@ -531,7 +531,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
                         
                         inflictedDamageToEnemy = GymBattleTwoManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -541,7 +541,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleTwoManager.Instance.UpdateHealthAndNameText();
                         GymBattleTwoManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
                         
                         GymBattleTwoManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
@@ -555,7 +555,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Persuade":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
                         
                         SwitchPanels.Instance.SwitchToCombatDialogue();
@@ -563,7 +563,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleTwoManager.Instance.UpdateHealthAndNameText();
                         GymBattleTwoManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
                         
                         persuading = false;
@@ -579,7 +579,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Mock":
 
-                    if (accuracy >= 15)
+                    if (accuracy >= 12)
                     {
                         
                         inflictedDamageToEnemy = GymBattleTwoManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -589,7 +589,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleTwoManager.Instance.UpdateHealthAndNameText();
                         GymBattleTwoManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                     }
-                    else if (accuracy <= 14)
+                    else if (accuracy <= 11)
                     {
                         
                         mocking = false;
@@ -639,7 +639,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
 
                         inflictedDamageToEnemy = GymBattleThreeManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -649,7 +649,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleThreeManager.Instance.UpdateHealthAndNameText();
                         GymBattleThreeManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
 
                         GymBattleThreeManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
@@ -663,7 +663,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Persuade":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
 
                         SwitchPanels.Instance.SwitchToCombatDialogue();
@@ -671,7 +671,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleThreeManager.Instance.UpdateHealthAndNameText();
                         GymBattleThreeManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
 
                         persuading = false;
@@ -687,7 +687,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Mock":
 
-                    if (accuracy >= 15)
+                    if (accuracy >= 12)
                     {
 
                         inflictedDamageToEnemy = GymBattleThreeManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -697,7 +697,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleThreeManager.Instance.UpdateHealthAndNameText();
                         GymBattleThreeManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                     }
-                    else if (accuracy <= 14)
+                    else if (accuracy <= 11)
                     {
 
                         mocking = false;
@@ -747,7 +747,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
 
                         inflictedDamageToEnemy = GymBattleFourManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -757,7 +757,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleFourManager.Instance.UpdateHealthAndNameText();
                         GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
 
                         GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
@@ -771,7 +771,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Persuade":
 
-                    if (accuracy >= 10)
+                    if (accuracy >= 7)
                     {
 
                         SwitchPanels.Instance.SwitchToCombatDialogue();
@@ -779,7 +779,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleFourManager.Instance.UpdateHealthAndNameText();
                         GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
                     }
-                    else if (accuracy <= 9)
+                    else if (accuracy <= 6)
                     {
 
                         persuading = false;
@@ -795,7 +795,7 @@ public class CombatActions : MonoBehaviour
 
                 case "Mock":
 
-                    if (accuracy >= 15)
+                    if (accuracy >= 12)
                     {
 
                         inflictedDamageToEnemy = GymBattleFourManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -805,7 +805,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleFourManager.Instance.UpdateHealthAndNameText();
                         GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
                     }
-                    else if (accuracy <= 14)
+                    else if (accuracy <= 11)
                     {
 
                         mocking = false;
@@ -1010,16 +1010,17 @@ public class CombatActions : MonoBehaviour
     void EnemyAttacksPlayer()
     {
         int enemyAccuracy = Random.Range(0,20);
+
         if(SceneManager.GetActiveScene().name == "GymBattleOne")
         {
-            if (enemyAccuracy >= 10 && !playerDefending)
+            if (enemyAccuracy >= 6 && !playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            else if (enemyAccuracy >= 10 && playerDefending)
+            else if (enemyAccuracy >= 6 && playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 inflictedModifiedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
@@ -1027,7 +1028,7 @@ public class CombatActions : MonoBehaviour
                 GymBattleOneManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            if (enemyAccuracy <= 9)
+            if (enemyAccuracy <= 5)
             {
                 PlayerEnemyDialogue.Instance.EnemyMisses();
             }
@@ -1035,14 +1036,14 @@ public class CombatActions : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
-            if (enemyAccuracy >= 10 && !playerDefending)
+            if (enemyAccuracy >= 6 && !playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 GymBattleTwoManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
                 GymBattleTwoManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            else if (enemyAccuracy >= 10 && playerDefending)
+            else if (enemyAccuracy >= 6 && playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 inflictedModifiedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
@@ -1050,7 +1051,7 @@ public class CombatActions : MonoBehaviour
                 GymBattleTwoManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            if (enemyAccuracy <= 9)
+            if (enemyAccuracy <= 5)
             {
                 PlayerEnemyDialogue.Instance.EnemyMisses();
             }
@@ -1058,14 +1059,14 @@ public class CombatActions : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "GymBattleThree")
         {
-            if (enemyAccuracy >= 10 && !playerDefending)
+            if (enemyAccuracy >= 6 && !playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 GymBattleThreeManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
                 GymBattleThreeManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            else if (enemyAccuracy >= 10 && playerDefending)
+            else if (enemyAccuracy >= 6 && playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 inflictedModifiedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
@@ -1073,7 +1074,7 @@ public class CombatActions : MonoBehaviour
                 GymBattleThreeManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            if (enemyAccuracy <= 9)
+            if (enemyAccuracy <= 5)
             {
                 PlayerEnemyDialogue.Instance.EnemyMisses();
             }
@@ -1081,14 +1082,14 @@ public class CombatActions : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleFour")
         {
-            if (enemyAccuracy >= 10 && !playerDefending)
+            if (enemyAccuracy >= 6 && !playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
                 GymBattleFourManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            else if (enemyAccuracy >= 10 && playerDefending)
+            else if (enemyAccuracy >= 6 && playerDefending)
             {
                 inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
                 inflictedModifiedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
@@ -1096,7 +1097,7 @@ public class CombatActions : MonoBehaviour
                 GymBattleFourManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
-            if (enemyAccuracy <= 9)
+            if (enemyAccuracy <= 5)
             {
                 PlayerEnemyDialogue.Instance.EnemyMisses();
             }

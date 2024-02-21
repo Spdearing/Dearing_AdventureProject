@@ -15,10 +15,11 @@ public class FriendlyCreature
     private int tackleAp;
     private int persuadeAp;
     private int mockAp;
+    private bool evolved;
 
 
 
-    private FriendlyCreature(string friendlyName, int friendlyHealth, int level, int tackleAp, int persuadeAp, int mockAp)
+    private FriendlyCreature(string friendlyName, int friendlyHealth, int level, int tackleAp, int persuadeAp, int mockAp, bool evolved)
     {
         this.friendlyName = friendlyName;
         this.friendlyHealth = friendlyHealth;
@@ -27,11 +28,12 @@ public class FriendlyCreature
         this.tackleAp = tackleAp;
         this.persuadeAp = persuadeAp;
         this.mockAp = mockAp;
+        this.evolved = evolved;
     }
 
-    public static FriendlyCreature Create(string friendlyName, int friendlyHealth, int level, int tackleAp, int persuadeAp, int mockAp)
+    public static FriendlyCreature Create(string friendlyName, int friendlyHealth, int level, int tackleAp, int persuadeAp, int mockAp, bool evolved)
     {
-        return new FriendlyCreature(friendlyName, friendlyHealth, level, tackleAp,persuadeAp,mockAp);
+        return new FriendlyCreature(friendlyName, friendlyHealth, level, tackleAp,persuadeAp,mockAp,evolved);
     }
 
     public void TakeDamage(int damage)
@@ -95,18 +97,37 @@ public class FriendlyCreature
     {
         int accuracy = Random.Range(0, 11);
         {
-            if (accuracy <= 4) // if accuracy is 0,1,2,3, or 4  
+            if(!evolved)
             {
-                damage = 2;
+                if (accuracy <= 4)
+                {
+                    damage = 2;
+                }
+                else if (accuracy >= 5 && accuracy <= 7)
+                {
+                    damage = 5;
+                }
+                if (accuracy >= 8)
+                {
+                    damage = 8;
+                }
             }
-            else if (accuracy >= 5 && accuracy <= 7) 
+            else if(evolved) 
             {
-                damage = 5;
+                if (accuracy <= 4)
+                {
+                    damage = 5;
+                }
+                else if (accuracy >= 5 && accuracy <= 7)
+                {
+                    damage = 10;
+                }
+                if (accuracy >= 8)
+                {
+                    damage = 15;
+                }
             }
-            if(accuracy >= 8)
-            {
-                damage = 8;
-            }
+       
         }
         return this.damage;
     }
@@ -115,9 +136,21 @@ public class FriendlyCreature
         
         this.friendlyHealth += amount;
         
-        if (this.friendlyHealth >= 10)
+        if (this.friendlyHealth >= 10 && this.level == 5)
         {
             this.friendlyHealth = 10;
+        }
+        else if (this.friendlyHealth >= 20 && this.level == 10)
+        {
+            this.friendlyHealth = 20;
+        }
+        if (this.friendlyHealth >= 40 && this.level == 20)
+        {
+            this.friendlyHealth = 40;
+        }
+        else if (this.friendlyHealth >= 60 && this.level == 30)
+        {
+            this.friendlyHealth = 60;
         }
     }
     public void IncreasePlayerAP(int amount)
@@ -126,9 +159,21 @@ public class FriendlyCreature
         {
             this.tackleAp += amount;
 
-            if (this.tackleAp >= 15)
+            if (this.tackleAp >= 15 && level == 5)
             {
                 this.tackleAp = 15;
+            }
+            else if (this.tackleAp >= 20 && level == 10)
+            {
+                this.tackleAp = 20;
+            }
+            if (this.tackleAp >= 25 && level == 20)
+            {
+                this.tackleAp = 25;
+            }
+            else if (this.tackleAp >= 30 && level == 30)
+            {
+                this.tackleAp = 30;
             }
         }
         else if(CombatActions.Instance.ReturnIncreasingPersuadeAP() == true)
@@ -136,9 +181,21 @@ public class FriendlyCreature
             {
                 this.persuadeAp += amount;
 
-                if (this.persuadeAp >= 15)
+                if (this.persuadeAp >= 10 && level == 5)
+                {
+                    this.persuadeAp = 10;
+                }
+                else if (this.persuadeAp >= 15 && level == 10)
                 {
                     this.persuadeAp = 15;
+                }
+                if (this.persuadeAp >= 20 && level == 20)
+                {
+                    this.persuadeAp = 20;
+                }
+                else if (this.persuadeAp >= 25 && level == 30)
+                {
+                    this.persuadeAp = 25;
                 }
             }
         }
@@ -147,9 +204,21 @@ public class FriendlyCreature
             {
                 this.mockAp += amount;
 
-                if (this.mockAp >= 15)
+                if (this.mockAp >= 5 && level == 5)
+                {
+                    this.mockAp = 5;
+                }
+                else if (this.mockAp >= 10 && level == 10)
+                {
+                    this.mockAp = 10;
+                }
+                if (this.mockAp >= 15 && level == 20)
                 {
                     this.mockAp = 15;
+                }
+                else if (this.mockAp >= 20 && level == 30)
+                {
+                    this.mockAp = 20;
                 }
             }
         }

@@ -44,8 +44,8 @@ public class GymBattleTwoManager : MonoBehaviour
     private void Awake()
     {
 
-        enemyCreature = EnemyCreature.Create("Laxerous", 20, 10);
-        friendlyCreature = FriendlyCreature.Create("Rexasourus", 20, 10, 20, 15, 10);
+        enemyCreature = EnemyCreature.Create("Laxerous", 20, 10, false);
+        friendlyCreature = FriendlyCreature.Create("Rexasourus", 20, 10, 20, 15, 10, false);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);

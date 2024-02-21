@@ -44,8 +44,8 @@ public class GymBattleFourManager : MonoBehaviour
     private void Awake()
     {
 
-        enemyCreature = EnemyCreature.Create("Deathenfenal", 60, 30);
-        friendlyCreature = FriendlyCreature.Create("Rexladon", 60, 30, 30, 25, 20);
+        enemyCreature = EnemyCreature.Create("Deathenfenal", 60, 30, true);
+        friendlyCreature = FriendlyCreature.Create("Rexladon", 60, 30, 30, 25, 20, true);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);

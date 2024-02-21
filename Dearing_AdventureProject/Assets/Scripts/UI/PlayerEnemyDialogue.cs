@@ -8,6 +8,8 @@ public class PlayerEnemyDialogue : MonoBehaviour
 {
     public static PlayerEnemyDialogue Instance;
 
+    private int returnsFromBattle;
+    
 
     [SerializeField] TMP_Text combatText;
 
@@ -409,6 +411,8 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
+            returnsFromBattle++;
+            Debug.Log("ReturnFromBattle" + returnsFromBattle.ToString());
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -418,6 +422,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
+            returnsFromBattle++;
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -427,6 +432,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
+            returnsFromBattle++;
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -436,6 +442,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
+            returnsFromBattle++;
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -449,7 +456,9 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene("Gym");
+            returnsFromBattle++;
+            Debug.Log("ReturnFromBattle" + returnsFromBattle.ToString());
+            SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")
@@ -458,7 +467,8 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene("Gym");
+            returnsFromBattle++;
+            SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
         if (SceneManager.GetActiveScene().name == "GymBattleThree")
@@ -467,7 +477,8 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene("Gym");
+            returnsFromBattle++;
+            SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleFour")
@@ -476,10 +487,16 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene("Gym");
+            returnsFromBattle++;
+            SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
 
+    }
+
+    public int ReturnTravels()
+    {
+        return this.returnsFromBattle;
     }
 
 }

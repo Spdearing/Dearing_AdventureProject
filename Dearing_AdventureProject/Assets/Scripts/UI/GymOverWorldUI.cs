@@ -1,21 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GymOverWorldUI : MonoBehaviour
-{
+{   
+    public static GymOverWorldUI Instance;
 
-    Dictionary<string, bool> items = new Dictionary<string, bool>();
+    public Vector2 playerPosition;
+    public Vector2 lastKnownLocation;
 
-    // Start is called before the first frame update
-    void Start()
+    
+
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        if (PlayerEnemyDialogue.Instance.ReturnTravels() >= 1)
+        {
+            PlaceThePlayer();
+        }
+    }
+    public void SavingPlayerPosition()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            playerPosition = player.transform.position;
+            lastKnownLocation = playerPosition;
+        }
+    }
+
+    //void InitializePlayerPosition() 
+    //{
+    //    Vector2 initialPlayerPosition;
+    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+    //    if (player != null)
+    //    {
+    //        initialPlayerPosition = player.transform.position;
+    //        player.transform.position = initialPlayerPosition;
+    //    }
+    //}
+    void PlaceThePlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+       
+        if (player != null)
+        {
+            player.transform.position = lastKnownLocation;
+        }
     }
 }

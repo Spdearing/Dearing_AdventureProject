@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private bool interactable;
     private TMP_Text interactableText;
 
+    private GymOverWorldUI gymOverWorldUI;
+
 
 
 
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         //animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
+        gymOverWorldUI = GameObject.Find("UIOverworldData").GetComponent <GymOverWorldUI>();
     }
 
     // Update is called once per frame
@@ -47,9 +50,25 @@ public class PlayerMovement : MonoBehaviour
         // Update vertical movement
         rb.velocity = new Vector2(rb.velocity.x, verticalMovement * walkingSpeed);
 
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactable)
+        if (Input.GetKeyDown(KeyCode.E) && interactable)
         {
+            
+            gymOverWorldUI.SavingPlayerPosition();
             SceneManager.LoadScene("GymBattleOne");
+
+        }
+
+
+        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactable)
+        {
+            
+            gymOverWorldUI.SavingPlayerPosition();
+            SceneManager.LoadScene("GymBattleOne");
+            
+        }
+        else if(CrossPlatformInputManager.GetButtonDown("InteractButton") && !interactable)
+        {
+            Debug.Log("What are you doing");
         }
 
         //if (horizontalMovement < 0)
