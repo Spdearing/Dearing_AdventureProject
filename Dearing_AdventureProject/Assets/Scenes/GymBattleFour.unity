@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 625661522ee466043a902f71d9fc2f00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b4bd359efc2ea1e4d8398e83ff36173e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3420,9 +3420,9 @@ GameObject:
   - component: {fileID: 697525124}
   - component: {fileID: 697525123}
   - component: {fileID: 697525122}
-  - component: {fileID: 697525126}
   - component: {fileID: 697525127}
   - component: {fileID: 697525128}
+  - component: {fileID: 697525129}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3526,28 +3526,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &697525126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697525121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e34ccef4b13ee254ba6141a5a374b323, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  potionQuanityText: {fileID: 1592955893}
-  potionNameText: {fileID: 763123358}
-  aPBoostNameText: {fileID: 793580389}
-  aPBoostQuantityText: {fileID: 1167517366}
-  tackleAPSetOne: {fileID: 1362649782}
-  persuadeAPSetOne: {fileID: 299963745}
-  mockAPSetOne: {fileID: 1340206783}
-  tackleAPSetTwo: {fileID: 1697875972}
-  persuadeAPSetTwo: {fileID: 346628319}
-  mockAPSetTwo: {fileID: 131491294}
 --- !u!114 &697525127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3579,6 +3557,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatText: {fileID: 861263540}
+--- !u!114 &697525129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697525121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bafb3254aa435d748b831d297ac22594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionQuanityText: {fileID: 1592955893}
+  potionNameText: {fileID: 763123358}
+  aPBoostNameText: {fileID: 793580389}
+  aPBoostQuantityText: {fileID: 1167517366}
+  tackleAPSetOne: {fileID: 1362649782}
+  persuadeAPSetOne: {fileID: 299963745}
+  mockAPSetOne: {fileID: 1340206783}
+  tackleAPSetTwo: {fileID: 1697875972}
+  persuadeAPSetTwo: {fileID: 346628319}
+  mockAPSetTwo: {fileID: 131491294}
 --- !u!1 &763123356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4152,7 +4152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.271, y: -16.017}
+  m_AnchoredPosition: {x: -1, y: -16.017}
   m_SizeDelta: {x: 2046.08, y: 1188.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822349416
@@ -6547,13 +6547,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477512756}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 697525125}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -555.142, y: -342.47}
@@ -6579,7 +6579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f37ec6b2772b46c4688e5082489f0d4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c93365b624787b74e81e575b3118f312, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
