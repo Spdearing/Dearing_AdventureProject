@@ -5,9 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GymBattleThreeManager : MonoBehaviour
+public class GymBattleFourManager : MonoBehaviour
 {
-    public static GymBattleThreeManager Instance;
+    public static GymBattleFourManager Instance;
 
     /// <summary>
     /// These are text spaces that are used during the battle
@@ -44,8 +44,8 @@ public class GymBattleThreeManager : MonoBehaviour
     private void Awake()
     {
 
-        enemyCreature = EnemyCreature.Create("Sratha", 35, 15);
-        friendlyCreature = FriendlyCreature.Create("Rexasourus", 35, 15, 25, 20, 15);
+        enemyCreature = EnemyCreature.Create("Deathenfenal", 60, 30);
+        friendlyCreature = FriendlyCreature.Create("Rexladon", 60, 30, 30, 25, 20);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);
@@ -76,7 +76,7 @@ public class GymBattleThreeManager : MonoBehaviour
         PlayerWonTheBattle();
     }
 
-    public GymBattleThreeManager()
+    public GymBattleFourManager()
     {
         Instance = this;
     }
@@ -84,9 +84,9 @@ public class GymBattleThreeManager : MonoBehaviour
     public void UpdateHealthAndNameText()
     {
         enemyName.text = enemyCreature.GetEnemyName();
-        enemyHealth.text = "HP: " + enemyCreature.GetEnemyHealth() + "/35";
+        enemyHealth.text = "HP: " + enemyCreature.GetEnemyHealth() + "/60";
         friendlyName.text = friendlyCreature.GetFriendlyName();
-        friendlyHealth.text = "HP: " + friendlyCreature.GetFriendlyHealth() + "/35";
+        friendlyHealth.text = "HP: " + friendlyCreature.GetFriendlyHealth() + "/60";
     }
     public void UpdateInventory()
     {
@@ -102,12 +102,12 @@ public class GymBattleThreeManager : MonoBehaviour
     }
     public void UpdateAP()
     {
-        tackleAPSetOne.text = "AP: " + friendlyCreature.GetTackleAP() + "/25";
-        persuadeAPSetOne.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/20";
-        mockAPSetOne.text = "AP: " + friendlyCreature.GetMockAP() + "/15";
-        tackleAPSetTwo.text = "AP: " + friendlyCreature.GetTackleAP() + "/25";
-        persuadeAPSetTwo.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/20";
-        mockAPSetTwo.text = "AP: " + friendlyCreature.GetMockAP() + "/15";
+        tackleAPSetOne.text = "AP: " + friendlyCreature.GetTackleAP() + "/30";
+        persuadeAPSetOne.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/25";
+        mockAPSetOne.text = "AP: " + friendlyCreature.GetMockAP() + "/20";
+        tackleAPSetTwo.text = "AP: " + friendlyCreature.GetTackleAP() + "/30";
+        persuadeAPSetTwo.text = "AP: " + friendlyCreature.GetPersuadeAP() + "/25";
+        mockAPSetTwo.text = "AP: " + friendlyCreature.GetMockAP() + "/20";
     }
 
     void PlayerDied()

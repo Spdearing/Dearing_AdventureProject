@@ -44,8 +44,8 @@ public class GymBattleThreeManager : MonoBehaviour
     private void Awake()
     {
 
-        enemyCreature = EnemyCreature.Create("Sratha", 35, 15);
-        friendlyCreature = FriendlyCreature.Create("Rexasourus", 35, 15, 25, 20, 15);
+        enemyCreature = EnemyCreature.Create("Sratha", 40, 20);
+        friendlyCreature = FriendlyCreature.Create("Rexasourus", 40, 20, 25, 20, 15);
 
         //Creation of Enemy, and Friendly Items
         potion = PlayerItems.Create("Potion", 5, 0, 5);
@@ -84,9 +84,9 @@ public class GymBattleThreeManager : MonoBehaviour
     public void UpdateHealthAndNameText()
     {
         enemyName.text = enemyCreature.GetEnemyName();
-        enemyHealth.text = "HP: " + enemyCreature.GetEnemyHealth() + "/35";
+        enemyHealth.text = "HP: " + enemyCreature.GetEnemyHealth() + "/40";
         friendlyName.text = friendlyCreature.GetFriendlyName();
-        friendlyHealth.text = "HP: " + friendlyCreature.GetFriendlyHealth() + "/35";
+        friendlyHealth.text = "HP: " + friendlyCreature.GetFriendlyHealth() + "/40";
     }
     public void UpdateInventory()
     {

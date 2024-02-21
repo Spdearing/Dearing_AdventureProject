@@ -67,6 +67,19 @@ public class CombatActions : MonoBehaviour
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
             }
         }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() != 0)
+            {
+                attacking = true;
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+            }
+            else if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() == 0)
+            {
+                attacking = false;
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
+            }
+        }
     }
 
     public void Persuading()
@@ -110,6 +123,19 @@ public class CombatActions : MonoBehaviour
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
             }
         }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() != 0)
+            {
+                persuading = true;
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+            }
+            else if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() == 0)
+            {
+                persuading = false;
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
+            }
+        }
     }
 
     public void Mocking()
@@ -148,6 +174,19 @@ public class CombatActions : MonoBehaviour
                 SwitchPanels.Instance.SwitchToConfirmPanel();
             }
             else if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetMockAP() == 0)
+            {
+                mocking = false;
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() != 0)
+            {
+                mocking = true;
+                SwitchPanels.Instance.SwitchToConfirmPanel();
+            }
+            else if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() == 0)
             {
                 mocking = false;
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerRanOutOfAPDialogue());
@@ -291,6 +330,48 @@ public class CombatActions : MonoBehaviour
             else if (usingAPBoost)
             {
                 if (GymBattleThreeManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (attacking)
+            {
+                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 30)
+                {
+                    Action("Tackle");
+                }
+            }
+            else if (persuading)
+            {
+                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 25)
+                {
+                    Action("Persuade");
+                }
+            }
+            if (mocking)
+            {
+                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 20)
+                {
+                    Action("Mock");
+                }
+            }
+            else if (playerDefending)
+            {
+                Action("Defend");
+            }
+            if (usingPotion)
+            {
+                if (GymBattleFourManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
+            }
+            else if (usingAPBoost)
+            {
+                if (GymBattleFourManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
                 {
                     Action("APBoost");
                 }
@@ -659,11 +740,115 @@ public class CombatActions : MonoBehaviour
 
             }
         }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+
+            switch (input)
+            {
+                case "Tackle":
+
+                    if (accuracy >= 10)
+                    {
+
+                        inflictedDamageToEnemy = GymBattleFourManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
+                        GymBattleFourManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
+                        SwitchPanels.Instance.SwitchToCombatDialogue();
+                        PlayerEnemyDialogue.Instance.PlayerHitEnemy();
+                        GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                        GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
+                    }
+                    else if (accuracy <= 9)
+                    {
+
+                        GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
+                        SwitchPanels.Instance.SwitchToCombatDialogue();
+                        PlayerEnemyDialogue.Instance.PlayerMissedTackle();
+                    }
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
+                    StartCoroutine(EnemyAction());
+
+                    break;
+
+                case "Persuade":
+
+                    if (accuracy >= 10)
+                    {
+
+                        SwitchPanels.Instance.SwitchToCombatDialogue();
+                        PlayerEnemyDialogue.Instance.PlayerHitEnemy();
+                        GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                        GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
+                    }
+                    else if (accuracy <= 9)
+                    {
+
+                        persuading = false;
+                        SwitchPanels.Instance.SwitchToCombatDialogue();
+                        PlayerEnemyDialogue.Instance.PlayerCouldNotPersuade();
+                        GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                        GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendPersuadeAP(1);
+                    }
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
+                    StartCoroutine(EnemyAction());
+
+                    break;
+
+                case "Mock":
+
+                    if (accuracy >= 15)
+                    {
+
+                        inflictedDamageToEnemy = GymBattleFourManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
+                        GymBattleFourManager.Instance.ReturnEnemyCreature().TakeDamage(inflictedDamageToEnemy);
+                        SwitchPanels.Instance.SwitchToCombatDialogue();
+                        PlayerEnemyDialogue.Instance.PlayerHitEnemy();
+                        GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                        GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
+                    }
+                    else if (accuracy <= 14)
+                    {
+
+                        mocking = false;
+                        GymBattleFourManager.Instance.ReturnFriendlyCreature().SpendMockAP(1);
+                        SwitchPanels.Instance.SwitchToCombatDialogue();
+                        PlayerEnemyDialogue.Instance.PlayerCouldNotMock();
+                    }
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
+                    StartCoroutine(EnemyAction());
+
+                    break;
+
+                case "Defend":
+
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
+                    PlayerEnemyDialogue.Instance.PlayerIsDefending();
+                    StartCoroutine(EnemyAction());
+
+                    break;
+
+                case "Potion":
+
+                    UsingItems.Instance.UsingPotion();
+                    UsingItems.Instance.StartCoroutine(UsingItems.Instance.UsingItem());
+                    GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                    StartCoroutine(EnemyAction());
+
+
+                    break;
+
+
+                case "APBoost":
+
+                    SwitchPanels.Instance.SwitchToCombatDialogue();
+                    GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                    UsingItems.Instance.StartCoroutine(UsingItems.Instance.UsingItem());
+                    StartCoroutine(EnemyAction());
+
+                    break;
+
+            }
+        }
     }
-
-
-    
-        
 
     public void IncreaseTackleAP()
     {
@@ -699,6 +884,18 @@ public class CombatActions : MonoBehaviour
                 increasingTackleAP = true;
             }
             else if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetTackleAP() == 25)
+            {
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() < 30)
+            {
+                UsingItems.Instance.SelectAPToIncrease("Tackle");
+                increasingTackleAP = true;
+            }
+            else if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() == 30)
             {
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
             }
@@ -743,6 +940,18 @@ public class CombatActions : MonoBehaviour
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
             }
         }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() < 25)
+            {
+                UsingItems.Instance.SelectAPToIncrease("Persuade");
+                increasingPersuadeAP = true;
+            }
+            else if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() == 25)
+            {
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+            }
+        }
 
     }
     public void IncreaseMockAP()
@@ -779,6 +988,18 @@ public class CombatActions : MonoBehaviour
                 increasingMockAP = true;
             }
             else if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetMockAP() == 15)
+            {
+                PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() < 15)
+            {
+                UsingItems.Instance.SelectAPToIncrease("Mock");
+                increasingMockAP = true;
+            }
+            else if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() == 15)
             {
                 PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerHasFullAP());
             }
@@ -850,6 +1071,29 @@ public class CombatActions : MonoBehaviour
                 inflictedModifiedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
                 GymBattleThreeManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
                 GymBattleThreeManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            if (enemyAccuracy <= 9)
+            {
+                PlayerEnemyDialogue.Instance.EnemyMisses();
+            }
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+        }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (enemyAccuracy >= 10 && !playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+                GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            else if (enemyAccuracy >= 10 && playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                inflictedModifiedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
+                GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
+                GymBattleFourManager.Instance.UpdateHealthAndNameText();
                 PlayerEnemyDialogue.Instance.EnemyHitPlayer();
             }
             if (enemyAccuracy <= 9)
