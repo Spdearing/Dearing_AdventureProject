@@ -412,7 +412,6 @@ public class PlayerEnemyDialogue : MonoBehaviour
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
             returnsFromBattle++;
-            Debug.Log("ReturnFromBattle" + returnsFromBattle.ToString());
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -457,8 +456,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
             returnsFromBattle++;
-            Debug.Log("ReturnFromBattle" + returnsFromBattle.ToString());
-            SceneManager.LoadScene("Gym"); 
+            SceneManager.LoadScene("Gym");
             TurnOffText();
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")

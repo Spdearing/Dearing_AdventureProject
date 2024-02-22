@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GymOverWorldUI : MonoBehaviour
-{   
+{
     public static GymOverWorldUI Instance;
+    private GameObject player;
 
     public Vector2 playerPosition;
     public Vector2 lastKnownLocation;
-
-    
-
 
     private void Awake()
     {
@@ -26,17 +24,31 @@ public class GymOverWorldUI : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        if (PlayerEnemyDialogue.Instance.ReturnTravels() >= 1)
+        player = GameObject.Find("Player");
+
+        if(lastKnownLocation != Vector2.zero)
         {
             PlaceThePlayer();
         }
     }
+
+    public void UpdateLastKnownLocation(Vector2 location)
+    {
+        lastKnownLocation = location;
+    }
+
+    private void OnEnable()
+    {
+        if (lastKnownLocation != Vector2.zero)
+        {
+            PlaceThePlayer();
+        }
+    }
+
     public void SavingPlayerPosition()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
         if (player != null)
         {
             playerPosition = player.transform.position;
@@ -44,21 +56,8 @@ public class GymOverWorldUI : MonoBehaviour
         }
     }
 
-    //void InitializePlayerPosition() 
-    //{
-    //    Vector2 initialPlayerPosition;
-    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-    //    if (player != null)
-    //    {
-    //        initialPlayerPosition = player.transform.position;
-    //        player.transform.position = initialPlayerPosition;
-    //    }
-    //}
-    void PlaceThePlayer()
+    public void PlaceThePlayer()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-       
         if (player != null)
         {
             player.transform.position = lastKnownLocation;

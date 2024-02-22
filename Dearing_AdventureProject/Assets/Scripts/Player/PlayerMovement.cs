@@ -19,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool interactable;
     private TMP_Text interactableText;
+    [SerializeField] GameObject interactableTextBox;
 
     private GymOverWorldUI gymOverWorldUI;
 
 
 
 
+   
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
         gymOverWorldUI = GameObject.Find("UIOverworldData").GetComponent <GymOverWorldUI>();
+        interactableTextBox.SetActive(false);
     }
 
     // Update is called once per frame
@@ -63,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
         {
             
             gymOverWorldUI.SavingPlayerPosition();
+            Debug.Log(gymOverWorldUI.playerPosition);
+            Debug.Log(gymOverWorldUI.lastKnownLocation);
             SceneManager.LoadScene("GymBattleOne");
             
         }
@@ -80,12 +85,13 @@ public class PlayerMovement : MonoBehaviour
         //    spriteRenderer.flipX = false; 
         //}
 
-        Debug.Log(interactable);
+        
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("GymTrainerOne"))
         {
+            interactableTextBox.SetActive(true);
             interactable = true;
             interactableText.text = "Talk to the gym member!";
         }
@@ -94,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("GymTrainerOne"))
         {
+            interactableTextBox.SetActive(false);
             interactable = false;
             interactableText.text = "";
         }
