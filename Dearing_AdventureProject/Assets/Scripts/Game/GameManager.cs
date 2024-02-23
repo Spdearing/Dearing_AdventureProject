@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
-    bool[] battles = new bool[] { false,false,false,false };
-    string[] items = new string[4];
+    private bool hasFirstBadge;
+    private bool hasSecondBadge;
+    private bool hasThirdBadge;
+    private bool hasFourthBadge;
 
     public static GameManager Instance
     {
@@ -17,22 +16,45 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 GameObject gameManager = new GameObject("GameManager");
-                gameManager.AddComponent<GameManager>();
+                instance = gameManager.AddComponent<GameManager>();
+                DontDestroyOnLoad(gameManager);
             }
 
             return instance;
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    public void SetHasFirstBadge(bool value)
     {
-       
+        hasFirstBadge = value;
+    }
+    public void SetHasSecondBadge(bool value) 
+    { 
+        hasSecondBadge = value;
+    }   
+    public void SetHasThirdBadge(bool value) 
+    { 
+        hasThirdBadge = value;
+    }
+    public void SetHasFourthBadge(bool value) 
+    { 
+        hasFourthBadge = value;
+    }
+    public bool ReturnHasFirstBadge() 
+    { 
+        return hasFirstBadge;
+    }
+    public bool ReturnHasSecondBadge() 
+    {
+        return hasSecondBadge;
+    }
+    public bool ReturnHasThirdBadge()
+    {
+        return hasThirdBadge;
+    }
+    public bool ReturnHasFourthBadge()
+    {
+        return hasFourthBadge;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

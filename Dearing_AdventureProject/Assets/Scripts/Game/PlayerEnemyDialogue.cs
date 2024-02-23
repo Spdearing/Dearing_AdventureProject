@@ -411,7 +411,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -421,7 +421,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -431,7 +431,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -441,7 +441,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " has fainted.... ";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -455,7 +455,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            GameManager.Instance.SetHasFirstBadge(true);
             SceneManager.LoadScene("Gym");
             TurnOffText();
         }
@@ -465,7 +465,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            GameManager.Instance.SetHasSecondBadge(true);
             SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
@@ -475,7 +475,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            GameManager.Instance.SetHasThirdBadge(true);
             SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
@@ -485,16 +485,13 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            returnsFromBattle++;
+            GameManager.Instance.SetHasFourthBadge(true);
             SceneManager.LoadScene("Gym"); 
             TurnOffText();
         }
 
     }
 
-    public int ReturnTravels()
-    {
-        return this.returnsFromBattle;
-    }
+   
 
 }
