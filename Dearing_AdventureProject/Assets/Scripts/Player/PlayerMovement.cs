@@ -8,9 +8,9 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    /// <summary>
-    /// Player Elements
-    /// </summary>
+    
+    private PlayerPositionManager playerPositionManager;
+
     private float walkingSpeed;
     private float sprintingSpeed;
     private Rigidbody2D rb;
@@ -19,9 +19,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool interactable;
     private TMP_Text interactableText;
-    [SerializeField] GameObject interactableTextBox;
+    private GameObject interactableTextBox;
 
-    private GymOverWorldUI gymOverWorldUI;
+    
 
 
 
@@ -35,9 +35,14 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        interactableTextBox = GameObject.Find("InteractableTextBackGround");
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
-        gymOverWorldUI = GameObject.Find("UIOverworldData").GetComponent <GymOverWorldUI>();
         interactableTextBox.SetActive(false);
+
+
+        playerPositionManager = PlayerPositionManager.Instance;
+        Vector2 savedPosition = playerPositionManager.LoadPlayerPosition();
+        transform.position = savedPosition;
     }
 
     // Update is called once per frame
@@ -55,8 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && interactable)
         {
-            
-            gymOverWorldUI.SavingPlayerPosition();
+            PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleOne");
 
         }
@@ -64,10 +68,8 @@ public class PlayerMovement : MonoBehaviour
 
         else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactable)
         {
-            
-            gymOverWorldUI.SavingPlayerPosition();
-            Debug.Log(gymOverWorldUI.playerPosition);
-            Debug.Log(gymOverWorldUI.lastKnownLocation);
+
+            PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleOne");
             
         }
