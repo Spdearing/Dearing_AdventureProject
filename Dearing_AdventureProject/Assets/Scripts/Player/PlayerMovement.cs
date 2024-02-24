@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canOpenGateOne = false;
+        canOpenGateOne = true;
         walkingSpeed = 2.0f;
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         interactableTextBox = GameObject.Find("InteractableTextBackGround");
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
         interactableTextBox.SetActive(false);
-        firstGate = GameObject.Find("FirstGate").GetComponent<GameObject>();
+        firstGate = GameObject.Find("FirstGate");
 
 
         playerPositionManager = PlayerPositionManager.Instance;
@@ -70,8 +70,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne == true)
         {
-            Destroy(firstGate);
-
+            firstGate.SetActive(false);
         }
 
         //if (horizontalMovement < 0)
@@ -109,12 +108,6 @@ public class PlayerMovement : MonoBehaviour
     public void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("GymTrainerOne"))
-        {
-            interactableTextBox.SetActive(false);
-            interactable = false;
-            interactableText.text = "";
-        }
-        else if (other.CompareTag("FirstGate"))
         {
             interactableTextBox.SetActive(false);
             interactable = false;
