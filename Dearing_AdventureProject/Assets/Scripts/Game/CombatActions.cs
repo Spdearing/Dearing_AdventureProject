@@ -523,6 +523,7 @@ public class CombatActions : MonoBehaviour
                     break;
 
             }
+            
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")
         {

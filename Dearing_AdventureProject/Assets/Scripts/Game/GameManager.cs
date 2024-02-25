@@ -1,29 +1,72 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager Instance;
 
     private bool hasFirstBadge;
     private bool hasSecondBadge;
     private bool hasThirdBadge;
     private bool hasFourthBadge;
 
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                GameObject gameManager = new GameObject("GameManager");
-                instance = gameManager.AddComponent<GameManager>();
-                DontDestroyOnLoad(gameManager);
-            }
+    [SerializeField] GameObject badgeOne;
+    [SerializeField] GameObject badgeTwo;
+    [SerializeField] GameObject badgeThree;
+    [SerializeField] GameObject badgeFour;
 
-            return instance;
+    
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(Instance);
         }
     }
-    
+
+    private void Start()
+    {
+        badgeOne = GameObject.FindWithTag("BadgeOne");
+        badgeTwo = GameObject.FindWithTag("BadgeTwo");
+        badgeThree = GameObject.FindWithTag("BadgeThree");
+        badgeFour = GameObject.FindWithTag("BadgeFour");
+        badgeOne.SetActive(false);
+        badgeTwo.SetActive(false);
+        badgeThree.SetActive(false);
+        badgeFour.SetActive(false);
+
+    }
+    private void Update()
+    {
+        ShowBadgesAquired();
+    }
+    void ShowBadgesAquired()
+    {
+        if(hasFirstBadge) 
+        {
+            badgeOne.SetActive(true);
+        }
+        else if(hasSecondBadge) 
+        {
+            badgeTwo.SetActive(true);
+        }
+        if (hasThirdBadge)
+        {
+            badgeThree.SetActive(true);
+        }
+        else if (hasFourthBadge)
+        {
+            badgeFour.SetActive(true);
+        }
+    }
+
     public void SetHasFirstBadge(bool value)
     {
         hasFirstBadge = value;
@@ -55,6 +98,22 @@ public class GameManager : MonoBehaviour
     public bool ReturnHasFourthBadge()
     {
         return hasFourthBadge;
+    }
+    public GameObject ReturnBadgeOne()
+    {
+        return badgeOne;
+    }
+    public GameObject ReturnBadgeTwo()
+    {
+        return badgeTwo;
+    }
+    public GameObject ReturnBadgeThree()
+    {
+        return badgeThree;
+    }
+    public GameObject ReturnBadgeFour()
+    {
+        return badgeFour;
     }
 
 }

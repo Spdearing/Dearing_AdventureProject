@@ -9,6 +9,10 @@ TagManager:
   - SecondGate
   - ThirdGate
   - FourthGate
+  - BadgeOne
+  - BadgeTwo
+  - BadgeThree
+  - BadgeFour
   layers:
   - Default
   - TransparentFX

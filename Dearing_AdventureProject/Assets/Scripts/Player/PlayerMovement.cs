@@ -113,5 +113,10 @@ public class PlayerMovement : MonoBehaviour
             interactable = false;
             interactableText.text = "";
         }
+        else if (other.CompareTag("FirstGate"))
+        {
+            interactableTextBox.SetActive(false);
+            interactableText.text = " ";
+        }
     }
 }
