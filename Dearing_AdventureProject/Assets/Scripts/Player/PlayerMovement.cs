@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
         {
-            firstGate.SetActive(false);
+            Destroy(firstGate);
         }
 
         //if (horizontalMovement < 0)
