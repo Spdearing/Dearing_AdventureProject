@@ -127,7 +127,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             if (CombatActions.Instance.ReturnAttacking() == true)
             {
-                combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " to " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName();
+                combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage to " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName();
             }
             else if (CombatActions.Instance.ReturnPersuading() == true)
             {
@@ -135,14 +135,14 @@ public class PlayerEnemyDialogue : MonoBehaviour
             }
             if (CombatActions.Instance.ReturnMocking() == true)
             {
-                combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
+                combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage";
             }
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
             if (CombatActions.Instance.ReturnAttacking() == true)
             {
-                combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " to " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName();
+                combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage to " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName();
             }
             else if (CombatActions.Instance.ReturnPersuading() == true)
             {
@@ -150,14 +150,14 @@ public class PlayerEnemyDialogue : MonoBehaviour
             }
             if (CombatActions.Instance.ReturnMocking() == true)
             {
-                combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
+                combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage";
             }
         }
         if (SceneManager.GetActiveScene().name == "GymBattleThree")
         {
             if (CombatActions.Instance.ReturnAttacking() == true)
             {
-                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " to " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName();
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage to " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName();
             }
             else if (CombatActions.Instance.ReturnPersuading() == true)
             {
@@ -165,14 +165,14 @@ public class PlayerEnemyDialogue : MonoBehaviour
             }
             if (CombatActions.Instance.ReturnMocking() == true)
             {
-                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
+                combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage";
             }
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleFour")
         {
             if (CombatActions.Instance.ReturnAttacking() == true)
             {
-                combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " to " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName();
+                combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " did " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage to " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName();
             }
             else if (CombatActions.Instance.ReturnPersuading() == true)
             {
@@ -180,7 +180,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
             }
             if (CombatActions.Instance.ReturnMocking() == true)
             {
-                combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " points of damage";
+                combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " mocked " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName() + " into attacking themselves, dealing " + CombatActions.Instance.ReturnInflictedDamageToEnemy().ToString() + " damage";
             }
         }
     }

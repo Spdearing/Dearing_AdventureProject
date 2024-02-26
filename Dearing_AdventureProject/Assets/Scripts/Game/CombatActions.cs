@@ -423,7 +423,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 7)
+                    if (accuracy >= 4)
                     {
                         
                         inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -433,7 +433,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleOneManager.Instance.UpdateHealthAndNameText();
                         GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 6)
+                    else if (accuracy <= 3)
                     {
                         
                         GymBattleOneManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
