@@ -451,6 +451,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "GymBattleOne")
         {
+            CombatActions.Instance.ResetActions();
             GameManager.Instance.SetHasFirstBadge(true);
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();

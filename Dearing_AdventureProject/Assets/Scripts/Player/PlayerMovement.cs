@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canOpenGateOne;
     private TMP_Text interactableText;
     private GameObject interactableTextBox;
-    private GameObject firstGate;
+    [SerializeField] GameObject firstGate;
     
 
 
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene("GymBattleOne");
             
         }
-        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne == true)
+        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
         {
             firstGate.SetActive(false);
         }
@@ -92,13 +92,13 @@ public class PlayerMovement : MonoBehaviour
             interactable = true;
             interactableText.text = "Talk to the gym member!";
         }
-        else if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge() == true)
+        else if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = true;
             interactableText.text = "Open the gate to the next battle area";
         }
-        if (other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge() == false)
+        if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = false;

@@ -1105,7 +1105,7 @@ public class CombatActions : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
         }
     }
-    void ResetActions()
+    public void ResetActions()
     {
         attacking = false;
         playerDefending = false;
@@ -1211,7 +1211,7 @@ public class CombatActions : MonoBehaviour
         increasingMockAP = value;
     }
 
-    IEnumerator EnemyAction()
+    public IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(2.0f);
 
