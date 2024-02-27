@@ -65,11 +65,14 @@ public class PlayerMovement : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactable)
         {
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
+            Debug.Log("Talking to Gym guy");
             SceneManager.LoadScene("GymBattleOne");
+
             
         }
         else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
         {
+            Debug.Log("Trying to destroy gate");
             Destroy(firstGate);
         }
 
