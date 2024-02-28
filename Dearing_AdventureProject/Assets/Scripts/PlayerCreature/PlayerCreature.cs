@@ -95,7 +95,7 @@ public class FriendlyCreature
 
     public int DoPlayerDamage()
     {
-        int accuracy = Random.Range(0, 15);
+        int accuracy = Random.Range(1, 16);
         {
             if(!evolved)
             {
@@ -103,7 +103,7 @@ public class FriendlyCreature
                 {
                     damage = 5;
                 }
-                else if (accuracy >= 5 && accuracy <= 9)
+                else if (accuracy >= 5 && accuracy <= 10)
                 {
                     damage = 8;
                 }

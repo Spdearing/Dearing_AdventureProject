@@ -34,12 +34,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject secondGate;
     [SerializeField] GameObject thirdGate;
     [SerializeField] GameObject fourthGate;
-    
+
+    [SerializeField] GameObject firstTrainer;
+    [SerializeField] GameObject secondTrainer;
+    [SerializeField] GameObject thirdTrainer;
+    [SerializeField] GameObject finalBoss;
 
 
 
 
-   
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
         secondGate = GameObject.Find("SecondGate");
         thirdGate = GameObject.Find("ThirdGate");
         fourthGate = GameObject.Find("FourthGate");
+        firstTrainer = GameObject.Find("FirstTrainer");
+        secondTrainer = GameObject.Find("SecondTrainer");
+        thirdTrainer = GameObject.Find("ThirdTrainer");
+        finalBoss = GameObject.Find("FinalBoss");
 
 
         playerPositionManager = PlayerPositionManager.Instance;
@@ -274,6 +285,56 @@ public class PlayerMovement : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateFour)
         {
             fourthGate.SetActive(false);
+        }
+    }
+
+    public TMP_Text ReturnInteractableText()
+    {
+        return interactableText;
+    }
+
+    public void InitalizeTheInteracbleText()
+    {
+        if (interactableTextBox.activeSelf)
+        {
+            // If active, set it inactive
+            interactableTextBox.SetActive(false);
+        }
+        else
+        {
+            // If inactive, set it active
+            interactableTextBox.SetActive(true);
+        }
+    }
+
+    void DefeatFirstTrainer()
+    {
+        if(GameManager.Instance.ReturnHasFirstBadge())
+        {
+            Destroy(firstTrainer);
+        }
+    }
+    void DefeatSecondTrainer()
+    {
+        if (GameManager.Instance.ReturnHasFirstBadge())
+        {
+            Destroy(secondTrainer);
+        }
+    }
+
+    void DefeatThirdTrainer()
+    {
+        if (GameManager.Instance.ReturnHasFirstBadge())
+        {
+            Destroy(thirdTrainer);
+        }
+    }
+
+    void DefeatFinalBoss()
+    {
+        if (GameManager.Instance.ReturnHasFirstBadge())
+        {
+            Destroy(finalBoss);
         }
     }
 

@@ -481,8 +481,9 @@ public class PlayerEnemyDialogue : MonoBehaviour
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene("Gym"); 
+            SceneManager.LoadScene("Gym");
             TurnOffText();
+            GameManager.Instance.StartCoroutine(GameManager.Instance.PlayersCreatureIsEvolving());
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleFour")
         {

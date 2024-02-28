@@ -224,7 +224,7 @@ public class CombatActions : MonoBehaviour
     void Action(string input)
     {
         //random number between 0, and 19 is aquired for accuracy
-        int accuracy = Random.Range(0, 20);
+        int accuracy = Random.Range(1, 21);
 
         if (SceneManager.GetActiveScene().name == "GymBattleOne")//if the scene is GymBattleOne do the following
         {
@@ -233,7 +233,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 4)
+                    if (accuracy > 3)
                     {
                         
                         inflictedDamageToEnemy = GymBattleOneManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();//damage to enemy is assigned a value which is from the DoPlayerDamage function in the friendly creature class script
@@ -351,7 +351,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 7)
+                    if (accuracy > 3)
                     {
                         
                         inflictedDamageToEnemy = GymBattleTwoManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -361,7 +361,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleTwoManager.Instance.UpdateHealthAndNameText();
                         GymBattleTwoManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 6)
+                    else if (accuracy <= 3)
                     {
                         
                         GymBattleTwoManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
@@ -468,7 +468,7 @@ public class CombatActions : MonoBehaviour
             {
                 case "Tackle":
 
-                    if (accuracy >= 7)
+                    if (accuracy > 3)
                     {
 
                         inflictedDamageToEnemy = GymBattleThreeManager.Instance.ReturnFriendlyCreature().DoPlayerDamage();
@@ -478,7 +478,7 @@ public class CombatActions : MonoBehaviour
                         GymBattleThreeManager.Instance.UpdateHealthAndNameText();
                         GymBattleThreeManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);
                     }
-                    else if (accuracy <= 6)
+                    else if (accuracy <= 3)
                     {
 
                         GymBattleThreeManager.Instance.ReturnFriendlyCreature().SpendTackleAP(1);

@@ -581,7 +581,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: You are a traveler who woke up in an unfamiliar world, filled with trials
-    and monster combat. In order to return to your own land you must defeat the vilianous
+    and monster combat. In order to return to your own land you must defeat the vilainous
     FOOG, also known as Follower Of the Old God.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

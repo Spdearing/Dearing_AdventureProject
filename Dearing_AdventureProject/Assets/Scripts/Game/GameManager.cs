@@ -1,9 +1,12 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    private PlayerMovement player;
 
     private bool hasFirstBadge;
     private bool hasSecondBadge;
@@ -14,6 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject badgeTwo;
     [SerializeField] GameObject badgeThree;
     [SerializeField] GameObject badgeFour;
+
+    [SerializeField] GameObject friendlyCreaturePanel;
+    [SerializeField] GameObject friendlyCreatureEvolving;
+    [SerializeField] GameObject friendlyCreatureEvolved;
 
     
     
@@ -44,6 +51,11 @@ public class GameManager : MonoBehaviour
         badgeTwo.SetActive(false);
         badgeThree.SetActive(false);
         badgeFour.SetActive(false);
+        friendlyCreaturePanel.SetActive(false);
+        friendlyCreatureEvolving.SetActive(false);
+        friendlyCreatureEvolved.SetActive(false);
+        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        
 
     }
     private void Update()
@@ -69,6 +81,61 @@ public class GameManager : MonoBehaviour
             badgeFour.SetActive(true);
         }
     }
+
+    public IEnumerator PlayersCreatureIsEvolving()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        player.InitalizeTheInteracbleText();//Turns the text box and panel on at the bottom of the screen
+
+        player.ReturnInteractableText().text = "WHATS HAPPENING TO REXASOURUS!?!?!";
+
+        friendlyCreaturePanel.SetActive(true);
+        friendlyCreatureEvolving.SetActive(true);
+
+        Image image = friendlyCreatureEvolving.GetComponent<Image>();
+
+        float fadeSpeed = 2f;//speed that the image fades in white and black
+
+        for (int i = 0; i < 5; i++) // Repeat the fading effect 6 times
+        {
+            // Fade from white to black
+            for (float t = 0f; t < 1.0f; t += Time.deltaTime * fadeSpeed)
+            {
+                image.color = Color.Lerp(Color.white, Color.black, t);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.25f); // Wait for a short duration between fades
+
+            // Fade from black to white
+            for (float t = 0f; t < 1.0f; t += Time.deltaTime * fadeSpeed)
+            {
+                image.color = Color.Lerp(Color.black, Color.white, t);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.25f); // Wait for a short duration between fades
+        }
+
+        // After all iterations, set the friendlyCreatureEvolving GameObject inactive
+        friendlyCreatureEvolving.SetActive(false);
+
+        // Set the friendlyCreatureEvolved GameObject active
+        friendlyCreatureEvolved.SetActive(true);
+        yield return new WaitForSeconds(0.75f);
+        player.ReturnInteractableText().text = "Rexasourus has evolved into Rexladon!";
+        yield return new WaitForSeconds(1.5f);
+        friendlyCreaturePanel.SetActive(false);
+        friendlyCreatureEvolved.SetActive(false);
+        PlayerEnemyDialogue.Instance.TurnOffText();
+        player.InitalizeTheInteracbleText();
+
+    }
+
+
+
+
 
     public void SetHasFirstBadge(bool value)
     {
