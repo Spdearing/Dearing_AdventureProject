@@ -48,8 +48,8 @@ public class GymBattleThreeManager : MonoBehaviour
         friendlyCreature = FriendlyCreature.Create("Rexasourus", 40, 20, 25, 20, 15, false);
 
         //Creation of Enemy, and Friendly Items
-        potion = PlayerItems.Create("Potion", 5, 0, 5);
-        aPBoost = PlayerItems.Create("APBoost", 0, 3, 5);
+        potion = PlayerItems.Create("Potion", 15, 0, 5);
+        aPBoost = PlayerItems.Create("APBoost", 0, 8, 5);
     }
 
 
@@ -118,11 +118,11 @@ public class GymBattleThreeManager : MonoBehaviour
         }
     }
 
-    void PlayerWonTheBattle()
+    public void PlayerWonTheBattle()
     {
         if (friendlyCreature.GetFriendlyHealth() > 0 && enemyCreature.GetEnemyHealth() <= 0)
         {
-            CombatActions.Instance.StopCoroutine(CombatActions.Instance.EnemyAction());
+            
             PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerWonTheBattleDialogue());
 
         }

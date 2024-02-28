@@ -110,7 +110,7 @@ public class GymBattleOneManager : MonoBehaviour
         mockAPSetTwo.text = "AP: " + friendlyCreature.GetMockAP() + "/5";
     }
 
-    void PlayerDied()
+    public void PlayerDied()
     {
         if(friendlyCreature.GetFriendlyHealth() <= 0)
         {
@@ -118,11 +118,10 @@ public class GymBattleOneManager : MonoBehaviour
         } 
     }    
 
-    void PlayerWonTheBattle()
+    public void PlayerWonTheBattle()
     {
         if(friendlyCreature.GetFriendlyHealth() > 0 && enemyCreature.GetEnemyHealth() <= 0)
         {
-            CombatActions.Instance.StopCoroutine(CombatActions.Instance.EnemyAction());
             PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerWonTheBattleDialogue());
            
         }

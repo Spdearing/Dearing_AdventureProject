@@ -13,10 +13,11 @@ public class PlayerItems
 
     private PlayerItems(string itemName, int healing,int aPBoost, int itemQuantity)
     {
+        this.itemName = itemName;
         this.healing = healing;
         this.itemQuantity = itemQuantity;
         this.aPBoost = aPBoost;
-        this.itemName = itemName;
+        
     }
 
     public static PlayerItems Create(string itemName, int healing,int aPBoost, int itemQuanity)

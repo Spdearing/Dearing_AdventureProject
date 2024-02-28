@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
             interactableWithGymMemberTwo = false;
             interactableText.text = "";
         }
-        else if (other.CompareTag("GymTrainerThree"))
+        if (other.CompareTag("GymTrainerThree"))
         {
             interactableTextBox.SetActive(false);
             interactableWithGymMemberThree = false;
@@ -226,22 +226,22 @@ public class PlayerMovement : MonoBehaviour
             interactableWithFinalBoss = false;
             interactableText.text = "";
         }
-        else if (other.CompareTag("FirstGate"))
+        if (other.CompareTag("FirstGate"))
         {
             interactableTextBox.SetActive(false);
             interactableText.text = " ";
         }
-        if (other.CompareTag("SecondGate"))
+        else if (other.CompareTag("SecondGate"))
         {
             interactableTextBox.SetActive(false);
             interactableText.text = " ";
         }
-        else if (other.CompareTag("ThirdGate"))
+        if (other.CompareTag("ThirdGate"))
         {
             interactableTextBox.SetActive(false);
             interactableText.text = " ";
         }
-        if (other.CompareTag("FourthGate"))
+        else if (other.CompareTag("FourthGate"))
         {
             interactableTextBox.SetActive(false);
             interactableText.text = " ";

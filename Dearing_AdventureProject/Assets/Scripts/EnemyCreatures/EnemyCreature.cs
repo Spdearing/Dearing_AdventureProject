@@ -57,7 +57,7 @@ public class EnemyCreature
         }
         else if(evolved)
             
-            enemyDamage = Random.Range(8, 17);
+            enemyDamage = Random.Range(7, 15);
 
         if (CombatActions.Instance.ReturnPlayerDefending() == true)
         {
