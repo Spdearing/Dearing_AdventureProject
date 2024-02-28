@@ -215,6 +215,10 @@ public class PlayerMovement : MonoBehaviour
             canOpenGateFour = false;
             interactableText.text = "You cannot progress just yet";
         }
+        if(other.CompareTag("Portal"))
+        {
+            SceneManager.LoadScene("GameWinScene");
+        }
     }
     public void OnTriggerExit2D(Collider2D other)
     {

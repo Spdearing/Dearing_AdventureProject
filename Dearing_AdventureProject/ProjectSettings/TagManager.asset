@@ -16,6 +16,7 @@ TagManager:
   - GymTrainerTwo
   - GymTrainerThree
   - FinalBoss
+  - Portal
   layers:
   - Default
   - TransparentFX
