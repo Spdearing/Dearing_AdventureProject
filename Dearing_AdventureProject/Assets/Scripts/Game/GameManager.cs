@@ -85,19 +85,19 @@ public class GameManager : MonoBehaviour
     public IEnumerator PlayersCreatureIsEvolving()
     {
         yield return new WaitForSeconds(1.0f);
+        
+        friendlyCreaturePanel.SetActive(true);
+        friendlyCreatureEvolving.SetActive(true);
 
         player.InitalizeTheInteracbleText();//Turns the text box and panel on at the bottom of the screen
 
         player.ReturnInteractableText().text = "WHATS HAPPENING TO REXASOURUS!?!?!";
 
-        friendlyCreaturePanel.SetActive(true);
-        friendlyCreatureEvolving.SetActive(true);
-
         Image image = friendlyCreatureEvolving.GetComponent<Image>();
 
         float fadeSpeed = 2f;//speed that the image fades in white and black
 
-        for (int i = 0; i < 5; i++) // Repeat the fading effect 6 times
+        for (int i = 0; i < 5; i++) // Repeat the fading effect 5 times
         {
             // Fade from white to black
             for (float t = 0f; t < 1.0f; t += Time.deltaTime * fadeSpeed)
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.25f); // Wait for a short duration between fades
+            yield return new WaitForSeconds(0.5f); // Wait for a short duration between fades
 
             // Fade from black to white
             for (float t = 0f; t < 1.0f; t += Time.deltaTime * fadeSpeed)
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.25f); // Wait for a short duration between fades
+            yield return new WaitForSeconds(0.5f); // Wait for a short duration between fades
         }
 
         // After all iterations, set the friendlyCreatureEvolving GameObject inactive
