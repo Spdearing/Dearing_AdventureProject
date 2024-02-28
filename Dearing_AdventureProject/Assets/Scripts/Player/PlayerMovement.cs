@@ -141,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("GymTrainerOne"))
@@ -217,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(other.CompareTag("Portal"))
         {
+            WipeTheScene();
             SceneManager.LoadScene("GameWinScene");
         }
     }
@@ -347,4 +349,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void WipeTheScene()
+    {
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+
+        // Iterate through each GameObject and destroy it
+        foreach (GameObject gameObject in allObjects)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
