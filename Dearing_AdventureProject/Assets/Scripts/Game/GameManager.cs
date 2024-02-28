@@ -84,20 +84,18 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator PlayersCreatureIsEvolving()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(.5f);
         
         friendlyCreaturePanel.SetActive(true);
         friendlyCreatureEvolving.SetActive(true);
-
-        player.InitalizeTheInteracbleText();//Turns the text box and panel on at the bottom of the screen
-
+        player.TurnOnInteractableTextBox();//Turns the text box and panel on at the bottom of the screen
         player.ReturnInteractableText().text = "WHATS HAPPENING TO REXASOURUS!?!?!";
 
         Image image = friendlyCreatureEvolving.GetComponent<Image>();
 
         float fadeSpeed = 2f;//speed that the image fades in white and black
 
-        for (int i = 0; i < 5; i++) // Repeat the fading effect 5 times
+        for (int i = 0; i < 4; i++) // Repeat the fading effect 5 times
         {
             // Fade from white to black
             for (float t = 0f; t < 1.0f; t += Time.deltaTime * fadeSpeed)
@@ -129,7 +127,7 @@ public class GameManager : MonoBehaviour
         friendlyCreaturePanel.SetActive(false);
         friendlyCreatureEvolved.SetActive(false);
         PlayerEnemyDialogue.Instance.TurnOffText();
-        player.InitalizeTheInteracbleText();
+        player.TurnOffInteractableTextBox();
 
     }
 

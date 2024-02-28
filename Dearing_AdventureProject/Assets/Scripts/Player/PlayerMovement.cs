@@ -304,18 +304,13 @@ public class PlayerMovement : MonoBehaviour
         return interactableText;
     }
 
-    public void InitalizeTheInteracbleText()
+    public void TurnOnInteractableTextBox()
     {
-        if (interactableTextBox.activeSelf)
-        {
-            // If active, set it inactive
-            interactableTextBox.SetActive(false);
-        }
-        else
-        {
-            // If inactive, set it active
-            interactableTextBox.SetActive(true);
-        }
+        interactableTextBox.SetActive(true);
+    }
+    public void TurnOffInteractableTextBox()
+    {
+        interactableTextBox.SetActive(false);
     }
 
     void DefeatFirstTrainer()

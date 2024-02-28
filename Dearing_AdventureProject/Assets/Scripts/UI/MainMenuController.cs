@@ -67,7 +67,7 @@ public class MainMenuController : MonoBehaviour
         SwitchPanel("SettingsPanel");
     }
 
-    public void QUitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }
