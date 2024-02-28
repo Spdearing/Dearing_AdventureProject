@@ -122,9 +122,7 @@ public class GymBattleTwoManager : MonoBehaviour
     {
         if (friendlyCreature.GetFriendlyHealth() > 0 && enemyCreature.GetEnemyHealth() <= 0)
         {
-           
             PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerWonTheBattleDialogue());
-
         }
     }
 
