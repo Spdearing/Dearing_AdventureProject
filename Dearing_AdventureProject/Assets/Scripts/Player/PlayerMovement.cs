@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         {
             interactableTextBox.SetActive(true);
             canOpenGateFour = true;
-            interactableText.text = "Go ahead and take the teleporter home!";
+            interactableText.text = "Go ahead and take the portal home!";
         }
         else if (other.CompareTag("FourthGate") && !GameManager.Instance.ReturnHasFourthBadge())
         {
