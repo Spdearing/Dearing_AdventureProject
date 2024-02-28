@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerPositionManager : MonoBehaviour
 {
     public static PlayerPositionManager Instance;
 
     private const string PlayerPositionKey = "PlayerPosition";
-    private Vector2 defaultPosition = new Vector2(0, 0);
+    private Vector2 lastSavedPosition = Vector2.zero; // Variable to store the last saved position
 
     private void Awake()
     {
@@ -25,26 +22,27 @@ public class PlayerPositionManager : MonoBehaviour
 
     private void Start()
     {
-        LoadPlayerPosition();
+        
     }
 
     public void SavePlayerPosition(Vector2 position)
     {
+        lastSavedPosition = position;
         PlayerPrefs.SetFloat(PlayerPositionKey + "X", position.x);
         PlayerPrefs.SetFloat(PlayerPositionKey + "Y", position.y);
         PlayerPrefs.Save();
     }
 
-    public Vector2 LoadPlayerPosition()
+    public Vector2 LoadLastSavedPosition()
     {
-        float x = PlayerPrefs.GetFloat(PlayerPositionKey + "X", defaultPosition.x);
-        float y = PlayerPrefs.GetFloat(PlayerPositionKey + "Y", defaultPosition.y);
-        return new Vector2(x, y);
+        float x = PlayerPrefs.GetFloat(PlayerPositionKey + "X", 0);
+        float y = PlayerPrefs.GetFloat(PlayerPositionKey + "Y", 0);
+        lastSavedPosition = new Vector2(x, y);
+        return lastSavedPosition;
+    }
+
+    private void OnDisable()
+    {
+        SavePlayerPosition(transform.position); // Save the player position before disabling the GameObject
     }
 }
-
-
-   
-
-
-

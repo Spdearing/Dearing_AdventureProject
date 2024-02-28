@@ -55,8 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
 
         playerPositionManager = PlayerPositionManager.Instance;
-        Vector2 savedPosition = playerPositionManager.LoadPlayerPosition();
-        transform.position = savedPosition;
+
+        if(!SceneManager.GetActiveScene().name.StartsWith("GymBattle"))
+        {
+            playerPositionManager.LoadLastSavedPosition();
+        }
     }
 
     // Update is called once per frame
@@ -83,16 +86,17 @@ public class PlayerMovement : MonoBehaviour
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleTwo");
         }
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
-        {
-            Debug.Log("Trying to destroy gate");
-            Destroy(firstGate);
-        }
-        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateTwo)
-        {
-            Debug.Log("Trying to destroy gate");
-            Destroy(secondGate);
-        }
+
+        CanOpenTheFirstGate();
+        CanOpenTheSecondGate();
+        //if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
+        //{
+        //    firstGate.SetActive(false);
+        //}
+        //else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateTwo)
+        //{
+        //    Destroy(secondGate);
+        //}
 
         //if (horizontalMovement < 0)
         //{
@@ -119,25 +123,25 @@ public class PlayerMovement : MonoBehaviour
             interactableWithGymMemberTwo = true;
             interactableText.text = "Talk to your second challenger!";
         }
-        if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge())
+        if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = true;
             interactableText.text = "Open the gate to the next battle area";
         }
-        else if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge())
+        else if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge() == false)
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = false;
             interactableText.text = "You cannot progress just yet";
         }
-        if (other.CompareTag("SecondGate") && GameManager.Instance.ReturnHasFirstBadge())
+        if (other.CompareTag("SecondGate") && GameManager.Instance.ReturnHasSecondBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateTwo = true;
             interactableText.text = "Open the second gate";
         }
-        else if (other.CompareTag("SecondGate") && !GameManager.Instance.ReturnHasFirstBadge())
+        else if (other.CompareTag("SecondGate") && !GameManager.Instance.ReturnHasSecondBadge() == false)
         {
             interactableTextBox.SetActive(true);
             canOpenGateTwo = false;
@@ -162,6 +166,21 @@ public class PlayerMovement : MonoBehaviour
         {
             interactableTextBox.SetActive(false);
             interactableText.text = " ";
+        }
+    }
+
+    public void CanOpenTheFirstGate()
+    {
+        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
+        {
+            firstGate.SetActive(false);
+        }
+    }
+    public void CanOpenTheSecondGate()
+    {
+       if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateTwo)
+       {
+            secondGate.SetActive(false);
         }
     }
 }
