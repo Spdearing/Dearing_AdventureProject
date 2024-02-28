@@ -12,16 +12,26 @@ public class PlayerMovement : MonoBehaviour
     private PlayerPositionManager playerPositionManager;
 
     private float walkingSpeed;
-    private float sprintingSpeed;
     private Rigidbody2D rb;
     //private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    private bool interactable;
+    private bool interactableWithGymMemberOne;
+    private bool interactableWithGymMemberTwo;
+    private bool interactableWithGymMemberThree;
+    private bool interactableWithGymMemberFour;
+
+
     private bool canOpenGateOne;
+    private bool canOpenGateTwo;
+    private bool canOpenGateThree;
+    private bool canOpenGateFour;
+
+
     private TMP_Text interactableText;
     private GameObject interactableTextBox;
     [SerializeField] GameObject firstGate;
+    [SerializeField] GameObject secondGate;
     
 
 
@@ -33,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         canOpenGateOne = true;
-        walkingSpeed = 2.0f;
+        walkingSpeed = 3.5f;
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -41,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
         interactableTextBox.SetActive(false);
         firstGate = GameObject.Find("FirstGate");
+        secondGate = GameObject.Find("SecondGate");
 
 
         playerPositionManager = PlayerPositionManager.Instance;
@@ -62,18 +73,25 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, verticalMovement * walkingSpeed);
 
     
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactable)
+        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithGymMemberOne)
         {
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
-            Debug.Log("Talking to Gym guy");
-            SceneManager.LoadScene("GymBattleOne");
-
-            
+            SceneManager.LoadScene("GymBattleOne");  
         }
-        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
+        else if(CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithGymMemberTwo)
+        {
+            PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
+            SceneManager.LoadScene("GymBattleTwo");
+        }
+        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
         {
             Debug.Log("Trying to destroy gate");
             Destroy(firstGate);
+        }
+        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateTwo)
+        {
+            Debug.Log("Trying to destroy gate");
+            Destroy(secondGate);
         }
 
         //if (horizontalMovement < 0)
@@ -92,19 +110,37 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("GymTrainerOne"))
         {
             interactableTextBox.SetActive(true);
-            interactable = true;
-            interactableText.text = "Talk to the gym member!";
+            interactableWithGymMemberOne = true;
+            interactableText.text = "Talk to the first gym member!";
         }
-        else if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge())
+        else if (other.CompareTag("GymTrainerTwo"))
+        {
+            interactableTextBox.SetActive(true);
+            interactableWithGymMemberTwo = true;
+            interactableText.text = "Talk to your second challenger!";
+        }
+        if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = true;
             interactableText.text = "Open the gate to the next battle area";
         }
-        if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge())
+        else if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = false;
+            interactableText.text = "You cannot progress just yet";
+        }
+        if (other.CompareTag("SecondGate") && GameManager.Instance.ReturnHasFirstBadge())
+        {
+            interactableTextBox.SetActive(true);
+            canOpenGateTwo = true;
+            interactableText.text = "Open the second gate";
+        }
+        else if (other.CompareTag("SecondGate") && !GameManager.Instance.ReturnHasFirstBadge())
+        {
+            interactableTextBox.SetActive(true);
+            canOpenGateTwo = false;
             interactableText.text = "You cannot progress just yet";
         }
     }
@@ -113,7 +149,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("GymTrainerOne"))
         {
             interactableTextBox.SetActive(false);
-            interactable = false;
+            interactableWithGymMemberOne = false;
+            interactableText.text = "";
+        }
+        else if (other.CompareTag("GymTrainerTwo"))
+        {
+            interactableTextBox.SetActive(false);
+            interactableWithGymMemberTwo = false;
             interactableText.text = "";
         }
         else if (other.CompareTag("FirstGate"))

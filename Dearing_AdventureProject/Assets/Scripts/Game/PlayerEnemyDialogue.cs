@@ -463,6 +463,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
+            CombatActions.Instance.ResetActions();
             GameManager.Instance.SetHasSecondBadge(true);
             GameManager.Instance.ReturnBadgeTwo().SetActive(true);
             yield return new WaitForSeconds(1);

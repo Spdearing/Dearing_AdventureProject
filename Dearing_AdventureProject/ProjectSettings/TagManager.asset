@@ -13,6 +13,7 @@ TagManager:
   - BadgeTwo
   - BadgeThree
   - BadgeFour
+  - GymTrainerTwo
   layers:
   - Default
   - TransparentFX
