@@ -35,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject thirdGate;
     [SerializeField] GameObject fourthGate;
 
-    [SerializeField] GameObject firstTrainer;
-    [SerializeField] GameObject secondTrainer;
-    [SerializeField] GameObject thirdTrainer;
+    [SerializeField] GameObject gymTrainerOne;
+    [SerializeField] GameObject gymTrainerTwo;
+    [SerializeField] GameObject gymTrainerThree;
     [SerializeField] GameObject finalBoss;
 
 
@@ -63,9 +63,9 @@ public class PlayerMovement : MonoBehaviour
         secondGate = GameObject.Find("SecondGate");
         thirdGate = GameObject.Find("ThirdGate");
         fourthGate = GameObject.Find("FourthGate");
-        firstTrainer = GameObject.Find("FirstTrainer");
-        secondTrainer = GameObject.Find("SecondTrainer");
-        thirdTrainer = GameObject.Find("ThirdTrainer");
+        gymTrainerOne = GameObject.Find("GymTrainerOne");
+        gymTrainerTwo = GameObject.Find("GymTrainerTwo");
+        gymTrainerThree = GameObject.Find("GymTrainerThree");
         finalBoss = GameObject.Find("FinalBoss");
 
 
@@ -116,6 +116,11 @@ public class PlayerMovement : MonoBehaviour
         CanOpenTheSecondGate();
         CanOpenTheThirdGate();
         CanOpenTheFourthGate();
+
+        DefeatFirstTrainer();
+        DefeatSecondTrainer();
+        DefeatThirdTrainer();
+        DefeatFinalBoss();
         //if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
         //{
         //    firstGate.SetActive(false);
@@ -309,30 +314,30 @@ public class PlayerMovement : MonoBehaviour
 
     void DefeatFirstTrainer()
     {
-        if(GameManager.Instance.ReturnHasFirstBadge())
+        if(GameManager.Instance.ReturnHasFirstBadge() == true)
         {
-            Destroy(firstTrainer);
+            Destroy(gymTrainerOne);
         }
     }
     void DefeatSecondTrainer()
     {
-        if (GameManager.Instance.ReturnHasFirstBadge())
+        if (GameManager.Instance.ReturnHasSecondBadge() == true)
         {
-            Destroy(secondTrainer);
+            Destroy(gymTrainerTwo);
         }
     }
 
     void DefeatThirdTrainer()
     {
-        if (GameManager.Instance.ReturnHasFirstBadge())
+        if (GameManager.Instance.ReturnHasThirdBadge() == true)
         {
-            Destroy(thirdTrainer);
+            Destroy(gymTrainerThree);
         }
     }
 
     void DefeatFinalBoss()
     {
-        if (GameManager.Instance.ReturnHasFirstBadge())
+        if (GameManager.Instance.ReturnHasFourthBadge() == true)
         {
             Destroy(finalBoss);
         }
