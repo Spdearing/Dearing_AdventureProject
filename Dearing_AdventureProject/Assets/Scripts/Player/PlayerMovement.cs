@@ -8,7 +8,7 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+
     private PlayerPositionManager playerPositionManager;
 
     private float walkingSpeed;
@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject interactableTextBox;
     [SerializeField] GameObject firstGate;
     [SerializeField] GameObject secondGate;
+    [SerializeField] GameObject thirdGate;
+    [SerializeField] GameObject fourthGate;
     
 
 
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         interactableTextBox.SetActive(false);
         firstGate = GameObject.Find("FirstGate");
         secondGate = GameObject.Find("SecondGate");
+        thirdGate = GameObject.Find("ThirdGate");
+        fourthGate = GameObject.Find("FourthGate");
 
 
         playerPositionManager = PlayerPositionManager.Instance;
@@ -86,9 +90,21 @@ public class PlayerMovement : MonoBehaviour
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleTwo");
         }
+        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithGymMemberThree)
+        {
+            PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
+            SceneManager.LoadScene("GymBattleThree");
+        }
+        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithFinalBoss)
+        {
+            PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
+            SceneManager.LoadScene("GymBattleFour");
+        }
 
         CanOpenTheFirstGate();
         CanOpenTheSecondGate();
+        CanOpenTheThirdGate();
+        CanOpenTheFourthGate();
         //if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
         //{
         //    firstGate.SetActive(false);
@@ -123,17 +139,17 @@ public class PlayerMovement : MonoBehaviour
             interactableWithGymMemberTwo = true;
             interactableText.text = "Put this menace in their place!";
         }
-        if (other.CompareTag("Final Boss"))
+        if (other.CompareTag("GymTrainerThree"))
         {
             interactableTextBox.SetActive(true);
             interactableWithGymMemberThree = true;
-            interactableText.text = "Talk to your second challenger!";
+            interactableText.text = "Put this menace in their place!";
         }
-        else if (other.CompareTag("GymTrainerTwo"))
+        else if (other.CompareTag("FinalBoss"))
         {
             interactableTextBox.SetActive(true);
             interactableWithFinalBoss = true;
-            interactableText.text = "Talk to your second challenger!";
+            interactableText.text = "Test your full power!";
         }
         if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge() == true)
         {
@@ -159,25 +175,25 @@ public class PlayerMovement : MonoBehaviour
             canOpenGateTwo = false;
             interactableText.text = "You cannot progress just yet";
         }
-        if (other.CompareTag("ThirdGate") && GameManager.Instance.ReturnHasSecondBadge() == true)
+        if (other.CompareTag("ThirdGate") && GameManager.Instance.ReturnHasThirdBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateThree = true;
             interactableText.text = "Open the third gate";
         }
-        else if (other.CompareTag("ThirdGate") && !GameManager.Instance.ReturnHasSecondBadge() == false)
+        else if (other.CompareTag("ThirdGate") && !GameManager.Instance.ReturnHasThirdBadge() == false)
         {
             interactableTextBox.SetActive(true);
             canOpenGateThree = false;
             interactableText.text = "You cannot progress just yet";
         }
-        if (other.CompareTag("FourthGate") && GameManager.Instance.ReturnHasSecondBadge() == true)
+        if (other.CompareTag("FourthGate") && GameManager.Instance.ReturnHasFourthBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateFour = true;
-            interactableText.text = "Go on and test your full strength";
+            interactableText.text = "Go ahead and take the teleporter home!";
         }
-        else if (other.CompareTag("FourthGate") && !GameManager.Instance.ReturnHasSecondBadge() == false)
+        else if (other.CompareTag("FourthGate") && !GameManager.Instance.ReturnHasFourthBadge() == false)
         {
             interactableTextBox.SetActive(true);
             canOpenGateFour = false;
@@ -215,6 +231,21 @@ public class PlayerMovement : MonoBehaviour
             interactableTextBox.SetActive(false);
             interactableText.text = " ";
         }
+        if (other.CompareTag("SecondGate"))
+        {
+            interactableTextBox.SetActive(false);
+            interactableText.text = " ";
+        }
+        else if (other.CompareTag("ThirdGate"))
+        {
+            interactableTextBox.SetActive(false);
+            interactableText.text = " ";
+        }
+        if (other.CompareTag("FourthGate"))
+        {
+            interactableTextBox.SetActive(false);
+            interactableText.text = " ";
+        }
     }
 
     public void CanOpenTheFirstGate()
@@ -235,7 +266,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateThree)
         {
-            secondGate.SetActive(false);
+            thirdGate.SetActive(false);
+        }
+    }
+    public void CanOpenTheFourthGate()
+    {
+        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateFour)
+        {
+            fourthGate.SetActive(false);
         }
     }
 
