@@ -14,6 +14,8 @@ TagManager:
   - BadgeThree
   - BadgeFour
   - GymTrainerTwo
+  - GymTrainerThree
+  - FinalBoss
   layers:
   - Default
   - TransparentFX

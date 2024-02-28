@@ -120,9 +120,11 @@ public class GymBattleThreeManager : MonoBehaviour
 
     void PlayerWonTheBattle()
     {
-        if (friendlyCreature.GetFriendlyHealth() >= 0 && enemyCreature.GetEnemyHealth() <= 0)
+        if (friendlyCreature.GetFriendlyHealth() > 0 && enemyCreature.GetEnemyHealth() <= 0)
         {
+            CombatActions.Instance.StopCoroutine(CombatActions.Instance.EnemyAction());
             PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerWonTheBattleDialogue());
+
         }
     }
 
