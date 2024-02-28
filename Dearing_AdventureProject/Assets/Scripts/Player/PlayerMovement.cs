@@ -174,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
             canOpenGateOne = true;
             interactableText.text = "Open the gate to the next battle area";
         }
-        else if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge() == false)
+        else if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = false;
@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
             canOpenGateTwo = true;
             interactableText.text = "Open the second gate";
         }
-        else if (other.CompareTag("SecondGate") && !GameManager.Instance.ReturnHasSecondBadge() == false)
+        else if (other.CompareTag("SecondGate") && !GameManager.Instance.ReturnHasSecondBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateTwo = false;
@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
             canOpenGateThree = true;
             interactableText.text = "Open the third gate";
         }
-        else if (other.CompareTag("ThirdGate") && !GameManager.Instance.ReturnHasThirdBadge() == false)
+        else if (other.CompareTag("ThirdGate") && !GameManager.Instance.ReturnHasThirdBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateThree = false;
@@ -210,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
             canOpenGateFour = true;
             interactableText.text = "Go ahead and take the teleporter home!";
         }
-        else if (other.CompareTag("FourthGate") && !GameManager.Instance.ReturnHasFourthBadge() == false)
+        else if (other.CompareTag("FourthGate") && !GameManager.Instance.ReturnHasFourthBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateFour = false;
@@ -279,21 +279,21 @@ public class PlayerMovement : MonoBehaviour
     }
     public void CanOpenTheSecondGate()
     {
-       if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateTwo)
+       if (CrossPlatformInputManager.GetButtonUp("InteractButton") && canOpenGateTwo)
        {
             secondGate.SetActive(false);
         }
     }
     public void CanOpenTheThirdGate()
     {
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateThree)
+        if (CrossPlatformInputManager.GetButtonUp("InteractButton") && canOpenGateThree)
         {
             thirdGate.SetActive(false);
         }
     }
     public void CanOpenTheFourthGate()
     {
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateFour)
+        if (CrossPlatformInputManager.GetButtonUp("InteractButton") && canOpenGateFour)
         {
             fourthGate.SetActive(false);
         }
