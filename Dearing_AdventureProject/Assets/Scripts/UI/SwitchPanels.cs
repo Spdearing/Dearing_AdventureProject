@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Handles the panel switching for each battles when you are making combat choices
+/// </summary>
+
 public class SwitchPanels: MonoBehaviour 
 {
     public static SwitchPanels Instance;

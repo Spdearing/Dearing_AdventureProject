@@ -6,6 +6,10 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Handles the settings menu on the MainMenu
+/// </summary>
+
 public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Slider soundSlider;

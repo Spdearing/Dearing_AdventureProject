@@ -6,6 +6,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+
+/// <summary>
+/// PlayerMovement handles the player movement, and the collisions with the gates for the progression mechanic, and when the player collides with the portal, and or Gym Members
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -39,13 +43,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject gymTrainerTwo;
     [SerializeField] GameObject gymTrainerThree;
     [SerializeField] GameObject finalBoss;
-
-
-
-
-
-
-
 
 
     // Start is called before the first frame update
@@ -121,24 +118,6 @@ public class PlayerMovement : MonoBehaviour
         DefeatSecondTrainer();
         DefeatThirdTrainer();
         DefeatFinalBoss();
-        //if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
-        //{
-        //    firstGate.SetActive(false);
-        //}
-        //else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateTwo)
-        //{
-        //    Destroy(secondGate);
-        //}
-
-        //if (horizontalMovement < 0)
-        //{
-        //    spriteRenderer.flipX = true; 
-        //}
-        //else if (horizontalMovement > 0)
-        //{
-        //    spriteRenderer.flipX = false; 
-        //}
-
 
     }
 

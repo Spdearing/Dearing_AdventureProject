@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles the positional save for the player so when they fight a battle, and then load the scene again, they are back where they left off
+/// </summary>
+
 public class PlayerPositionManager : MonoBehaviour
 {
     public static PlayerPositionManager Instance;

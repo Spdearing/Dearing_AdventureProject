@@ -3,6 +3,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// GameManager handles the evolution animation, and the handling of gameobjects that are being destroyed for progression purposes
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;

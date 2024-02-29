@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the UI data initialization for GymBattleThree
+/// </summary>
 public class GymBattleThreeManager : MonoBehaviour
 {
     public static GymBattleThreeManager Instance;

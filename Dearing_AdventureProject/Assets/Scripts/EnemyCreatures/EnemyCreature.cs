@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This Class script is in charge of giving the enemy in each level its data, Health/Level/Name
+/// </summary>
 public class EnemyCreature 
 {
     private string enemyName;

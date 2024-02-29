@@ -23,7 +23,7 @@ public class CombatActions : MonoBehaviour
     private bool usingAPBoost;
 
     /// <summary>
-    /// Int variables that are returned from the player and enemy class scripts to dictate the amount of damage donw
+    /// Int variables that are returned from the player and enemy class scripts to dictate the amount of damage done
     /// </summary>
     private int inflictedDamageToEnemy;
     private int inflictedModifiedDamageToPlayer;
@@ -35,7 +35,9 @@ public class CombatActions : MonoBehaviour
         Instance = this;
     }
 
-    
+    /// <summary>
+    /// Tackle/Persuading/ and mocking get set to true, dependent on what the player chooses.Then is plugged into the Actions Switch Statement 
+    /// </summary>
     public void Tackle()
     {
         if (SceneManager.GetActiveScene().name == "GymBattleOne")
@@ -233,7 +235,183 @@ public class CombatActions : MonoBehaviour
         SwitchPanels.Instance.SwitchToConfirmPanel();
         playerDefending = true;
     }//player can choose to defend themselves which will allow them to reduce incoming damage
-    
+     public void ConfirmPlayerAction()
+    {
+        if(SceneManager.GetActiveScene().name == "GymBattleOne")
+        {
+            if (attacking)
+            {
+                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 15)
+                {
+                    Action("Tackle");
+                }
+            }
+            else if (persuading)
+            {
+                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 10)
+                {
+                    Action("Persuade");
+                }
+            }
+            if (mocking)
+            {
+                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 5)
+                {
+                    Action("Mock");
+                }
+            }
+            else if (playerDefending)
+            {
+                Action("Defend");
+            }
+            if (usingPotion)
+            {
+                if (GymBattleOneManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
+            }
+            else if (usingAPBoost)
+            {
+                if (GymBattleOneManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
+            }
+        }
+        else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
+        {
+            if (attacking)
+            {
+                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 20)
+                {
+                    Action("Tackle");
+                }
+            }
+            else if (persuading)
+            {
+                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 15)
+                {
+                    Action("Persuade");
+                }
+            }
+            if (mocking)
+            {
+                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 10)
+                {
+                    Action("Mock");
+                }
+            }
+            else if (playerDefending)
+            {
+                Action("Defend");
+            }
+            if (usingPotion)
+            {
+                if (GymBattleTwoManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
+            }
+            else if (usingAPBoost)
+            {
+                if (GymBattleTwoManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (attacking)
+            {
+                if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 25)
+                {
+                    Action("Tackle");
+                }
+            }
+            else if (persuading)
+            {
+                if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 20)
+                {
+                    Action("Persuade");
+                }
+            }
+            if (mocking)
+            {
+                if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 15)
+                {
+                    Action("Mock");
+                }
+            }
+            else if (playerDefending)
+            {
+                Action("Defend");
+            }
+            if (usingPotion)
+            {
+                if (GymBattleThreeManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
+            }
+            else if (usingAPBoost)
+            {
+                if (GymBattleThreeManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (attacking)
+            {
+                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 30)
+                {
+                    Action("Tackle");
+                }
+            }
+            else if (persuading)
+            {
+                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 25)
+                {
+                    Action("Persuade");
+                }
+            }
+            if (mocking)
+            {
+                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 20)
+                {
+                    Action("Mock");
+                }
+            }
+            else if (playerDefending)
+            {
+                Action("Defend");
+            }
+            if (usingPotion)
+            {
+                if (GymBattleFourManager.Instance.ReturnPotion().GetItemQuantity() > 0)
+                {
+                    Action("Potion");
+                }
+            }
+            else if (usingAPBoost)
+            {
+                if (GymBattleFourManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
+                {
+                    Action("APBoost");
+                }
+            }
+        }
+    }//confirming the combat action the player chose
+
+
+    /// <summary>
+    /// The majority of code which handles the turn based combat system for battles 1 - 4
+    /// </summary>
+    /// <param name="input"></param>
     void Action(string input)
     {
         //random number between 0, and 19 is aquired for accuracy
@@ -708,177 +886,7 @@ public class CombatActions : MonoBehaviour
             }
         }
     }
-    public void ConfirmPlayerAction()
-    {
-        if(SceneManager.GetActiveScene().name == "GymBattleOne")
-        {
-            if (attacking)
-            {
-                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 15)
-                {
-                    Action("Tackle");
-                }
-            }
-            else if (persuading)
-            {
-                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 10)
-                {
-                    Action("Persuade");
-                }
-            }
-            if (mocking)
-            {
-                if (GymBattleOneManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 5)
-                {
-                    Action("Mock");
-                }
-            }
-            else if (playerDefending)
-            {
-                Action("Defend");
-            }
-            if (usingPotion)
-            {
-                if (GymBattleOneManager.Instance.ReturnPotion().GetItemQuantity() > 0)
-                {
-                    Action("Potion");
-                }
-            }
-            else if (usingAPBoost)
-            {
-                if (GymBattleOneManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
-                {
-                    Action("APBoost");
-                }
-            }
-        }
-        else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
-        {
-            if (attacking)
-            {
-                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 20)
-                {
-                    Action("Tackle");
-                }
-            }
-            else if (persuading)
-            {
-                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 15)
-                {
-                    Action("Persuade");
-                }
-            }
-            if (mocking)
-            {
-                if (GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 10)
-                {
-                    Action("Mock");
-                }
-            }
-            else if (playerDefending)
-            {
-                Action("Defend");
-            }
-            if (usingPotion)
-            {
-                if (GymBattleTwoManager.Instance.ReturnPotion().GetItemQuantity() > 0)
-                {
-                    Action("Potion");
-                }
-            }
-            else if (usingAPBoost)
-            {
-                if (GymBattleTwoManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
-                {
-                    Action("APBoost");
-                }
-            }
-        }
-        if (SceneManager.GetActiveScene().name == "GymBattleThree")
-        {
-            if (attacking)
-            {
-                if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 25)
-                {
-                    Action("Tackle");
-                }
-            }
-            else if (persuading)
-            {
-                if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 20)
-                {
-                    Action("Persuade");
-                }
-            }
-            if (mocking)
-            {
-                if (GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 15)
-                {
-                    Action("Mock");
-                }
-            }
-            else if (playerDefending)
-            {
-                Action("Defend");
-            }
-            if (usingPotion)
-            {
-                if (GymBattleThreeManager.Instance.ReturnPotion().GetItemQuantity() > 0)
-                {
-                    Action("Potion");
-                }
-            }
-            else if (usingAPBoost)
-            {
-                if (GymBattleThreeManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
-                {
-                    Action("APBoost");
-                }
-            }
-        }
-        if (SceneManager.GetActiveScene().name == "GymBattleFour")
-        {
-            if (attacking)
-            {
-                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetTackleAP() <= 30)
-                {
-                    Action("Tackle");
-                }
-            }
-            else if (persuading)
-            {
-                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetPersuadeAP() <= 25)
-                {
-                    Action("Persuade");
-                }
-            }
-            if (mocking)
-            {
-                if (GymBattleFourManager.Instance.ReturnFriendlyCreature().GetMockAP() <= 20)
-                {
-                    Action("Mock");
-                }
-            }
-            else if (playerDefending)
-            {
-                Action("Defend");
-            }
-            if (usingPotion)
-            {
-                if (GymBattleFourManager.Instance.ReturnPotion().GetItemQuantity() > 0)
-                {
-                    Action("Potion");
-                }
-            }
-            else if (usingAPBoost)
-            {
-                if (GymBattleFourManager.Instance.ReturnAPBoost().GetItemQuantity() > 0)
-                {
-                    Action("APBoost");
-                }
-            }
-        }
-    }
+   
 
     public void CancelPlayerAction()
     {
@@ -914,8 +922,151 @@ public class CombatActions : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// Enemies Turn
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator EnemyAction()
+    {
+        yield return new WaitForSeconds(2.0f);
 
+        if (attacking && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        else if (!attacking && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        if (!attacking && persuading && !mocking)
+        {
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        else if (!attacking && !persuading && mocking)
+        {
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        if (!attacking && playerDefending && !persuading && !mocking)
+        {
+            EnemyAttacksPlayer();
+            yield return new WaitForSeconds(2.0f);
+            SwitchPanels.Instance.BackToCombatOptions();
+            ResetActions();
+        }
+        PlayerEnemyDialogue.Instance.TurnOffText();
+    }
+    
+    void EnemyAttacksPlayer()
+    {
+        int enemyAccuracy = Random.Range(0,20);
+
+        if(SceneManager.GetActiveScene().name == "GymBattleOne")
+        {
+            if (enemyAccuracy >= 12 && !playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+                GymBattleOneManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            else if (enemyAccuracy >= 12 && playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                inflictedModifiedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
+                GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
+                GymBattleOneManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            if (enemyAccuracy <= 11)
+            {
+                PlayerEnemyDialogue.Instance.EnemyMisses();
+            }
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+        }
+        else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
+        {
+            if (enemyAccuracy >= 12 && !playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                GymBattleTwoManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+                GymBattleTwoManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            else if (enemyAccuracy >= 12 && playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                inflictedModifiedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
+                GymBattleTwoManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
+                GymBattleTwoManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            if (enemyAccuracy <= 11)
+            {
+                PlayerEnemyDialogue.Instance.EnemyMisses();
+            }
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+        }
+        if (SceneManager.GetActiveScene().name == "GymBattleThree")
+        {
+            if (enemyAccuracy >= 12 && !playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                GymBattleThreeManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+                GymBattleThreeManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            else if (enemyAccuracy >= 12 && playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                inflictedModifiedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
+                GymBattleThreeManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
+                GymBattleThreeManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            if (enemyAccuracy <= 11)
+            {
+                PlayerEnemyDialogue.Instance.EnemyMisses();
+            }
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+        }
+        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
+        {
+            if (enemyAccuracy >= 12 && !playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
+                GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            else if (enemyAccuracy >= 12 && playerDefending)
+            {
+                inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
+                inflictedModifiedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
+                GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
+                GymBattleFourManager.Instance.UpdateHealthAndNameText();
+                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
+            }
+            if (enemyAccuracy <= 11)
+            {
+                PlayerEnemyDialogue.Instance.EnemyMisses();
+            }
+            SwitchPanels.Instance.SwitchToCombatDialogue();
+        }
+    }
+
+    /// <summary>
+    /// Handles the increase of AP points
+    /// </summary>
     public void IncreaseTackleAP()
     {
         if (SceneManager.GetActiveScene().name == "GymBattleOne")
@@ -1073,103 +1224,9 @@ public class CombatActions : MonoBehaviour
 
     }
 
-    void EnemyAttacksPlayer()
-    {
-        int enemyAccuracy = Random.Range(0,20);
-
-        if(SceneManager.GetActiveScene().name == "GymBattleOne")
-        {
-            if (enemyAccuracy >= 12 && !playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
-                GymBattleOneManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            else if (enemyAccuracy >= 12 && playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                inflictedModifiedDamageToPlayer = GymBattleOneManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
-                GymBattleOneManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
-                GymBattleOneManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            if (enemyAccuracy <= 11)
-            {
-                PlayerEnemyDialogue.Instance.EnemyMisses();
-            }
-            SwitchPanels.Instance.SwitchToCombatDialogue();
-        }
-        else if(SceneManager.GetActiveScene().name == "GymBattleTwo")
-        {
-            if (enemyAccuracy >= 12 && !playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                GymBattleTwoManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
-                GymBattleTwoManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            else if (enemyAccuracy >= 12 && playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                inflictedModifiedDamageToPlayer = GymBattleTwoManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
-                GymBattleTwoManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
-                GymBattleTwoManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            if (enemyAccuracy <= 11)
-            {
-                PlayerEnemyDialogue.Instance.EnemyMisses();
-            }
-            SwitchPanels.Instance.SwitchToCombatDialogue();
-        }
-        if (SceneManager.GetActiveScene().name == "GymBattleThree")
-        {
-            if (enemyAccuracy >= 12 && !playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                GymBattleThreeManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
-                GymBattleThreeManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            else if (enemyAccuracy >= 12 && playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                inflictedModifiedDamageToPlayer = GymBattleThreeManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
-                GymBattleThreeManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
-                GymBattleThreeManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            if (enemyAccuracy <= 11)
-            {
-                PlayerEnemyDialogue.Instance.EnemyMisses();
-            }
-            SwitchPanels.Instance.SwitchToCombatDialogue();
-        }
-        else if (SceneManager.GetActiveScene().name == "GymBattleFour")
-        {
-            if (enemyAccuracy >= 12 && !playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedDamageToPlayer);
-                GymBattleFourManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            else if (enemyAccuracy >= 12 && playerDefending)
-            {
-                inflictedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoEnemyDamage();
-                inflictedModifiedDamageToPlayer = GymBattleFourManager.Instance.ReturnEnemyCreature().DoModifiedEnemyDamage();
-                GymBattleFourManager.Instance.ReturnFriendlyCreature().TakeDamage(inflictedModifiedDamageToPlayer);
-                GymBattleFourManager.Instance.UpdateHealthAndNameText();
-                PlayerEnemyDialogue.Instance.EnemyHitPlayer();
-            }
-            if (enemyAccuracy <= 11)
-            {
-                PlayerEnemyDialogue.Instance.EnemyMisses();
-            }
-            SwitchPanels.Instance.SwitchToCombatDialogue();
-        }
-    }
+    /// <summary>
+    /// Resets the action bools
+    /// </summary>
     public void ResetActions()
     {
         attacking = false;
@@ -1183,6 +1240,11 @@ public class CombatActions : MonoBehaviour
         increasingMockAP = false;
     }
 
+    /// <summary>
+    /// Returns the private bools that are in this script
+    /// </summary>
+    /// <returns></returns>
+
     public bool ReturnAttacking()
     {
         return this.attacking;
@@ -1195,10 +1257,6 @@ public class CombatActions : MonoBehaviour
     public bool ReturnPersuading()
     {
         return this.persuading;
-    }
-    public void SetAttackingBool(bool value)
-    {
-        attacking = value;
     }
     public bool ReturnMocking()
     {
@@ -1241,16 +1299,10 @@ public class CombatActions : MonoBehaviour
         return this.inflictedDamageToEnemy;
     }
 
-    public void SetPersuadingBool(bool value)
-    {
-        persuading = value;
-    }
-
-    public void SetMockingBool(bool value)
-    {
-        mocking = value;
-    }
-
+    /// <summary>
+    /// Sets the private bools for the using items script
+    /// </summary>
+    /// <param name="value"></param>
     public void SetUsingPotionsBool(bool value)
     {
         usingPotion = value;
@@ -1260,59 +1312,5 @@ public class CombatActions : MonoBehaviour
     {
         usingAPBoost = value;
     }
-
-    public void SetIncreasingTackleAP(bool value)
-    {
-        increasingTackleAP = value;
-    }
-
-    public void SetIncreasingPersuadeAPBool(bool value)
-    {
-        increasingPersuadeAP = value;
-    }
-
-    public void SetIncreasingMockAPBool(bool value)
-    {
-        increasingMockAP = value;
-    }
-
-    public IEnumerator EnemyAction()
-    {
-        yield return new WaitForSeconds(2.0f);
-
-        if (attacking && !persuading && !mocking)
-        {
-            EnemyAttacksPlayer();
-            yield return new WaitForSeconds(2.0f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        else if (!attacking && !persuading && !mocking)
-        {
-            EnemyAttacksPlayer();
-            yield return new WaitForSeconds(2.0f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        if (!attacking && persuading && !mocking)
-        {
-            yield return new WaitForSeconds(2.0f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        else if (!attacking && !persuading && mocking)
-        {
-            yield return new WaitForSeconds(2.0f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        if (!attacking && playerDefending && !persuading && !mocking)
-        {
-            EnemyAttacksPlayer();
-            yield return new WaitForSeconds(2.0f);
-            SwitchPanels.Instance.BackToCombatOptions();
-            ResetActions();
-        }
-        PlayerEnemyDialogue.Instance.TurnOffText();
-    }
+    
 }

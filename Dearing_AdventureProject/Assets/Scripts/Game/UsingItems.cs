@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Handles the action of using a potion, or AP boost
+/// </summary>
 public class UsingItems : MonoBehaviour
 {
     public static UsingItems Instance;

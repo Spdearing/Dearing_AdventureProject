@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Handles the Data for the Players potions, and AP Items.
+/// </summary>
 public class PlayerItems
 {
     private string itemName;

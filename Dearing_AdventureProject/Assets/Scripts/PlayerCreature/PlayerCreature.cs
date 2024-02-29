@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// This Class script is in charge of giving the friendly creature that that the player controls in each level its data, Health/Level/Name
+/// </summary>
+
 public class FriendlyCreature
 {
     private string friendlyName;

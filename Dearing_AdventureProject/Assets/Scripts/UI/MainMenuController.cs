@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Handles all of the UI element functionality for the MainMenu
+/// </summary>
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] GameObject titlePanel;

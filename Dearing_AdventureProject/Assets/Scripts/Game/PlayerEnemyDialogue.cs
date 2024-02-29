@@ -4,11 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// this script handles the entirety of the combat dialague inside of battle, and also talks to the UsingItems Script
+/// </summary>
 public class PlayerEnemyDialogue : MonoBehaviour
 {
     public static PlayerEnemyDialogue Instance;
 
-    private int returnsFromBattle;
     
 
     [SerializeField] TMP_Text combatText;
