@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        ShowBadgesAquired();
+        ShowBadgesAcquired();
     }
-    void ShowBadgesAquired()
+    void ShowBadgesAcquired()
     {
         if(hasFirstBadge) 
         {

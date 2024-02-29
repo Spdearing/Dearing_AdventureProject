@@ -343,7 +343,9 @@ public class PlayerMovement : MonoBehaviour
             Destroy(finalBoss);
         }
     }
-
+    /// <summary>
+    /// clears the objects from the game when the player wins
+    /// </summary>
     public void WipeTheScene()
     {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();

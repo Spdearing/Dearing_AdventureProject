@@ -453,6 +453,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             CombatActions.Instance.ResetActions();
             GameManager.Instance.SetHasFirstBadge(true);
+            GameManager.Instance.ReturnBadgeOne().SetActive(true);
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleOneManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleOneManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
@@ -464,6 +465,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         {
             CombatActions.Instance.ResetActions();
             GameManager.Instance.SetHasSecondBadge(true);
+            GameManager.Instance.ReturnBadgeTwo().SetActive(true);
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
@@ -474,6 +476,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "GymBattleThree")
         {
             GameManager.Instance.SetHasThirdBadge(true);
+            GameManager.Instance.ReturnBadgeThree().SetActive(true);
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleThreeManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleThreeManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";
@@ -485,6 +488,7 @@ public class PlayerEnemyDialogue : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "GymBattleFour")
         {
             GameManager.Instance.SetHasFourthBadge(true);
+            GameManager.Instance.ReturnBadgeFour().SetActive(true);
             yield return new WaitForSeconds(1);
             SwitchPanels.Instance.SwitchToCombatDialogue();
             combatText.text = GymBattleFourManager.Instance.ReturnFriendlyCreature().GetFriendlyName() + " defeated " + GymBattleFourManager.Instance.ReturnEnemyCreature().GetEnemyName() + " Congratulations, you won the battle!!!";

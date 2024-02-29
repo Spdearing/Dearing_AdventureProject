@@ -213,6 +213,19 @@ public class CombatActions : MonoBehaviour
         {
             PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerTriedToRunAwayDialogue());
         }
+        else if (GymBattleTwoManager.Instance.ReturnBattleStatus() == true)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerTriedToRunAwayDialogue());
+        }
+        if (GymBattleThreeManager.Instance.ReturnBattleStatus() == true)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerTriedToRunAwayDialogue());
+        }
+        if (GymBattleFourManager.Instance.ReturnBattleStatus() == true)
+        {
+            PlayerEnemyDialogue.Instance.StartCoroutine(PlayerEnemyDialogue.Instance.PlayerTriedToRunAwayDialogue());
+        }
+
     }//player can choose to run away but in these scenarios they cannot
     
     public void Defend()
@@ -346,7 +359,6 @@ public class CombatActions : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "GymBattleTwo")
         {
-
             switch (input)
             {
                 case "Tackle":
@@ -370,7 +382,7 @@ public class CombatActions : MonoBehaviour
                     }
                     SwitchPanels.Instance.SwitchToCombatDialogue();
 
-                    if (GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyHealth() <= 0 && GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() >= 0)
+                    if (GymBattleTwoManager.Instance.ReturnEnemyCreature().GetEnemyHealth() <= 0 && GymBattleTwoManager.Instance.ReturnFriendlyCreature().GetFriendlyHealth() > 0)
                     {
                         GymBattleTwoManager.Instance.PlayerWonTheBattle();
                     }
