@@ -88,22 +88,22 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, verticalMovement * walkingSpeed);
 
     
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithGymMemberOne)
+        if (Input.GetKeyDown(KeyCode.E) && interactableWithGymMemberOne)
         {
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleOne");  
         }
-        else if(CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithGymMemberTwo)
+        else if(Input.GetKeyDown(KeyCode.E) && interactableWithGymMemberTwo)
         {
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleTwo");
         }
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithGymMemberThree)
+        if (Input.GetKeyDown(KeyCode.E) && interactableWithGymMemberThree)
         {
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleThree");
         }
-        else if (CrossPlatformInputManager.GetButtonDown("InteractButton") && interactableWithFinalBoss)
+        else if (Input.GetKeyDown(KeyCode.E) && interactableWithFinalBoss)
         {
             PlayerPositionManager.Instance.SavePlayerPosition(transform.position);
             SceneManager.LoadScene("GymBattleFour");
@@ -251,28 +251,28 @@ public class PlayerMovement : MonoBehaviour
 
     public void CanOpenTheFirstGate()
     {
-        if (CrossPlatformInputManager.GetButtonDown("InteractButton") && canOpenGateOne)
+        if (Input.GetKeyDown(KeyCode.E) && canOpenGateOne)
         {
             firstGate.SetActive(false);
         }
     }
     public void CanOpenTheSecondGate()
     {
-       if (CrossPlatformInputManager.GetButtonUp("InteractButton") && canOpenGateTwo)
+       if (Input.GetKeyDown(KeyCode.E) && canOpenGateTwo)
        {
             secondGate.SetActive(false);
         }
     }
     public void CanOpenTheThirdGate()
     {
-        if (CrossPlatformInputManager.GetButtonUp("InteractButton") && canOpenGateThree)
+        if (Input.GetKeyDown(KeyCode.E) && canOpenGateThree)
         {
             thirdGate.SetActive(false);
         }
     }
     public void CanOpenTheFourthGate()
     {
-        if (CrossPlatformInputManager.GetButtonUp("InteractButton") && canOpenGateFour)
+        if (Input.GetKeyDown(KeyCode.E) && canOpenGateFour)
         {
             fourthGate.SetActive(false);
         }
