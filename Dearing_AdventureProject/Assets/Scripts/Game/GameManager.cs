@@ -187,5 +187,4 @@ public class GameManager : MonoBehaviour
     {
         return badgeFour;
     }
-
 }

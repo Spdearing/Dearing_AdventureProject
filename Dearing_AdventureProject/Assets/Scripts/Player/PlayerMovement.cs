@@ -127,73 +127,73 @@ public class PlayerMovement : MonoBehaviour
         {
             interactableTextBox.SetActive(true);
             interactableWithGymMemberOne = true;
-            interactableText.text = "Talk to the first gym member!";
+            interactableText.text = " Press (E) To Talk To The First Gym Member!";
         }
         else if (other.CompareTag("GymTrainerTwo"))
         {
             interactableTextBox.SetActive(true);
             interactableWithGymMemberTwo = true;
-            interactableText.text = "Put this menace in their place!";
+            interactableText.text = "Press (E) To Put This Menace In Their Place!";
         }
         if (other.CompareTag("GymTrainerThree"))
         {
             interactableTextBox.SetActive(true);
             interactableWithGymMemberThree = true;
-            interactableText.text = "Put this menace in their place!";
+            interactableText.text = "Press (E) To Show This Guy You Aren't A Slouch!";
         }
         else if (other.CompareTag("FinalBoss"))
         {
             interactableTextBox.SetActive(true);
             interactableWithFinalBoss = true;
-            interactableText.text = "Test your full power!";
+            interactableText.text = "Press (E) To Test Your Full Power!";
         }
         if(other.CompareTag("FirstGate") && GameManager.Instance.ReturnHasFirstBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = true;
-            interactableText.text = "Open the gate to the next battle area";
+            interactableText.text = "Press (E) To Open The Gate To The Next Battle Area";
         }
         else if (other.CompareTag("FirstGate") && !GameManager.Instance.ReturnHasFirstBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateOne = false;
-            interactableText.text = "You cannot progress just yet";
+            interactableText.text = "You Cannot Progress Just Yet";
         }
         if (other.CompareTag("SecondGate") && GameManager.Instance.ReturnHasSecondBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateTwo = true;
-            interactableText.text = "Open the second gate";
+            interactableText.text = "Press (E) To Open The Second Gate";
         }
         else if (other.CompareTag("SecondGate") && !GameManager.Instance.ReturnHasSecondBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateTwo = false;
-            interactableText.text = "You cannot progress just yet";
+            interactableText.text = "You Cannot Progress Just Yet";
         }
         if (other.CompareTag("ThirdGate") && GameManager.Instance.ReturnHasThirdBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateThree = true;
-            interactableText.text = "Open the third gate";
+            interactableText.text = "Press (E) To Open The Third Gate";
         }
         else if (other.CompareTag("ThirdGate") && !GameManager.Instance.ReturnHasThirdBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateThree = false;
-            interactableText.text = "You cannot progress just yet";
+            interactableText.text = "You Cannot Progress Just Yet";
         }
         if (other.CompareTag("FourthGate") && GameManager.Instance.ReturnHasFourthBadge() == true)
         {
             interactableTextBox.SetActive(true);
             canOpenGateFour = true;
-            interactableText.text = "Go ahead and take the portal home!";
+            interactableText.text = "Press (E) To Go Ahead And Take The Portal Home!";
         }
         else if (other.CompareTag("FourthGate") && !GameManager.Instance.ReturnHasFourthBadge())
         {
             interactableTextBox.SetActive(true);
             canOpenGateFour = false;
-            interactableText.text = "You cannot progress just yet";
+            interactableText.text = "You Cannot Progress Just Yet";
         }
         if(other.CompareTag("Portal"))
         {

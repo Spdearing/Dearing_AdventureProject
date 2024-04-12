@@ -533,7 +533,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: IncreaseTackleAP
         m_Mode: 1
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442481}
         m_TargetAssemblyTypeName: UsingItems, Assembly-CSharp
         m_MethodName: UsePotion
         m_Mode: 1
@@ -2279,7 +2279,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Tackle
         m_Mode: 1
@@ -3541,7 +3541,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Mocking
         m_Mode: 1
@@ -3886,7 +3886,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: CancelPlayerAction
         m_Mode: 1
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Defend
         m_Mode: 1
@@ -4493,7 +4493,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: Persuading
         m_Mode: 1
@@ -5299,7 +5299,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442481}
         m_TargetAssemblyTypeName: UsingItems, Assembly-CSharp
         m_MethodName: UseAPBooster
         m_Mode: 1
@@ -6053,7 +6053,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: IncreaseMockAP
         m_Mode: 1
@@ -6535,7 +6535,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: IncreasePersuadeAP
         m_Mode: 1
@@ -7630,7 +7630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: RunAway
         m_Mode: 1
@@ -7763,7 +7763,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 66442482}
         m_TargetAssemblyTypeName: CombatActions, Assembly-CSharp
         m_MethodName: ConfirmPlayerAction
         m_Mode: 1
